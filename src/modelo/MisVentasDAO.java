@@ -133,6 +133,26 @@ public class MisVentasDAO {
         } catch (SQLException e) {
             System.out.println(e.toString());
             return false;
+        } /*finally{
+            try {
+               // con.close();
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+            }
+        }*/
+    }
+    
+    
+    public boolean EliminarDetalleMisVentas(int id){
+        String sql = "DELETE FROM detalle_mis_ventas WHERE id_mis_ventas=?";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.execute();
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+            return false;
         } finally{
             try {
                 con.close();
@@ -145,6 +165,25 @@ public class MisVentasDAO {
     public void EliminarTodasMisVentas(){
         String sqlElimminar = "DELETE FROM mis_ventas";
         String sqlRestablecerId = "ALTER TABLE mis_ventas AUTO_INCREMENT=1";
+        try {
+            ps = con.prepareStatement(sqlElimminar);
+            ps.execute();
+            ps = con.prepareStatement(sqlRestablecerId);
+            ps.execute();
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        } /*finally{
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+            }
+        }   */            
+    }
+    
+    public void EliminarTodoDetalleMisVentas(){
+        String sqlElimminar = "DELETE FROM detalle_mis_ventas";
+        String sqlRestablecerId = "ALTER TABLE detalle_mis_ventas AUTO_INCREMENT=1";
         try {
             ps = con.prepareStatement(sqlElimminar);
             ps.execute();
@@ -274,5 +313,47 @@ public class MisVentasDAO {
             System.out.println(e.toString());
         }
         return pagCamp;
+    }
+    
+    public DetalleMisVentas BuscarIdDetalleMisVentas(int idVenta){
+        DetalleMisVentas dmVentas = new DetalleMisVentas();
+        String sql = "SELECT * FROM detalle_mis_ventas WHERE id_mis_ventas =?";
+        try {
+            con = cn.getConecction();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, idVenta);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+              //  dmVentas.setId(rs.getInt("id"));
+                dmVentas.setCodigoProducto(rs.getInt("codigo_producto"));
+                dmVentas.setCantidad(rs.getInt("cantidad"));
+                dmVentas.setPrecioFactura(rs.getDouble("precio_factura"));
+                dmVentas.setPrecioVendido(rs.getDouble("precio_vendido"));
+                dmVentas.setTotal(rs.getDouble("total"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return dmVentas;
+    }
+    
+    public MisVentas BuscarIdRegistroMisVentas(int idVenta){
+        MisVentas dmVentas = new MisVentas();
+        String sql = "SELECT * FROM mis_ventas WHERE id =?";
+        try {
+            con = cn.getConecction();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, idVenta);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                dmVentas.setCodigo_cliente(rs.getInt("codigo_cliente"));
+                dmVentas.setDebe(rs.getDouble("debe"));
+                dmVentas.setAbonado(rs.getDouble("abonado"));
+                dmVentas.setTotal(rs.getDouble("total"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return dmVentas;
     }
 }

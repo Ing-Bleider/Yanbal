@@ -114,6 +114,26 @@ public class MisVendedoresDAO {
         } catch (SQLException e) {
             System.out.println(e.toString());
             return false;
+        } 
+//        finally{
+//            try {
+//                con.close();
+//            } catch (SQLException e) {
+//                System.out.println(e.toString());
+//            }
+//        }
+    }
+    
+    public boolean EliminarDetalleMisVendedores(int id){
+        String sql = "DELETE FROM detalle_mis_vendedores WHERE id_mis_vendedores=?";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.execute();
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+            return false;
         } finally{
             try {
                 con.close();
@@ -133,6 +153,27 @@ public class MisVendedoresDAO {
             ps.execute();
         } catch (SQLException e) {
             System.out.println(e.toString());
+        } 
+//         finally{
+//            try {
+//                con.close();
+//            } catch (SQLException e) {
+//                System.out.println(e.toString());
+//            }
+//        }
+               
+    }
+    
+    public void EliminarTodoDetalleMisVendedores(){
+        String sqlElimminar = "DELETE FROM detalle_mis_vendedores";
+        String sqlRestablecerId = "ALTER TABLE detalle_mis_vendedores AUTO_INCREMENT=1";
+        try {
+            ps = con.prepareStatement(sqlElimminar);
+            ps.execute();
+            ps = con.prepareStatement(sqlRestablecerId);
+            ps.execute();
+        } catch (SQLException e) {
+            System.out.println(e.toString());
         } finally{
             try {
                 con.close();
@@ -142,5 +183,4 @@ public class MisVendedoresDAO {
         }
                
     }
-    
 }

@@ -6,6 +6,8 @@ package yanbal;
 
 //import com.itextpdf.text.BaseColor;
 //import com.itextpdf.text.Chunk;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -40,17 +42,24 @@ import modelo.ProductosDAO;
 import modelo.Vendedores;
 import modelo.VendedoresDAO;
 
-/*
 import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.Phrase;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
- */
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 //import com.itextpdf.text.Image as PdfImage;
 /**
  *
@@ -89,26 +98,32 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
 
         initComponents();
+        //Desactivar pestanias de jtabbepane 
+        for (int i = 0; i < jTabbedPane1.getTabCount(); i++) {
+            jTabbedPane1.setEnabledAt(i, false);
+        }
+
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setTitle("Yanbal");
         setIconImage(new ImageIcon(getClass().getResource("/images/miniLogo.png")).getImage());
 
         this.setLocationRelativeTo(null);
         this.setResizable(false);
-        //SetImageLabel(labelLogoCreador, "src/images/LogoBleider5.png");
         setImageButton(btnLogoPersonal, "/images/LogoBleider5.png");
         this.txtClientesId.setVisible(false);
         this.txtVendedoresId.setVisible(false);
         this.txtProductosId.setVisible(false);
-        this.txtMisVentasRegistroId.setVisible(false);
+        //this.txtMisVentasRegistroId.setVisible(false);
         this.txtMisVentasAgregarIdProducto.setVisible(false);
         this.txtMisVendedoresAgregarIdProducto.setVisible(false);
         this.txtMisVendedoresRegistroId.setVisible(false);
+        this.txtMisVentasAgregarDireccionCliente.setVisible(false);
+        this.txtMisVentasAgregarTelefonoCliente.setVisible(false);
         //-----------------------------------------------------------
         this.btnProductosPdf.setVisible(false);
         this.btnClientesPdf.setVisible(false);
         this.btnVendedoresPdf.setVisible(false);
-        this.btnMisVentasRegistrosPdf.setVisible(false);
+        // this.btnMisVentasRegistrosPdf.setVisible(false);
         this.btnMisVendedoresRegistroPdf.setVisible(false);
         SpinnerModel ModeloSpinner = new SpinnerNumberModel(1, 1, 100, 1); // Valor inicial, mínimo, máximo, incremento
         spinnerMisVentasAgregarCantidad.setModel(ModeloSpinner);
@@ -119,10 +134,7 @@ public class Principal extends javax.swing.JFrame {
         txtField2.setEditable(false);
         //pdfMiVenta();
 
-        
-
     }
-    
 
     public void ListarClientes() {
         List<Clientes> ListarCl = client.ListarClientes();
@@ -187,7 +199,7 @@ public class Principal extends javax.swing.JFrame {
     public void ListarRegistroMisVendedores() {
         List<MisVendedores> ListarMvr = misvendedor.ListarVentaMisVendedores();
         modelo = (DefaultTableModel) tableMisVendedoresRegistro.getModel();
-        Object[] ob = new Object[6];
+        Object[] ob = new Object[5];
         for (int i = 0; i < ListarMvr.size(); i++) {
             ob[0] = ListarMvr.get(i).getId();
             ob[1] = ListarMvr.get(i).getCodigoVendedor();
@@ -266,6 +278,8 @@ public class Principal extends javax.swing.JFrame {
         labelMisVentasAgregarTotalPagar = new javax.swing.JLabel();
         spinnerMisVentasAgregarCantidad = new javax.swing.JSpinner();
         txtMisVentasAgregarIdProducto = new javax.swing.JTextField();
+        txtMisVentasAgregarDireccionCliente = new javax.swing.JTextField();
+        txtMisVentasAgregarTelefonoCliente = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -636,8 +650,7 @@ public class Principal extends javax.swing.JFrame {
         spinnerMisVentasAgregarCantidad.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         spinnerMisVentasAgregarCantidad.setFocusable(false);
 
-        txtMisVentasAgregarIdProducto.setBackground(new java.awt.Color(255, 204, 255));
-        txtMisVentasAgregarIdProducto.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(255, 102, 51)));
+        txtMisVentasAgregarIdProducto.setBorder(null);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -689,11 +702,19 @@ public class Principal extends javax.swing.JFrame {
                             .addComponent(txtMisVentasAgregarNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(74, 74, 74)
                         .addComponent(btnMisVentasAgregarGuardar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel24)
-                        .addGap(9, 9, 9)
-                        .addComponent(labelMisVentasAgregarTotalPagar)
-                        .addGap(127, 127, 127))))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel24)
+                                .addGap(9, 9, 9)
+                                .addComponent(labelMisVentasAgregarTotalPagar)
+                                .addGap(127, 127, 127))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(40, 40, 40)
+                                .addComponent(txtMisVentasAgregarDireccionCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtMisVentasAgregarTelefonoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -721,28 +742,35 @@ public class Principal extends javax.swing.JFrame {
                                         .addComponent(txtMisVentasAgregarPrecioFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(txtMisVentasAgregarPrecioVendido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtMisVentasAgregarIdProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addComponent(txtMisVentasAgregarIdProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnMisVentasAgregarEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel18)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel19)
-                        .addGap(11, 11, 11)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel18)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel19)
+                                .addGap(11, 11, 11)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtMisVentasAgregarNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtMisVentasAgregarCodigoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel24)
+                                        .addComponent(labelMisVentasAgregarTotalPagar))
+                                    .addComponent(btnMisVentasAgregarGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(2, 2, 2))))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtMisVentasAgregarNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtMisVentasAgregarCodigoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel24)
-                                .addComponent(labelMisVentasAgregarTotalPagar))
-                            .addComponent(btnMisVentasAgregarGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(2, 2, 2)))
+                            .addComponent(txtMisVentasAgregarDireccionCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMisVentasAgregarTelefonoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
 
@@ -1689,6 +1717,11 @@ public class Principal extends javax.swing.JFrame {
 
         btnMisVentasRegistrosPdf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pdf.png"))); // NOI18N
         btnMisVentasRegistrosPdf.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMisVentasRegistrosPdf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMisVentasRegistrosPdfActionPerformed(evt);
+            }
+        });
 
         jLabel25.setBackground(new java.awt.Color(255, 204, 204));
         jLabel25.setFont(new java.awt.Font("Monotype Corsiva", 0, 36)); // NOI18N
@@ -1705,9 +1738,9 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 953, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(25, 25, 25)
                 .addComponent(txtMisVentasRegistroId, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(26, 26, 26)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 877, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1752,7 +1785,7 @@ public class Principal extends javax.swing.JFrame {
                             .addComponent(jLabel21)
                             .addComponent(btnMisVentasRegistroActualizar)
                             .addComponent(btnMisVentasRegistroEliminar))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(3, 3, 3)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(MisVentasRegistroEliminarTodo)
                             .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1764,7 +1797,7 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnMisVentasRegistrosPdf)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(118, 118, 118))
         );
@@ -1989,12 +2022,6 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnVendedoresGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendedoresGuardarActionPerformed
         // TODO add your handling code here:
-        if (ultimoBotonSeleccionado != null) {
-            ultimoBotonSeleccionado.setBackground(new Color(255, 153, 153)); // Restaura el color original
-        }
-        JButton botonActual = (JButton) evt.getSource();
-        botonActual.setBackground(new Color(255, 153, 255)); // Cambia el color del botón actual
-        ultimoBotonSeleccionado = botonActual;
 
         if (!"".equals(txtVendedoresCodigo.getText()) && !"".equals(txtVendedoresNombre.getText())) {
 
@@ -2222,6 +2249,8 @@ public class Principal extends javax.swing.JFrame {
                 cl = client.BuscarClientes(codigoCliente);
                 if (cl.getNombre() != null) {
                     txtMisVentasAgregarNombreCliente.setText("" + cl.getNombre());
+                    txtMisVentasAgregarDireccionCliente.setText("" + cl.getDireccion());
+                    txtMisVentasAgregarTelefonoCliente.setText("" + cl.getTelefono());
 
                 } else {
                     txtMisVentasAgregarCodigoCliente.setText("");
@@ -2287,15 +2316,18 @@ public class Principal extends javax.swing.JFrame {
         JButton botonActual = (JButton) evt.getSource();
         botonActual.setBackground(new Color(255, 153, 255)); // Cambia el color del botón actual
         ultimoBotonSeleccionado = botonActual;
-
+//-------------------------------------------------------------------------------
         String[] opcionVenta = {"Usuario", "Vendedor"};
         int opcionSeleccionada = JOptionPane.showOptionDialog(null, "¿Qué ventas desea ver?", "Venta Realizadas", 0, JOptionPane.QUESTION_MESSAGE, null, opcionVenta, EXIT_ON_CLOSE);
         if (opcionSeleccionada == 0) {
             jTabbedPane1.setSelectedComponent(jPanel8);
+            LimpiarTable();
             ListarMisVentasRegistro();
         }
         if (opcionSeleccionada == 1) {
             jTabbedPane1.setSelectedComponent(jPanel9);
+            LimpiarTable();
+            ListarRegistroMisVendedores();
         }
     }//GEN-LAST:event_btnTotalVentasActionPerformed
 
@@ -2375,6 +2407,7 @@ public class Principal extends javax.swing.JFrame {
                 modelo = (DefaultTableModel) tableMisVentasAgregar.getModel();
                 modelo.removeRow(tableMisVentasAgregar.getSelectedRow());
                 TotalPagarMisVentas();
+                LimpiarMiVenta();
                 txtMisVentasAgregarCodigoProducto.requestFocus();
                 labelMisVentasAgregarTotalPagar.setText("--------");
                 JOptionPane.showMessageDialog(null, "Producto Eliminado Con Exito");
@@ -2394,6 +2427,8 @@ public class Principal extends javax.swing.JFrame {
         }
         registrarMisVentas();
         registrarDetalleMisVentas();
+        // pdfMiVenta();
+
         LimpiarTableAgregarMiVenta();
         LimpiarMiVenta();
         labelMisVentasAgregarTotalPagar.setText("-----");
@@ -2428,6 +2463,7 @@ public class Principal extends javax.swing.JFrame {
             if (pregunta == 0) {
                 int id = Integer.parseInt(txtMisVentasRegistroId.getText());
                 misven.EliminarMisVentas(id);
+                misven.EliminarDetalleMisVentas(id);
 
                 limpiarTablaMisVentasRegistro();
                 ListarMisVentasRegistro();
@@ -2443,6 +2479,7 @@ public class Principal extends javax.swing.JFrame {
         int pregunta = JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminar todos los registros?");
         if (pregunta == 0) {
             misven.EliminarTodasMisVentas();
+            misven.EliminarTodoDetalleMisVentas();
 
             limpiarTablaMisVentasRegistro();
             ListarMisVentasRegistro();
@@ -2457,11 +2494,13 @@ public class Principal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Debe ingresar productos a la tabla");
             return;
         }
-        registrarDetalleMisVendedores();
         registrarVentasMisVendedores();
+        registrarDetalleMisVendedores();
         LimpiarMisVendedores();
         LimpiarTableAgregarMisVendedores();
+        labelMisVendedoresAgregarTotalPagar.setText("--------");
         JOptionPane.showMessageDialog(null, "Venta agregada con éxito");
+
 
     }//GEN-LAST:event_btnMisVendedoresAgregarGuardarActionPerformed
 
@@ -2556,6 +2595,7 @@ public class Principal extends javax.swing.JFrame {
             if (pregunta == 0) {
                 int id = Integer.parseInt(txtMisVendedoresRegistroId.getText());
                 misvendedor.EliminarVentasMisVendedores(id);
+                misvendedor.EliminarDetalleMisVendedores(id);
 
                 limpiarTablaMisVendedoresRegistro();
                 ListarRegistroMisVendedores();
@@ -2577,6 +2617,7 @@ public class Principal extends javax.swing.JFrame {
         int pregunta = JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminar todos los registros?");
         if (pregunta == 0) {
             misvendedor.EliminarTodasVentasMisVendedores();
+            misvendedor.EliminarTodoDetalleMisVendedores();
 
             limpiarTablaMisVendedoresRegistro();
             ListarRegistroMisVendedores();
@@ -2722,6 +2763,26 @@ public class Principal extends javax.swing.JFrame {
         acd.setVisible(true);
     }//GEN-LAST:event_btnLogoPersonalActionPerformed
 
+    private void btnMisVentasRegistrosPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMisVentasRegistrosPdfActionPerformed
+
+        pdfMiVenta();
+        
+//        if (tableMisVentasRegistro.getSelectedRow() == -1) {
+//            JOptionPane.showMessageDialog(null, "Debe seleccionar una fila");
+//        } else {
+//            pdfMiVenta();
+////            try {
+////                // TODO add your handling code here:
+////                int id = Integer.parseInt(txtMisVentasRegistroId.getText());
+////                File file = new File("src/pdf/miVenta" + id + ".pdf");
+////                Desktop.getDesktop().open(file);
+////            } catch (IOException ex) {
+////                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+////                System.out.println(ex.toString());
+////            }
+//        }
+    }//GEN-LAST:event_btnMisVentasRegistrosPdfActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2866,11 +2927,13 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField txtMisVendedoresRegistroId;
     private javax.swing.JTextField txtMisVentasAgregarCodigoCliente;
     private javax.swing.JTextField txtMisVentasAgregarCodigoProducto;
+    private javax.swing.JTextField txtMisVentasAgregarDireccionCliente;
     private javax.swing.JTextField txtMisVentasAgregarIdProducto;
     private javax.swing.JTextField txtMisVentasAgregarNombreCliente;
     private javax.swing.JTextField txtMisVentasAgregarNombreProducto;
     private javax.swing.JTextField txtMisVentasAgregarPrecioFactura;
     private javax.swing.JTextField txtMisVentasAgregarPrecioVendido;
+    private javax.swing.JTextField txtMisVentasAgregarTelefonoCliente;
     private javax.swing.JTextField txtMisVentasRegistroAbonar;
     private javax.swing.JTextField txtMisVentasRegistroCodigoCliente;
     private javax.swing.JTextField txtMisVentasRegistroDeuda;
@@ -2887,7 +2950,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField txtVendedoresTelefono;
     // End of variables declaration//GEN-END:variables
 
- 
     //metodo para ajustar imagen a un jbutton
     private void setImageButton(JButton buttonName, String root) {
         ImageIcon image = new ImageIcon(getClass().getResource(root));
@@ -3111,47 +3173,194 @@ public class Principal extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Actualizado con éxito");
     }
 
-    /*  private void pdfMiVenta(){
+    private void pdfMiVenta() {
         try {
+            int id = misven.idMisVentas();
             FileOutputStream archivo;
-            File file = new File("src/pdf/miVenta.pdf");
+            File file = new File("src/pdf/miVenta" + id + ".pdf");
             archivo = new FileOutputStream(file);
             Document doc = new Document();
             PdfWriter.getInstance(doc, archivo);
-            doc.open();       
+            doc.open();
             com.itextpdf.text.Image pdfImage = null;
             pdfImage = com.itextpdf.text.Image.getInstance("src/images/yanbalCatalogo.png");
-            
+
             Paragraph fecha = new Paragraph();
-            Font negrita = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD, BaseColor.BLUE);
+            Font negrita = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD, BaseColor.RED);
             fecha.add(Chunk.NEWLINE);
             Date date = new Date();
-            fecha.add("""
-                      Factura: 1
-                      Fecha: """+ new SimpleDateFormat("dd-MM-yyyy").format(date)+"\n\n");
-            
+            fecha.add("Factura:" + id + "\n" + "Fecha: " + new SimpleDateFormat("dd-MM-yyyy").format(date) + "\n\n");
+
             PdfPTable Encabezado = new PdfPTable(4);
             Encabezado.setWidthPercentage(100);
             Encabezado.getDefaultCell().setBorder(0);
-            float[] ColumnaEncabezado = new float[]{20f,10f,60f,30f};
+            float[] ColumnaEncabezado = new float[]{20f, 10f, 60f, 30f};
             Encabezado.setWidths(ColumnaEncabezado);
             Encabezado.setHorizontalAlignment(Element.ALIGN_LEFT);
-            
+
             Encabezado.addCell(pdfImage);
-            
+
             String nombreApp = "Registro De Ventas Yanbal";
             String creador = "Bleider Hernandez Morales";
-            String nombreUsu = "Gabriela Lopez";
-            
+            String nombreUsu = "Gabriela Lopez Calderón";
+
             Encabezado.addCell("");
-            Encabezado.addCell("Nombre App: "+nombreApp+"\nCreador: "+creador+"\nUsuario: "+nombreUsu);
+            Encabezado.addCell("Nombre App: " + nombreApp + "\nCreador: " + creador + "\nUsuario: " + nombreUsu);
             Encabezado.addCell(fecha);
-            
+
             doc.add(Encabezado);
+
+            Paragraph cliente = new Paragraph();
+            cliente.add(Chunk.NEWLINE);
+            cliente.add("""
+                        Datos de los clientes
+                        
+                        """);
+            doc.add(cliente);
+//-----------------------------------------------------------------------------
+            int maxId = id;
+            for (int i = 1; i <= maxId; i++) {
+                //Cliente
+                PdfPTable tabCliente = new PdfPTable(4);
+                tabCliente.setWidthPercentage(100);
+                tabCliente.getDefaultCell().setBorder(0);
+                float[] columCliente = new float[]{45f, 50f, 40f, 30f};
+                tabCliente.setWidths(columCliente);
+                tabCliente.setHorizontalAlignment(Element.ALIGN_LEFT);
+                PdfPCell cl1 = new PdfPCell(new Phrase("Codigo Cliente", negrita));
+                PdfPCell cl2 = new PdfPCell(new Phrase("Nombre Cliente", negrita));
+                PdfPCell cl3 = new PdfPCell(new Phrase("Direccion", negrita));
+                PdfPCell cl4 = new PdfPCell(new Phrase("Telefono", negrita));
+                cl1.setBorder(0);
+                cl2.setBorder(0);
+                cl3.setBorder(0);
+                cl4.setBorder(0);
+                tabCliente.addCell(cl1);
+                tabCliente.addCell(cl2);
+                tabCliente.addCell(cl3);
+                tabCliente.addCell(cl4);
+
+                // obtenemos los registros de la tabla mis ventas por medio del id
+                mv = misven.BuscarIdRegistroMisVentas(i); 
+                int codiClie = mv.getCodigo_cliente(); // Obtenemos codigo del cliente
+                cl = client.BuscarClientes(codiClie); // Por medio del codigo obtenemos los demas datos del cliente
+                String nombrCli = cl.getNombre();
+                String dirCli = cl.getDireccion();
+                String telCli = cl.getTelefono();
+
+                tabCliente.addCell(""+codiClie);
+                tabCliente.addCell(nombrCli);
+                tabCliente.addCell(dirCli);
+                tabCliente.addCell(telCli);
+
+                doc.add(tabCliente);
+
+                doc.add(new Paragraph("\n"));// Salto de linea entre tablas
+//-----------------------------------------------------------------------------------
+                //Productos
+                PdfPTable tabProducto = new PdfPTable(6);
+                tabProducto.setWidthPercentage(100);
+                tabProducto.getDefaultCell().setBorder(0);
+                float[] columProducto = new float[]{45f, 50f, 25f, 40f, 40f, 35f};
+                tabProducto.setWidths(columProducto);
+                tabProducto.setHorizontalAlignment(Element.ALIGN_LEFT);
+                PdfPCell pr1 = new PdfPCell(new Phrase("Codigo Producto", negrita));
+                PdfPCell pr2 = new PdfPCell(new Phrase("Nombre Producto", negrita));
+                PdfPCell pr3 = new PdfPCell(new Phrase("Cantidad", negrita));
+                PdfPCell pr4 = new PdfPCell(new Phrase("Precio Factura", negrita));
+                PdfPCell pr5 = new PdfPCell(new Phrase("Precio Vendido", negrita));
+                PdfPCell pr6 = new PdfPCell(new Phrase("Total", negrita));
+                pr1.setBorder(0);
+                pr2.setBorder(0);
+                pr3.setBorder(0);
+                pr4.setBorder(0);
+                pr5.setBorder(0);
+                pr6.setBorder(0);
+                pr1.setBackgroundColor(BaseColor.PINK);
+                pr2.setBackgroundColor(BaseColor.PINK);
+                pr3.setBackgroundColor(BaseColor.PINK);
+                pr4.setBackgroundColor(BaseColor.PINK);
+                pr5.setBackgroundColor(BaseColor.PINK);
+                pr6.setBackgroundColor(BaseColor.PINK);
+                tabProducto.addCell(pr1);
+                tabProducto.addCell(pr2);
+                tabProducto.addCell(pr3);
+                tabProducto.addCell(pr4);
+                tabProducto.addCell(pr5);
+                tabProducto.addCell(pr6);
+
+                //int idven = Integer.parseInt(txtMisVentasRegistroId.getText()); // obtenemos el id_mis_ventas
+                dmv = misven.BuscarIdDetalleMisVentas(i); // traemos los registros de los detalles de la venta
+                int codipro = dmv.getCodigoProducto();
+                int canti = dmv.getCantidad();
+                double precfact = dmv.getPrecioFactura();
+                double precvend = dmv.getPrecioVendido();
+                double tot = dmv.getTotal();
+
+                //buscamos el nombre del producto
+                pr = produ.BuscarProductos(codipro);
+                String nombrePro = pr.getNombre();
+
+                tabProducto.addCell("" + codipro);
+                tabProducto.addCell("" + nombrePro);
+                tabProducto.addCell("" + canti);
+                tabProducto.addCell("" + precfact);
+                tabProducto.addCell("" + precvend);
+                tabProducto.addCell("" + tot);
+
+                doc.add(tabProducto);
+
+                doc.add(new Paragraph("\n"));// Salto de linea entre tablas
+//----------------------------------------------------------------------------
+
+                //Abonado y deuda
+                PdfPTable tabAbono = new PdfPTable(3);
+                tabAbono.setWidthPercentage(100);
+                tabAbono.getDefaultCell().setBorder(0);
+                float[] columAbono = new float[]{35f, 40f, 50f};
+                tabAbono.setWidths(columAbono);
+                tabAbono.setHorizontalAlignment(Element.ALIGN_LEFT);
+                PdfPCell ab1 = new PdfPCell(new Phrase("Abonado", negrita));
+                PdfPCell ab2 = new PdfPCell(new Phrase("Debe", negrita));
+                PdfPCell ab3 = new PdfPCell(new Phrase("Total a pagar", negrita));
+
+                ab1.setBorder(0);
+                ab2.setBorder(0);
+                ab3.setBorder(0);
+                ab1.setBackgroundColor(BaseColor.PINK);
+                ab2.setBackgroundColor(BaseColor.PINK);
+                ab3.setBackgroundColor(BaseColor.PINK);
+                tabAbono.addCell(ab1);
+                tabAbono.addCell(ab2);
+                tabAbono.addCell(ab3);
+
+                //mv = misven.BuscarIdRegistroMisVentas(i);
+
+                double abona = mv.getAbonado();
+                double debe = mv.getDebe();
+                double pagaTotal = mv.getTotal();
+
+                tabAbono.addCell("$" + formatoDecimal.format(abona));
+                tabAbono.addCell("$" + formatoDecimal.format(debe));
+                tabAbono.addCell("$" + formatoDecimal.format(pagaTotal));
+
+                doc.add(tabAbono);
+                
+                doc.add(new Paragraph("\n\n"
+                        +"=========================================================================="
+                        + "\n\n\n"));
+
+            }
+            //Cliente
+
+//----------------------------------------------------------------------------
             doc.close();
             archivo.close();
-        } catch (Exception e) {
+            Desktop.getDesktop().open(file);
+
+        } catch (DocumentException | IOException e) {
+            System.out.println(e.toString());
         }
     }
-     */
+
 }

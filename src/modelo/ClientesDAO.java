@@ -133,6 +133,27 @@ public class ClientesDAO {
             rs = ps.executeQuery();
             if (rs.next()) {
                 cliente.setNombre(rs.getString("nombre"));
+                cliente.setDireccion(rs.getString("direccion"));
+                cliente.setTelefono(rs.getString("telefono"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return cliente;
+    }
+    
+    public Clientes BuscarClientesXId(int codigo){
+        Clientes cliente = new Clientes();
+        String sql = "SELECT * FROM clientes WHERE codigo =?";
+        try {
+            con = cn.getConecction();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, codigo);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                cliente.setNombre(rs.getString("nombre"));
+                cliente.setDireccion(rs.getString("direccion"));
+                cliente.setTelefono(rs.getString("telefono"));
             }
         } catch (SQLException e) {
             System.out.println(e.toString());

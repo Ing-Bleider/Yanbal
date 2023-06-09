@@ -113,7 +113,7 @@ public class ProductosDAO {
             if (rs.next()) {
                 producto.setId(rs.getInt("id"));
                 producto.setNombre(rs.getString("nombre"));
-                producto.setPrecio(rs.getDouble("precio"));
+                producto.setPrecio(rs.getDouble("precio"));                
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
