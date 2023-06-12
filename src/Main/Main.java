@@ -4,6 +4,7 @@
  */
 package Main;
 
+import modelo.SplashScreen;
 import yanbal.Bienvenida;
 
 /**
@@ -13,9 +14,25 @@ import yanbal.Bienvenida;
 
 public class Main {
    
-  /*  public static void main(String[] args) {
+   public static void main(String[] args) {
+       
+       
+       SplashScreen splashScreen = new SplashScreen();
+        splashScreen.setVisible(true);
+        
+        // Simula una carga de trabajo
+        try {
+            Thread.sleep(3000); // Espera 3 segundos
+        } catch (InterruptedException e) {
+        }
+        
+        // Cierra la SplashScreen y continúa con la aplicación principal
+        splashScreen.setProgress("Carga completa");
+        splashScreen.close();
+        
+       
         Bienvenida bien = new Bienvenida();
         bien.setVisible(true);
     }
-*/
+
 }

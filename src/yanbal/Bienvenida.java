@@ -7,9 +7,6 @@ package yanbal;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
-import java.io.InputStream;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -187,7 +184,8 @@ public class Bienvenida extends javax.swing.JFrame {
     private void txtPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPassKeyPressed
         // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (!"".equals(txtPass.getText())) {
+            if ("".equals(txtPass.getText())) {
+            } else {
                 validar();
             }
         }

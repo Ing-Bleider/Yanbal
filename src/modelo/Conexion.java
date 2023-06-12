@@ -4,6 +4,7 @@ package modelo;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 public class Conexion {
     
@@ -12,10 +13,11 @@ public class Conexion {
     public Connection getConecction(){
         try {
             String myBD = "jdbc:mysql://localhost:3306/yanbal?serverTimezone=UTC";
-            con = DriverManager.getConnection(myBD, "root", "");
+            //con = DriverManager.getConnection(myBD, "root", "123456");//123456
+            con = DriverManager.getConnection(myBD, "root", "");// sin contrasenia 
             return con;
         } catch (SQLException e) {
-            System.out.println(e.toString());
+            JOptionPane.showMessageDialog(null, e.toString());
         }
         return null;
     }

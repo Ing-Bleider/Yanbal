@@ -35,6 +35,22 @@ public class MisVendedoresDAO {
         return id;
     }
     
+    public int idDetalleMisVendedores(){
+        int id = 0;
+        String sql = "SELECT MAX(id) FROM detalle_mis_vendedores";
+        try {
+            con = cn.getConecction();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return id;
+    }
+    
     public int RegistrarDetalleMisVendedores(DetalleMisVendedores dmvr){
         String sql = "INSERT INTO detalle_mis_vendedores (codigo_producto, cantidad, precio, total, id_mis_vendedores) VALUES (?,?,?,?,?)";
         try {
@@ -92,12 +108,13 @@ public class MisVendedoresDAO {
             while (rs.next()) {
                 MisVendedores mvr = new MisVendedores();
                 mvr.setId(rs.getInt("id"));
+                mvr.setCodigoVendedor(rs.getInt("codigo_vendedor"));
                 mvr.setNombreVendedor(rs.getString("nombre_vendedor"));
                 mvr.setFecha(rs.getDate("fecha_limite"));
                 mvr.setTotal(rs.getDouble("total"));
                 ListaMvr.add(mvr);            
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e.toString());
         }
         return  ListaMvr;
@@ -180,7 +197,69 @@ public class MisVendedoresDAO {
             } catch (SQLException e) {
                 System.out.println(e.toString());
             }
-        }
-               
+        }               
     }
+    
+    public MisVendedores BuscarIdRegistroMisVendedores(int idVenta){
+        MisVendedores rmVendedor = new MisVendedores();
+        String sql = "SELECT * FROM mis_vendedores WHERE id =?";
+        try {
+            con = cn.getConecction();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, idVenta);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                rmVendedor.setCodigoVendedor(rs.getInt("codigo_vendedor"));
+                rmVendedor.setNombreVendedor(rs.getString("nombre_vendedor"));
+                rmVendedor.setFecha(rs.getDate("fecha_limite"));
+                rmVendedor.setTotal(rs.getDouble("total"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return rmVendedor;
+    }
+    
+    public DetalleMisVendedores BuscarIdDetalleMisVendedores(int idVenta){
+        DetalleMisVendedores dmVendedor = new DetalleMisVendedores();
+        String sql = "SELECT * FROM detalle_mis_vendedores WHERE id_mis_vendedores =?";
+        try {
+            con = cn.getConecction();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, idVenta);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                dmVendedor.setId(rs.getInt("id"));
+                dmVendedor.setCodigoProducto(rs.getInt("codigo_producto"));
+                dmVendedor.setCantidad(rs.getInt("cantidad"));
+                dmVendedor.setPrecio(rs.getDouble("precio"));
+                dmVendedor.setTotal(rs.getDouble("total"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return dmVendedor;
+    }
+    
+    public DetalleMisVendedores BuscarIdMisVendedores(int idVenta){
+        DetalleMisVendedores dmVendedor = new DetalleMisVendedores();
+        String sql = "SELECT * FROM detalle_mis_vendedores WHERE id =?";
+        try {
+            con = cn.getConecction();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, idVenta);
+            rs = ps.executeQuery();
+            if (rs.next()) {                
+                dmVendedor.setCodigoProducto(rs.getInt("codigo_producto"));
+                dmVendedor.setCantidad(rs.getInt("cantidad"));
+                dmVendedor.setPrecio(rs.getDouble("precio"));
+                dmVendedor.setTotal(rs.getDouble("total"));
+                dmVendedor.setIdMisVendedores(rs.getInt("id_mis_vendedores"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return dmVendedor;
+    }
+    
 }

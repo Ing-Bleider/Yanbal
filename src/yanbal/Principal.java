@@ -53,12 +53,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
+//import com.sun.source.tree.BreakTree;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
 
 //import com.itextpdf.text.Image as PdfImage;
 /**
@@ -113,7 +114,7 @@ public class Principal extends javax.swing.JFrame {
         this.txtClientesId.setVisible(false);
         this.txtVendedoresId.setVisible(false);
         this.txtProductosId.setVisible(false);
-        //this.txtMisVentasRegistroId.setVisible(false);
+        this.txtMisVentasRegistroId.setVisible(false);
         this.txtMisVentasAgregarIdProducto.setVisible(false);
         this.txtMisVendedoresAgregarIdProducto.setVisible(false);
         this.txtMisVendedoresRegistroId.setVisible(false);
@@ -123,8 +124,6 @@ public class Principal extends javax.swing.JFrame {
         this.btnProductosPdf.setVisible(false);
         this.btnClientesPdf.setVisible(false);
         this.btnVendedoresPdf.setVisible(false);
-        // this.btnMisVentasRegistrosPdf.setVisible(false);
-        this.btnMisVendedoresRegistroPdf.setVisible(false);
         SpinnerModel ModeloSpinner = new SpinnerNumberModel(1, 1, 100, 1); // Valor inicial, mínimo, máximo, incremento
         spinnerMisVentasAgregarCantidad.setModel(ModeloSpinner);
         JFormattedTextField txtField = ((JSpinner.DefaultEditor) spinnerMisVentasAgregarCantidad.getEditor()).getTextField();
@@ -132,7 +131,6 @@ public class Principal extends javax.swing.JFrame {
         spinnerMisVendedoresAgregarCantidad.setModel(ModeloSpinner);
         JFormattedTextField txtField2 = ((JSpinner.DefaultEditor) spinnerMisVendedoresAgregarCantidad.getEditor()).getTextField();
         txtField2.setEditable(false);
-        //pdfMiVenta();
 
     }
 
@@ -485,10 +483,10 @@ public class Principal extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 130, Short.MAX_VALUE)
+            .addGap(0, 160, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 960, 130));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 960, 160));
 
         jTabbedPane1.setBackground(new java.awt.Color(204, 255, 204));
 
@@ -973,32 +971,34 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel4Layout.createSequentialGroup()
+                            .addGap(39, 39, 39)
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel4Layout.createSequentialGroup()
+                                    .addComponent(jLabel3)
+                                    .addGap(7, 7, 7)
+                                    .addComponent(txtMisVendedoresAgregarCodigoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtMisVendedoresAgregarIdProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(btnMisVendedoresAgregarEliminar, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                    .addComponent(jLabel6)
+                                    .addGap(2, 2, 2)
+                                    .addComponent(txtMisVendedoresAgregarPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                    .addComponent(jLabel4)
+                                    .addGap(2, 2, 2)
+                                    .addComponent(txtMisVendedoresAgregarNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(7, 7, 7)
-                                .addComponent(txtMisVendedoresAgregarCodigoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtMisVendedoresAgregarIdProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addGap(2, 2, 2)
-                                .addComponent(spinnerMisVendedoresAgregarCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnMisVendedoresAgregarEliminar, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(2, 2, 2)
-                                .addComponent(txtMisVendedoresAgregarPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(2, 2, 2)
-                                .addComponent(txtMisVendedoresAgregarNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(35, 35, 35)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(spinnerMisVendedoresAgregarCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1036,6 +1036,11 @@ public class Principal extends javax.swing.JFrame {
 
         txtProductosCodigo.setBackground(new java.awt.Color(204, 255, 204));
         txtProductosCodigo.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(0, 153, 153)));
+        txtProductosCodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtProductosCodigoActionPerformed(evt);
+            }
+        });
         txtProductosCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtProductosCodigoKeyTyped(evt);
@@ -1550,10 +1555,10 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 885, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnVendedoresGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel39)
-                            .addComponent(txtVendedoresCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(40, 40, 40)
+                            .addComponent(txtVendedoresCodigo)
+                            .addComponent(btnVendedoresGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel40)
                             .addComponent(txtVendedoresNombre)
@@ -1840,6 +1845,11 @@ public class Principal extends javax.swing.JFrame {
 
         btnMisVendedoresRegistroPdf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pdf.png"))); // NOI18N
         btnMisVendedoresRegistroPdf.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMisVendedoresRegistroPdf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMisVendedoresRegistroPdfActionPerformed(evt);
+            }
+        });
 
         btnMisVendedoresRegistroEliminar.setFont(new java.awt.Font("Rockwell", 0, 15)); // NOI18N
         btnMisVendedoresRegistroEliminar.setText("Eliminar");
@@ -1912,21 +1922,32 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnClientesGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesGuardarActionPerformed
         // TODO add your handling code here:
-        if (!"".equals(txtClientesCodigo.getText()) && !"".equals(txtClientesNombre.getText())) {
 
-            cl.setCodigo(Integer.parseInt(txtClientesCodigo.getText()));
-            cl.setNombre(txtClientesNombre.getText());
-            cl.setDireccion(txtClientesDireccion.getText());
-            cl.setTelefono(txtClientesTelefono.getText());
-            client.RegistrarCliente(cl);
+        if (txtClientesCodigo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar un codigo");
+            return;
+        }
 
-            LimpiarTable();
-            LimpiarCliente();
-            ListarClientes();
-            JOptionPane.showMessageDialog(null, "Cliente Registrado Con Exito");
-            txtClientesCodigo.requestFocus();
+        cl = client.BuscarClientes(Integer.parseInt(txtClientesCodigo.getText()));
+        if (cl.getId() != 0) {
+            JOptionPane.showMessageDialog(null, "Error, ya hay un cliente con ese codigo");
         } else {
-            JOptionPane.showMessageDialog(null, "Hay Campos Requeridos Vacios");
+            if (!"".equals(txtClientesCodigo.getText()) && !"".equals(txtClientesNombre.getText())) {
+
+                cl.setCodigo(Integer.parseInt(txtClientesCodigo.getText()));
+                cl.setNombre(txtClientesNombre.getText());
+                cl.setDireccion(txtClientesDireccion.getText());
+                cl.setTelefono(txtClientesTelefono.getText());
+                client.RegistrarCliente(cl);
+
+                LimpiarTable();
+                LimpiarCliente();
+                ListarClientes();
+                JOptionPane.showMessageDialog(null, "Cliente Registrado Con Exito");
+                txtClientesCodigo.requestFocus();
+            } else {
+                JOptionPane.showMessageDialog(null, "Hay Campos Requeridos Vacios");
+            }
         }
     }//GEN-LAST:event_btnClientesGuardarActionPerformed
 
@@ -2023,21 +2044,31 @@ public class Principal extends javax.swing.JFrame {
     private void btnVendedoresGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendedoresGuardarActionPerformed
         // TODO add your handling code here:
 
-        if (!"".equals(txtVendedoresCodigo.getText()) && !"".equals(txtVendedoresNombre.getText())) {
+        if (txtVendedoresCodigo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar un codigo");
+            return;
+        }
 
-            ve.setCodigo(Integer.parseInt(txtVendedoresCodigo.getText()));
-            ve.setNombre(txtVendedoresNombre.getText());
-            ve.setDireccion(txtVendedoresDireccion.getText());
-            ve.setTelefono(txtVendedoresTelefono.getText());
-            vend.RegistrarVendedor(ve);
-
-            LimpiarTable();
-            ListarVendedores();
-            LimpiarVendedor();
-            JOptionPane.showMessageDialog(null, "Vendedor Registrado Con Exito");
-            txtVendedoresCodigo.requestFocus();
+        ve = vend.BuscarVendedores(Integer.parseInt(txtVendedoresCodigo.getText()));
+        if (ve.getId() != 0) {
+            JOptionPane.showMessageDialog(null, "Error, ya hay un vendedor con ese codigo");
         } else {
-            JOptionPane.showMessageDialog(null, "Hay Campos Requeridos Vacios");
+            if (!"".equals(txtVendedoresCodigo.getText()) && !"".equals(txtVendedoresNombre.getText())) {
+
+                ve.setCodigo(Integer.parseInt(txtVendedoresCodigo.getText()));
+                ve.setNombre(txtVendedoresNombre.getText());
+                ve.setDireccion(txtVendedoresDireccion.getText());
+                ve.setTelefono(txtVendedoresTelefono.getText());
+                vend.RegistrarVendedor(ve);
+
+                LimpiarTable();
+                ListarVendedores();
+                LimpiarVendedor();
+                JOptionPane.showMessageDialog(null, "Vendedor Registrado Con Exito");
+                txtVendedoresCodigo.requestFocus();
+            } else {
+                JOptionPane.showMessageDialog(null, "Hay Campos Requeridos Vacios");
+            }
         }
     }//GEN-LAST:event_btnVendedoresGuardarActionPerformed
 
@@ -2118,9 +2149,15 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVendedoresActualizarActionPerformed
 
     private void btnProductosGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductosGuardarActionPerformed
-        // TODO add your handling code here:
-        if ("".equals(txtProductosPrecio.getText())) {
-            JOptionPane.showMessageDialog(null, "Debe Digitar Un Precio");
+
+        if (txtProductosCodigo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar un codigo");
+            return;
+        }
+
+        pr = produ.BuscarProductos(Integer.parseInt(txtProductosCodigo.getText()));
+        if (pr.getId() != 0) {
+            JOptionPane.showMessageDialog(null, "Error, ya hay un producto con ese codigo");
         } else {
             if (!"".equals(txtProductosCodigo.getText()) && !"".equals(txtProductosNombre.getText()) && !"".equals(txtProductosPrecio.getText())) {
 
@@ -2138,6 +2175,8 @@ public class Principal extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Hay Campos Requeridos Vacios");
             }
         }
+
+
     }//GEN-LAST:event_btnProductosGuardarActionPerformed
 
     private void tableProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProductosMouseClicked
@@ -2766,7 +2805,7 @@ public class Principal extends javax.swing.JFrame {
     private void btnMisVentasRegistrosPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMisVentasRegistrosPdfActionPerformed
 
         pdfMiVenta();
-        
+
 //        if (tableMisVentasRegistro.getSelectedRow() == -1) {
 //            JOptionPane.showMessageDialog(null, "Debe seleccionar una fila");
 //        } else {
@@ -2782,6 +2821,15 @@ public class Principal extends javax.swing.JFrame {
 ////            }
 //        }
     }//GEN-LAST:event_btnMisVentasRegistrosPdfActionPerformed
+
+    private void btnMisVendedoresRegistroPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMisVendedoresRegistroPdfActionPerformed
+        // TODO add your handling code here:
+        pdfMiVendedores();
+    }//GEN-LAST:event_btnMisVendedoresRegistroPdfActionPerformed
+
+    private void txtProductosCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProductosCodigoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtProductosCodigoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -3098,7 +3146,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
     private void registrarDetalleMisVentas() {
-        int id = misven.idMisVentas();
+        int id = misven.idMaxMisVentas();
         for (int i = 0; i < tableMisVentasAgregar.getRowCount(); i++) {
             int codPro = Integer.parseInt(tableMisVentasAgregar.getValueAt(i, 0).toString());
             int cant = Integer.parseInt(tableMisVentasAgregar.getValueAt(i, 2).toString());
@@ -3175,15 +3223,22 @@ public class Principal extends javax.swing.JFrame {
 
     private void pdfMiVenta() {
         try {
-            int id = misven.idMisVentas();
+            int id = misven.idMaxMisVentas();
+            int idMaxDtm = misven.idMaxDetalleMisVentas();
             FileOutputStream archivo;
-            File file = new File("src/pdf/miVenta" + id + ".pdf");
+            //File directory = new File("C:\\Users\\Eduard\\Desktop\\YanbalPdf");
+            File directory = new File("C:\\Users\\57301\\Desktop\\YanbalPdf");
+            if (!directory.exists()) {
+                directory.mkdirs();
+            }
+            File file = new File(directory, "MisVentas" + id + ".pdf");
+
             archivo = new FileOutputStream(file);
             Document doc = new Document();
             PdfWriter.getInstance(doc, archivo);
             doc.open();
             com.itextpdf.text.Image pdfImage = null;
-            pdfImage = com.itextpdf.text.Image.getInstance("src/images/yanbalCatalogo.png");
+            pdfImage = com.itextpdf.text.Image.getInstance(getClass().getResource("/images/yanbalCatalogo.png"));
 
             Paragraph fecha = new Paragraph();
             Font negrita = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD, BaseColor.RED);
@@ -3218,8 +3273,8 @@ public class Principal extends javax.swing.JFrame {
                         """);
             doc.add(cliente);
 //-----------------------------------------------------------------------------
-            int maxId = id;
-            for (int i = 1; i <= maxId; i++) {
+
+            for (int i = 1; i <= id; i++) {
                 //Cliente
                 PdfPTable tabCliente = new PdfPTable(4);
                 tabCliente.setWidthPercentage(100);
@@ -3241,14 +3296,14 @@ public class Principal extends javax.swing.JFrame {
                 tabCliente.addCell(cl4);
 
                 // obtenemos los registros de la tabla mis ventas por medio del id
-                mv = misven.BuscarIdRegistroMisVentas(i); 
+                mv = misven.BuscarIdRegistroMisVentas(i);
                 int codiClie = mv.getCodigo_cliente(); // Obtenemos codigo del cliente
                 cl = client.BuscarClientes(codiClie); // Por medio del codigo obtenemos los demas datos del cliente
                 String nombrCli = cl.getNombre();
                 String dirCli = cl.getDireccion();
                 String telCli = cl.getTelefono();
 
-                tabCliente.addCell(""+codiClie);
+                tabCliente.addCell("" + codiClie);
                 tabCliente.addCell(nombrCli);
                 tabCliente.addCell(dirCli);
                 tabCliente.addCell(telCli);
@@ -3289,24 +3344,29 @@ public class Principal extends javax.swing.JFrame {
                 tabProducto.addCell(pr5);
                 tabProducto.addCell(pr6);
 
-                //int idven = Integer.parseInt(txtMisVentasRegistroId.getText()); // obtenemos el id_mis_ventas
-                dmv = misven.BuscarIdDetalleMisVentas(i); // traemos los registros de los detalles de la venta
-                int codipro = dmv.getCodigoProducto();
-                int canti = dmv.getCantidad();
-                double precfact = dmv.getPrecioFactura();
-                double precvend = dmv.getPrecioVendido();
-                double tot = dmv.getTotal();
+                for (int j = 1; j <= idMaxDtm; j++) { // idMaxDtm --> id maximo de tabla `detalle_mis_ventas`
+                    dmv = misven.BuscarIdMisVentas(j); // Traemos los datos de la tabla `mis_ventas` por medio del id
+                    if (dmv.getIdVenta() == i) {
 
-                //buscamos el nombre del producto
-                pr = produ.BuscarProductos(codipro);
-                String nombrePro = pr.getNombre();
+                        int codipro = dmv.getCodigoProducto();
+                        int canti = dmv.getCantidad();
+                        double precfact = dmv.getPrecioFactura();
+                        double precvend = dmv.getPrecioVendido();
+                        double tot = dmv.getTotal();
 
-                tabProducto.addCell("" + codipro);
-                tabProducto.addCell("" + nombrePro);
-                tabProducto.addCell("" + canti);
-                tabProducto.addCell("" + precfact);
-                tabProducto.addCell("" + precvend);
-                tabProducto.addCell("" + tot);
+                        //buscamos el nombre del producto
+                        pr = produ.BuscarProductos(codipro);
+                        String nombrePro = pr.getNombre();
+
+                        tabProducto.addCell("" + codipro);
+                        tabProducto.addCell("" + nombrePro);
+                        tabProducto.addCell("" + canti);
+                        tabProducto.addCell("" + precfact);
+                        tabProducto.addCell("" + precvend);
+                        tabProducto.addCell("" + tot);
+
+                    }
+                }
 
                 doc.add(tabProducto);
 
@@ -3334,8 +3394,6 @@ public class Principal extends javax.swing.JFrame {
                 tabAbono.addCell(ab2);
                 tabAbono.addCell(ab3);
 
-                //mv = misven.BuscarIdRegistroMisVentas(i);
-
                 double abona = mv.getAbonado();
                 double debe = mv.getDebe();
                 double pagaTotal = mv.getTotal();
@@ -3345,10 +3403,15 @@ public class Principal extends javax.swing.JFrame {
                 tabAbono.addCell("$" + formatoDecimal.format(pagaTotal));
 
                 doc.add(tabAbono);
-                
-                doc.add(new Paragraph("\n\n"
-                        +"=========================================================================="
-                        + "\n\n\n"));
+
+                doc.add(new Paragraph("""
+                                      
+                                      
+                                      ==========================================================================
+                                      
+                                      
+                                      
+                                      """));
 
             }
             //Cliente
@@ -3359,7 +3422,184 @@ public class Principal extends javax.swing.JFrame {
             Desktop.getDesktop().open(file);
 
         } catch (DocumentException | IOException e) {
-            System.out.println(e.toString());
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+    }
+
+    private void pdfMiVendedores() {
+        try {
+            int idMVendedores = misvendedor.idMisVendedores();
+            int idDetMVendedores = misvendedor.idDetalleMisVendedores();
+            FileOutputStream archivo;
+            //File directory = new File("C:\\Users\\Eduard\\Desktop\\YanbalPdf");
+            File directory = new File("C:\\Users\\57301\\Desktop\\YanbalPdf");
+            if (!directory.exists()) {
+                directory.mkdirs();
+            }
+            File file = new File(directory, "MisVendedores" + idMVendedores + ".pdf");
+
+            archivo = new FileOutputStream(file);
+            Document doc = new Document();
+            PdfWriter.getInstance(doc, archivo);
+            doc.open();
+            com.itextpdf.text.Image pdfImage = null;
+            pdfImage = com.itextpdf.text.Image.getInstance(getClass().getResource("/images/yanbalCatalogo.png"));
+
+            Paragraph fecha = new Paragraph();
+            Font negrita = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD, BaseColor.RED);
+            fecha.add(Chunk.NEWLINE);
+            Date date = new Date();
+            fecha.add("Factura:" + idMVendedores + "\n" + "Fecha: " + new SimpleDateFormat("dd-MM-yyyy").format(date) + "\n\n");
+
+            PdfPTable Encabezado = new PdfPTable(4);
+            Encabezado.setWidthPercentage(100);
+            Encabezado.getDefaultCell().setBorder(0);
+            float[] ColumnaEncabezado = new float[]{20f, 10f, 60f, 30f};
+            Encabezado.setWidths(ColumnaEncabezado);
+            Encabezado.setHorizontalAlignment(Element.ALIGN_LEFT);
+
+            Encabezado.addCell(pdfImage);
+
+            String nombreApp = "Registro De Ventas Yanbal";
+            String creador = "Bleider Hernandez Morales";
+            String nombreUsu = "Gabriela Lopez Calderón";
+
+            Encabezado.addCell("");
+            Encabezado.addCell("Nombre App: " + nombreApp + "\nCreador: " + creador + "\nUsuario: " + nombreUsu);
+            Encabezado.addCell(fecha);
+
+            doc.add(Encabezado);
+
+            Paragraph cliente = new Paragraph();
+            cliente.add(Chunk.NEWLINE);
+            cliente.add("""
+                        Datos de los vendedores
+                        
+                        """);
+            doc.add(cliente);
+//-----------------------------------------------------------------------------
+
+            int aux = 1;
+            int temp = 1;
+            for (int i = 1; i <= idMVendedores; i++) {
+                //Vendedor
+                PdfPTable tabVendedor = new PdfPTable(4);
+                tabVendedor.setWidthPercentage(100);
+                tabVendedor.getDefaultCell().setBorder(0);
+                float[] columVendedor = new float[]{45f, 50f, 40f, 30f};
+                tabVendedor.setWidths(columVendedor);
+                tabVendedor.setHorizontalAlignment(Element.ALIGN_LEFT);
+                PdfPCell ve1 = new PdfPCell(new Phrase("Codigo Vendedor", negrita));
+                PdfPCell ve2 = new PdfPCell(new Phrase("Nombre Vendedor", negrita));
+                PdfPCell ve3 = new PdfPCell(new Phrase("Direccion", negrita));
+                PdfPCell ve4 = new PdfPCell(new Phrase("Telefono", negrita));
+                ve1.setBorder(0);
+                ve2.setBorder(0);
+                ve3.setBorder(0);
+                ve4.setBorder(0);
+                tabVendedor.addCell(ve1);
+                tabVendedor.addCell(ve2);
+                tabVendedor.addCell(ve3);
+                tabVendedor.addCell(ve4);
+
+                // obtenemos los registros de la tabla mis ventas por medio del id
+                mvr = misvendedor.BuscarIdRegistroMisVendedores(i);
+                int codiVende = mvr.getCodigoVendedor(); // Obtenemos codigo del cliente
+                ve = vend.BuscarVendedores(codiVende); // Por medio del codigo obtenemos los demas datos del cliente
+                String nombrVende = ve.getNombre();
+                String dirVende = ve.getDireccion();
+                String telVende = ve.getTelefono();
+
+                tabVendedor.addCell("" + codiVende);
+                tabVendedor.addCell(nombrVende);
+                tabVendedor.addCell(dirVende);
+                tabVendedor.addCell(telVende);
+
+                doc.add(tabVendedor);
+
+                doc.add(new Paragraph("\n"));// Salto de linea entre tablas
+//-----------------------------------------------------------------------------------
+                //Productos
+
+                PdfPTable tabProducto = new PdfPTable(5);
+                tabProducto.setWidthPercentage(100);
+                tabProducto.getDefaultCell().setBorder(0);
+                float[] columProducto = new float[]{45f, 50f, 25f, 40f, 40f};
+                tabProducto.setWidths(columProducto);
+                tabProducto.setHorizontalAlignment(Element.ALIGN_LEFT);
+                PdfPCell pr1 = new PdfPCell(new Phrase("Codigo Producto", negrita));
+                PdfPCell pr2 = new PdfPCell(new Phrase("Nombre Producto", negrita));
+                PdfPCell pr3 = new PdfPCell(new Phrase("Cantidad", negrita));
+                PdfPCell pr4 = new PdfPCell(new Phrase("Precio ", negrita));
+                PdfPCell pr5 = new PdfPCell(new Phrase("Total", negrita));
+                pr1.setBorder(0);
+                pr2.setBorder(0);
+                pr3.setBorder(0);
+                pr4.setBorder(0);
+                pr5.setBorder(0);
+                pr1.setBackgroundColor(BaseColor.PINK);
+                pr2.setBackgroundColor(BaseColor.PINK);
+                pr3.setBackgroundColor(BaseColor.PINK);
+                pr4.setBackgroundColor(BaseColor.PINK);
+                pr5.setBackgroundColor(BaseColor.PINK);
+                tabProducto.addCell(pr1);
+                tabProducto.addCell(pr2);
+                tabProducto.addCell(pr3);
+                tabProducto.addCell(pr4);
+                tabProducto.addCell(pr5);
+
+                for (int j = 1; j <= idDetMVendedores; j++) {// idDetMVendedores --> id maximo de la tabla 'detalle_mis_vendedores'
+                    dmvr = misvendedor.BuscarIdMisVendedores(j); // traemos los datos por el id de la tabla `detalle mis vendedores`
+                    if (dmvr.getIdMisVendedores() == i) {
+                        // hacer proceso
+                        int codipro = dmvr.getCodigoProducto();
+                        int canti = dmvr.getCantidad();
+                        double prec = dmvr.getPrecio();
+                        double tot = dmvr.getTotal();
+
+                        //buscamos el nombre del producto
+                        pr = produ.BuscarProductos(codipro);
+                        String nombrePro = pr.getNombre();
+
+                        tabProducto.addCell("" + codipro);
+                        tabProducto.addCell("" + nombrePro);
+                        tabProducto.addCell("" + canti);
+                        tabProducto.addCell("" + prec);
+                        tabProducto.addCell("" + tot);
+                    }
+                }
+
+                doc.add(tabProducto);
+
+                doc.add(new Paragraph("\n"));// Salto de linea entre tablas
+
+//----------------------------------------------------------------------------
+                //falta paragraph de total a pagar
+                Paragraph pTotal = new Paragraph();
+                double pagaTotal = mvr.getTotal();
+                pTotal.add(Chunk.NEWLINE);
+                pTotal.setAlignment(Element.ALIGN_RIGHT);
+                pTotal.add("Total a pagar:  $" + formatoDecimal.format(pagaTotal));
+                doc.add(pTotal);
+
+                doc.add(new Paragraph("""
+                                      
+                                      
+                                      ==========================================================================
+                                      
+                                      
+                                      
+                                      """));
+
+            }
+
+//----------------------------------------------------------------------------
+            doc.close();
+            archivo.close();
+            Desktop.getDesktop().open(file);
+
+        } catch (DocumentException | IOException e) {
+            JOptionPane.showMessageDialog(null, e.toString());
         }
     }
 

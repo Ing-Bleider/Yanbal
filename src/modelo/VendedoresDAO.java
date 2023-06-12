@@ -115,6 +115,7 @@ public class VendedoresDAO {
             ps.setInt(1, codigo);
             rs = ps.executeQuery();
             if (rs.next()) {
+                vendedor.setId(rs.getInt("id"));
                 vendedor.setNombre(rs.getString("nombre"));
             }
         } catch (SQLException e) {

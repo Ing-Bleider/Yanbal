@@ -17,9 +17,25 @@ public class MisVentasDAO {
     ResultSet rs;
     int r;
     
-    public int idMisVentas(){
+    public int idMaxMisVentas(){
         int id = 0;
         String sql = "SELECT MAX(id) FROM mis_ventas";
+        try {
+            con = cn.getConecction();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return id;
+    }
+    
+    public int idMaxDetalleMisVentas(){
+        int id = 0;
+        String sql = "SELECT MAX(id) FROM detalle_mis_ventas";
         try {
             con = cn.getConecction();
             ps = con.prepareStatement(sql);
@@ -337,8 +353,31 @@ public class MisVentasDAO {
         return dmVentas;
     }
     
+    public DetalleMisVentas BuscarIdMisVentas(int idVenta){
+        DetalleMisVentas dmVentas = new DetalleMisVentas();
+        String sql = "SELECT * FROM detalle_mis_ventas WHERE id =?";
+        try {
+            con = cn.getConecction();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, idVenta);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+              //  dmVentas.setId(rs.getInt("id"));
+                dmVentas.setCodigoProducto(rs.getInt("codigo_producto"));
+                dmVentas.setCantidad(rs.getInt("cantidad"));
+                dmVentas.setPrecioFactura(rs.getDouble("precio_factura"));
+                dmVentas.setPrecioVendido(rs.getDouble("precio_vendido"));
+                dmVentas.setTotal(rs.getDouble("total"));
+                dmVentas.setIdVenta(rs.getInt("id_mis_ventas"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return dmVentas;
+    }
+    
     public MisVentas BuscarIdRegistroMisVentas(int idVenta){
-        MisVentas dmVentas = new MisVentas();
+        MisVentas rmVentas = new MisVentas();
         String sql = "SELECT * FROM mis_ventas WHERE id =?";
         try {
             con = cn.getConecction();
@@ -346,14 +385,14 @@ public class MisVentasDAO {
             ps.setInt(1, idVenta);
             rs = ps.executeQuery();
             if (rs.next()) {
-                dmVentas.setCodigo_cliente(rs.getInt("codigo_cliente"));
-                dmVentas.setDebe(rs.getDouble("debe"));
-                dmVentas.setAbonado(rs.getDouble("abonado"));
-                dmVentas.setTotal(rs.getDouble("total"));
+                rmVentas.setCodigo_cliente(rs.getInt("codigo_cliente"));
+                rmVentas.setDebe(rs.getDouble("debe"));
+                rmVentas.setAbonado(rs.getDouble("abonado"));
+                rmVentas.setTotal(rs.getDouble("total"));
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
         }
-        return dmVentas;
+        return rmVentas;
     }
 }

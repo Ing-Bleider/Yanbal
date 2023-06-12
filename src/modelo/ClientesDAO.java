@@ -132,6 +132,7 @@ public class ClientesDAO {
             ps.setInt(1, codigo);
             rs = ps.executeQuery();
             if (rs.next()) {
+                cliente.setId(rs.getInt("id"));
                 cliente.setNombre(rs.getString("nombre"));
                 cliente.setDireccion(rs.getString("direccion"));
                 cliente.setTelefono(rs.getString("telefono"));
