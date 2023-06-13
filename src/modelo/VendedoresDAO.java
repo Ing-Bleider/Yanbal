@@ -117,6 +117,8 @@ public class VendedoresDAO {
             if (rs.next()) {
                 vendedor.setId(rs.getInt("id"));
                 vendedor.setNombre(rs.getString("nombre"));
+                vendedor.setDireccion(rs.getString("direccion"));
+                vendedor.setTelefono(rs.getString("telefono"));
             }
         } catch (SQLException e) {
             System.out.println(e.toString());

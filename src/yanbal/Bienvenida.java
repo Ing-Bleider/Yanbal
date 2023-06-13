@@ -69,13 +69,13 @@ public class Bienvenida extends javax.swing.JFrame {
         txtPass = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(255, 204, 204));
+        setBackground(new java.awt.Color(204, 255, 204));
         setLocation(new java.awt.Point(0, 0));
         setMinimumSize(new java.awt.Dimension(578, 443));
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
-        jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(4, 6, 4, 4, new java.awt.Color(153, 204, 255)));
+        jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(6, 8, 6, 6, new java.awt.Color(153, 204, 255)));
 
         jLabel1.setFont(new java.awt.Font("Monotype Corsiva", 1, 48)); // NOI18N
         jLabel1.setText("Bienvenid@");
@@ -165,7 +165,7 @@ public class Bienvenida extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 298, Short.MAX_VALUE)
+                .addGap(0, 294, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
