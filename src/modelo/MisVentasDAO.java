@@ -1,6 +1,7 @@
 
 package modelo;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -56,9 +57,9 @@ public class MisVentasDAO {
             ps = con.prepareStatement(sql);
             ps.setInt(1, mv.getCodigo_cliente());
             ps.setString(2, mv.getNombreCliente());
-            ps.setDouble(3, mv.getDebe());
-            ps.setDouble(4, mv.getAbonado());
-            ps.setDouble(5, mv.getTotal());
+            ps.setBigDecimal(3, mv.getDebe());
+            ps.setBigDecimal(4, mv.getAbonado());
+            ps.setBigDecimal(5, mv.getTotal());
             ps.execute();
             return r;
         } catch (SQLException e) {
@@ -80,9 +81,9 @@ public class MisVentasDAO {
             ps = con.prepareStatement(sql);
             ps.setInt(1, dmv.getCodigoProducto());
             ps.setInt(2, dmv.getCantidad());
-            ps.setDouble(3, dmv.getPrecioFactura());
-            ps.setDouble(4, dmv.getPrecioVendido());
-            ps.setDouble(5, dmv.getTotal());
+            ps.setBigDecimal(3, dmv.getPrecioFactura());
+            ps.setBigDecimal(4, dmv.getPrecioVendido());
+            ps.setBigDecimal(5, dmv.getTotal());
             ps.setInt(6, dmv.getIdVenta());
             ps.execute();
             return r;
@@ -110,9 +111,9 @@ public class MisVentasDAO {
                 mv.setId(rs.getInt("id"));
                 mv.setCodigo_cliente(rs.getInt("codigo_cliente"));
                 mv.setNombreCliente(rs.getString("nombre_cliente"));
-                mv.setDebe(rs.getDouble("debe"));
-                mv.setAbonado(rs.getDouble("abonado"));
-                mv.setTotal(rs.getDouble("total"));
+                mv.setDebe(rs.getBigDecimal("debe"));
+                mv.setAbonado(rs.getBigDecimal("abonado"));
+                mv.setTotal(rs.getBigDecimal("total"));
                 ListaMv.add(mv);
             }
         } catch (SQLException e) {
@@ -121,13 +122,13 @@ public class MisVentasDAO {
         return ListaMv;
     }
     
-    public boolean ActualizarMisVentas(double debe, double abonar, int id){
+    public boolean ActualizarMisVentas(BigDecimal debe, BigDecimal abonar, int id){
         String sql = "UPDATE mis_ventas SET debe=?, abonado=? WHERE id=?";
         try {
             con = cn.getConecction();
             ps = con.prepareStatement(sql);
-            ps.setDouble(1, debe);
-            ps.setDouble(2, abonar);
+            ps.setBigDecimal(1, debe);
+            ps.setBigDecimal(2, abonar);
             ps.setInt(3, id);
             
             ps.executeUpdate(); 
@@ -221,10 +222,10 @@ public class MisVentasDAO {
         try {
             con = cn.getConecction();
             ps = con.prepareStatement(sql);
-            ps.setDouble(1, mc.getMontoVenta());
-            ps.setDouble(2, mc.getPagoCampania());
-            ps.setDouble(3, mc.getRecaudado());
-            ps.setDouble(4, mc.getTotalGanancia());
+            ps.setBigDecimal(1, mc.getMontoVenta());
+            ps.setBigDecimal(2, mc.getPagoCampania());
+            ps.setBigDecimal(3, mc.getRecaudado());
+            ps.setBigDecimal(4, mc.getTotalGanancia());
             ps.execute();
             return true;
         } catch (SQLException e) {
@@ -240,16 +241,18 @@ public class MisVentasDAO {
     }
     
     
-    public double MontoVentaMisCuentas(){
-        double monto = 0;
+    
+    
+    public BigDecimal MontoVentaMisCuentas(){
+        BigDecimal monto = BigDecimal.ZERO; // monto = 0.00
         String sql = "SELECT total FROM mis_ventas";
         try {
             con = cn.getConecction();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             if (rs.next()) {
-                double total = rs.getDouble("total");
-                monto += total;
+                BigDecimal total = rs.getBigDecimal("total");
+                monto = monto.add(total); // monto += total
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
@@ -258,16 +261,17 @@ public class MisVentasDAO {
     }
     
     
-    public double RecaudoMisCuentas(){
-        double abonado = 0;
+    public BigDecimal RecaudoMisCuentas(){
+        BigDecimal abonado = BigDecimal.ZERO;
         String sql = "SELECT abonado FROM mis_ventas";
         try {
             con = cn.getConecction();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             if (rs.next()) {
-                double total = rs.getDouble("abonado");
-                abonado += total;
+                
+                BigDecimal total = rs.getBigDecimal("abonado");
+                abonado  = abonado.add(total);
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
@@ -280,10 +284,10 @@ public class MisVentasDAO {
         try {
             con = cn.getConecction();
             ps = con.prepareStatement(sql);
-            ps.setDouble(1, mc.getMontoVenta());
-            ps.setDouble(2, mc.getPagoCampania());
-            ps.setDouble(3, mc.getRecaudado());
-            ps.setDouble(4, mc.getTotalGanancia());
+            ps.setBigDecimal(1, mc.getMontoVenta());
+            ps.setBigDecimal(2, mc.getPagoCampania());
+            ps.setBigDecimal(3, mc.getRecaudado());
+            ps.setBigDecimal(4, mc.getTotalGanancia());
             ps.setInt(5, mc.getId());
             ps.execute();
             return true;
@@ -315,15 +319,15 @@ public class MisVentasDAO {
         return id;
     }
     
-    public double PagoCampanialMisCuentas(){
-        double pagCamp = 0;
-        String sql = "SELECT MAX(pago_campania) FROM mis_cuentas";
+    public BigDecimal PagoCampanialMisCuentas(){
+        BigDecimal pagCamp = BigDecimal.ZERO;
+        String sql = "SELECT pago_campania FROM mis_cuentas ORDER BY pago_campania DESC LIMIT 1";
         try {
             con = cn.getConecction();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             if (rs.next()) {
-                pagCamp = rs.getInt(1);
+                pagCamp = rs.getBigDecimal(1);
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
@@ -343,9 +347,9 @@ public class MisVentasDAO {
               //  dmVentas.setId(rs.getInt("id"));
                 dmVentas.setCodigoProducto(rs.getInt("codigo_producto"));
                 dmVentas.setCantidad(rs.getInt("cantidad"));
-                dmVentas.setPrecioFactura(rs.getDouble("precio_factura"));
-                dmVentas.setPrecioVendido(rs.getDouble("precio_vendido"));
-                dmVentas.setTotal(rs.getDouble("total"));
+                dmVentas.setPrecioFactura(rs.getBigDecimal("precio_factura"));
+                dmVentas.setPrecioVendido(rs.getBigDecimal("precio_vendido"));
+                dmVentas.setTotal(rs.getBigDecimal("total"));
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
@@ -365,9 +369,9 @@ public class MisVentasDAO {
               //  dmVentas.setId(rs.getInt("id"));
                 dmVentas.setCodigoProducto(rs.getInt("codigo_producto"));
                 dmVentas.setCantidad(rs.getInt("cantidad"));
-                dmVentas.setPrecioFactura(rs.getDouble("precio_factura"));
-                dmVentas.setPrecioVendido(rs.getDouble("precio_vendido"));
-                dmVentas.setTotal(rs.getDouble("total"));
+                dmVentas.setPrecioFactura(rs.getBigDecimal("precio_factura"));
+                dmVentas.setPrecioVendido(rs.getBigDecimal("precio_vendido"));
+                dmVentas.setTotal(rs.getBigDecimal("total"));
                 dmVentas.setIdVenta(rs.getInt("id_mis_ventas"));
             }
         } catch (SQLException e) {
@@ -386,9 +390,9 @@ public class MisVentasDAO {
             rs = ps.executeQuery();
             if (rs.next()) {
                 rmVentas.setCodigo_cliente(rs.getInt("codigo_cliente"));
-                rmVentas.setDebe(rs.getDouble("debe"));
-                rmVentas.setAbonado(rs.getDouble("abonado"));
-                rmVentas.setTotal(rs.getDouble("total"));
+                rmVentas.setDebe(rs.getBigDecimal("debe"));
+                rmVentas.setAbonado(rs.getBigDecimal("abonado"));
+                rmVentas.setTotal(rs.getBigDecimal("total"));
             }
         } catch (SQLException e) {
             System.out.println(e.toString());

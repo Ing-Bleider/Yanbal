@@ -24,7 +24,7 @@ public class ProductosDAO {
             ps = con.prepareStatement(sql);
             ps.setInt(1, pr.getCodigo());
             ps.setString(2,pr.getNombre());
-            ps.setDouble(3, pr.getPrecio());
+            ps.setBigDecimal(3, pr.getPrecio());
             ps.execute();
             return true;
         } catch (SQLException e) {
@@ -51,7 +51,7 @@ public class ProductosDAO {
                 pr.setId(rs.getInt("id"));
                 pr.setCodigo(rs.getInt("codigo"));
                 pr.setNombre(rs.getString("nombre"));
-                pr.setPrecio(rs.getDouble("precio"));
+                pr.setPrecio(rs.getBigDecimal("precio"));
                 ListaPr.add(pr);
             }
         } catch (SQLException e) {
@@ -86,7 +86,7 @@ public class ProductosDAO {
             ps = con.prepareStatement(sql);
             ps.setInt(1, pr.getCodigo());
             ps.setString(2, pr.getNombre());
-            ps.setDouble(3, pr.getPrecio());
+            ps.setBigDecimal(3, pr.getPrecio());
             ps.setInt(4, pr.getId());
             ps.execute();
             return true;
@@ -102,7 +102,7 @@ public class ProductosDAO {
         }    
     }   
     
-    public Productos BuscarProductos(int codigo){
+    public Productos BuscarProductosXCodigo(int codigo){
         Productos producto = new Productos();
         String sql = "SELECT * FROM productos WHERE codigo =?";
         try {
@@ -113,13 +113,34 @@ public class ProductosDAO {
             if (rs.next()) {
                 producto.setId(rs.getInt("id"));
                 producto.setNombre(rs.getString("nombre"));
-                producto.setPrecio(rs.getDouble("precio"));                
+                producto.setPrecio(rs.getBigDecimal("precio"));                
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
         }
         return producto;
     }
+    
+    public Productos BuscarProductosXNombre(String nombre){
+        Productos producto = new Productos();
+        String sql = "SELECT * FROM productos WHERE nombre =?";
+        try {
+            con = cn.getConecction();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, nombre);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                producto.setId(rs.getInt("id"));
+                producto.setCodigo(rs.getInt("codigo"));
+                producto.setPrecio(rs.getBigDecimal("precio"));                
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return producto;
+    }
+    
+    
     
     
     

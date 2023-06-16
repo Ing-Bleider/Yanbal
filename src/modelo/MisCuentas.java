@@ -1,20 +1,22 @@
 
 package modelo;
 
+import java.math.BigDecimal;
+
 
 
 public class MisCuentas {
     
     private int id;
-    private double montoVenta;
-    private double pagoCampania;
-    private double recaudado;
-    private double totalGanancia;
+    private BigDecimal montoVenta;
+    private BigDecimal pagoCampania;
+    private BigDecimal recaudado;
+    private BigDecimal totalGanancia;
 
     public MisCuentas() {
     }
 
-    public MisCuentas(int id, double montoVenta, double pagoCampania, double recaudado, double totalGanancia) {
+    public MisCuentas(int id, BigDecimal montoVenta, BigDecimal pagoCampania, BigDecimal recaudado, BigDecimal totalGanancia) {
         this.id = id;
         this.montoVenta = montoVenta;
         this.pagoCampania = pagoCampania;
@@ -30,38 +32,38 @@ public class MisCuentas {
         this.id = id;
     }
 
-    public double getMontoVenta() {
+    public BigDecimal getMontoVenta() {
         return montoVenta;
     }
 
-    public void setMontoVenta(double montoVenta) {
+    public void setMontoVenta(BigDecimal montoVenta) {
         this.montoVenta = montoVenta;
     }
 
-    public double getPagoCampania() {
+    public BigDecimal getPagoCampania() {
         return pagoCampania;
     }
 
-    public void setPagoCampania(double pagoCampania) {
+    public void setPagoCampania(BigDecimal pagoCampania) {
         this.pagoCampania = pagoCampania;
     }
 
-    public double getRecaudado() {
+    public BigDecimal getRecaudado() {
         return recaudado;
     }
 
-    public void setRecaudado(double recaudado) {
+    public void setRecaudado(BigDecimal recaudado) {
         this.recaudado = recaudado;
     }
 
-    public double getTotalGanancia() {
+    public BigDecimal getTotalGanancia() {
         return totalGanancia;
     }
 
-    public void setTotalGanancia(double totalGanancia) {
+    public void setTotalGanancia(BigDecimal totalGanancia) {
         this.totalGanancia = totalGanancia;
     }
-    
+
     
     
 }

@@ -1,20 +1,22 @@
 
 package modelo;
 
+import java.math.BigDecimal;
+
 public class DetalleMisVendedores {
     
     private int id;
     private int codigoProducto;
     private String nombreProducto;
     private int cantidad;
-    private double precio;
-    private double total;
+    private BigDecimal precio;
+    private BigDecimal total;
     private int idMisVendedores;
 
     public DetalleMisVendedores() {
     }
 
-    public DetalleMisVendedores(int id, int codigoProducto, String nombreProducto, int cantidad, double precio, double total, int idMisVendedores) {
+    public DetalleMisVendedores(int id, int codigoProducto, String nombreProducto, int cantidad, BigDecimal precio, BigDecimal total, int idMisVendedores) {
         this.id = id;
         this.codigoProducto = codigoProducto;
         this.nombreProducto = nombreProducto;
@@ -56,19 +58,19 @@ public class DetalleMisVendedores {
         this.cantidad = cantidad;
     }
 
-    public double getPrecio() {
+    public BigDecimal getPrecio() {
         return precio;
     }
 
-    public void setPrecio(double precio) {
+    public void setPrecio(BigDecimal precio) {
         this.precio = precio;
     }
 
-    public double getTotal() {
+    public BigDecimal getTotal() {
         return total;
     }
 
-    public void setTotal(double total) {
+    public void setTotal(BigDecimal total) {
         this.total = total;
     }
 
@@ -80,6 +82,6 @@ public class DetalleMisVendedores {
         this.idMisVendedores = idMisVendedores;
     }
 
-   
+    
     
 }

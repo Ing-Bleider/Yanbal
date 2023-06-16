@@ -4,12 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/57301/Documents/NetBeansProjects/Gaby/Yanbal/src/yanbal/Principal.java</file>
-            <file>file:/C:/Users/57301/Documents/NetBeansProjects/Gaby/Yanbal/src/yanbal/Bienvenida.java</file>
-            <file>file:/C:/Users/57301/Documents/NetBeansProjects/Gaby/Yanbal/src/modelo/VendedoresDAO.java</file>
+            <file>file:/C:/Users/57301/Documents/NetBeansProjects/Gaby/Yanbal/src/modelo/DetalleMisVentas.java</file>
+            <file>file:/C:/Users/57301/Documents/NetBeansProjects/Gaby/Yanbal/src/yanbal/AcercaDe.java</file>
             <file>file:/C:/Users/57301/Documents/NetBeansProjects/Gaby/Yanbal/src/modelo/Conexion.java</file>
-            <file>file:/C:/Users/57301/Documents/NetBeansProjects/Gaby/Yanbal/src/modelo/DetalleMisVendedores.java</file>
-            <file>file:/C:/Users/57301/Documents/NetBeansProjects/Gaby/Yanbal/src/modelo/Vendedores.java</file>
-            <file>file:/C:/Users/57301/Documents/NetBeansProjects/Gaby/Yanbal/src/Main/Main.java</file>
         </group>
     </open-files>
 </project-private>

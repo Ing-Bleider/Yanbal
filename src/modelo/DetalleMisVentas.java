@@ -1,20 +1,22 @@
 
 package modelo;
 
+import java.math.BigDecimal;
+
 public class DetalleMisVentas {
     
     private int id;
     private int codigoProducto;
     private int cantidad;
-    private double precioFactura;
-    private double precioVendido;
-    private double total;
+    private BigDecimal precioFactura;
+    private BigDecimal precioVendido;
+    private BigDecimal total;
     private int idVenta;
 
     public DetalleMisVentas() {
     }
 
-    public DetalleMisVentas(int id, int codigoProducto, int cantidad, double precioFactura, double precioVendido, double total, int idVenta) {
+    public DetalleMisVentas(int id, int codigoProducto, int cantidad, BigDecimal precioFactura, BigDecimal precioVendido, BigDecimal total, int idVenta) {
         this.id = id;
         this.codigoProducto = codigoProducto;
         this.cantidad = cantidad;
@@ -48,27 +50,27 @@ public class DetalleMisVentas {
         this.cantidad = cantidad;
     }
 
-    public double getPrecioFactura() {
+    public BigDecimal getPrecioFactura() {
         return precioFactura;
     }
 
-    public void setPrecioFactura(double precioFactura) {
+    public void setPrecioFactura(BigDecimal precioFactura) {
         this.precioFactura = precioFactura;
     }
 
-    public double getPrecioVendido() {
+    public BigDecimal getPrecioVendido() {
         return precioVendido;
     }
 
-    public void setPrecioVendido(double precioVendido) {
+    public void setPrecioVendido(BigDecimal precioVendido) {
         this.precioVendido = precioVendido;
     }
 
-    public double getTotal() {
+    public BigDecimal getTotal() {
         return total;
     }
 
-    public void setTotal(double total) {
+    public void setTotal(BigDecimal total) {
         this.total = total;
     }
 
@@ -79,8 +81,8 @@ public class DetalleMisVentas {
     public void setIdVenta(int idVenta) {
         this.idVenta = idVenta;
     }
-    
-    
+
+  
     
     
 }

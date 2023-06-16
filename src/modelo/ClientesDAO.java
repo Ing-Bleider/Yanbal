@@ -123,7 +123,7 @@ public class ClientesDAO {
         }
     }
     
-    public Clientes BuscarClientes(int codigo){
+    public Clientes BuscarClientesXCodigo(int codigo){
         Clientes cliente = new Clientes();
         String sql = "SELECT * FROM clientes WHERE codigo =?";
         try {
@@ -134,6 +134,26 @@ public class ClientesDAO {
             if (rs.next()) {
                 cliente.setId(rs.getInt("id"));
                 cliente.setNombre(rs.getString("nombre"));
+                cliente.setDireccion(rs.getString("direccion"));
+                cliente.setTelefono(rs.getString("telefono"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return cliente;
+    }
+    
+    public Clientes BuscarClientesXNombre(String nombre){
+        Clientes cliente = new Clientes();
+        String sql = "SELECT * FROM clientes WHERE nombre =?";
+        try {
+            con = cn.getConecction();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, nombre);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                cliente.setId(rs.getInt("id"));
+                cliente.setId(rs.getInt("codigo"));
                 cliente.setDireccion(rs.getString("direccion"));
                 cliente.setTelefono(rs.getString("telefono"));
             }

@@ -21,6 +21,8 @@ public class MisVendedoresDAO {
     public int idMisVendedores(){
         int id = 0;
         String sql = "SELECT MAX(id) FROM mis_vendedores";
+   //     String sql = "SELECT COUNT(*) FROM mis_vendedores";
+        
         try {
             con = cn.getConecction();
             ps = con.prepareStatement(sql);
@@ -57,8 +59,8 @@ public class MisVendedoresDAO {
             ps = con.prepareStatement(sql);
             ps.setInt(1, dmvr.getCodigoProducto());
             ps.setInt(2, dmvr.getCantidad());
-            ps.setDouble(3, dmvr.getPrecio());
-            ps.setDouble(4, dmvr.getTotal());
+            ps.setBigDecimal(3, dmvr.getPrecio());
+            ps.setBigDecimal(4, dmvr.getTotal());
             ps.setInt(5, dmvr.getIdMisVendedores());
             ps.execute();
             return r;
@@ -82,7 +84,7 @@ public class MisVendedoresDAO {
             ps.setInt(1, mvr.getCodigoVendedor());
             ps.setString(2, mvr.getNombreVendedor());
             ps.setDate(3, (Date) mvr.getFecha());
-            ps.setDouble(4, mvr.getTotal());
+            ps.setBigDecimal(4, mvr.getTotal());
             ps.execute();
             return r;
         } catch (SQLException e) {
@@ -110,7 +112,7 @@ public class MisVendedoresDAO {
                 mvr.setCodigoVendedor(rs.getInt("codigo_vendedor"));
                 mvr.setNombreVendedor(rs.getString("nombre_vendedor"));
                 mvr.setFecha(rs.getDate("fecha_limite"));
-                mvr.setTotal(rs.getDouble("total"));
+                mvr.setTotal(rs.getBigDecimal("total"));
                 ListaMvr.add(mvr);            
             }
         } catch (SQLException e) {
@@ -211,7 +213,7 @@ public class MisVendedoresDAO {
                 rmVendedor.setCodigoVendedor(rs.getInt("codigo_vendedor"));
                 rmVendedor.setNombreVendedor(rs.getString("nombre_vendedor"));
                 rmVendedor.setFecha(rs.getDate("fecha_limite"));
-                rmVendedor.setTotal(rs.getDouble("total"));
+                rmVendedor.setTotal(rs.getBigDecimal("total"));
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
@@ -231,8 +233,8 @@ public class MisVendedoresDAO {
                 dmVendedor.setId(rs.getInt("id"));
                 dmVendedor.setCodigoProducto(rs.getInt("codigo_producto"));
                 dmVendedor.setCantidad(rs.getInt("cantidad"));
-                dmVendedor.setPrecio(rs.getDouble("precio"));
-                dmVendedor.setTotal(rs.getDouble("total"));
+                dmVendedor.setPrecio(rs.getBigDecimal("precio"));
+                dmVendedor.setTotal(rs.getBigDecimal("total"));
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
@@ -251,8 +253,8 @@ public class MisVendedoresDAO {
             if (rs.next()) {                
                 dmVendedor.setCodigoProducto(rs.getInt("codigo_producto"));
                 dmVendedor.setCantidad(rs.getInt("cantidad"));
-                dmVendedor.setPrecio(rs.getDouble("precio"));
-                dmVendedor.setTotal(rs.getDouble("total"));
+                dmVendedor.setPrecio(rs.getBigDecimal("precio"));
+                dmVendedor.setTotal(rs.getBigDecimal("total"));
                 dmVendedor.setIdMisVendedores(rs.getInt("id_mis_vendedores"));
             }
         } catch (SQLException e) {

@@ -1,20 +1,25 @@
 
 package modelo;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+
 
 public class MisVentas {
     
     private int id;
     private int codigo_cliente;
     private String nombreCliente;
-    private double debe;
-    private double abonado;
-    private double total;
+    private BigDecimal debe;
+    private BigDecimal abonado;
+    private BigDecimal total;
+    public DecimalFormat formatoDecimal = new DecimalFormat("#,##0.00");
+
 
     public MisVentas() {
     }
 
-    public MisVentas(int id, int codigo_cliente, String nombreCliente, double debe, double abonado, double total) {
+    public MisVentas(int id, int codigo_cliente, String nombreCliente, BigDecimal debe, BigDecimal abonado, BigDecimal total) {
         this.id = id;
         this.codigo_cliente = codigo_cliente;
         this.nombreCliente = nombreCliente;
@@ -47,31 +52,31 @@ public class MisVentas {
         this.nombreCliente = nombreCliente;
     }
 
-    public double getDebe() {
+    public BigDecimal getDebe() {
         return debe;
     }
 
-    public void setDebe(double debe) {
+    public void setDebe(BigDecimal debe) {
         this.debe = debe;
     }
 
-    public double getAbonado() {
+    public BigDecimal getAbonado() {
         return abonado;
     }
 
-    public void setAbonado(double abonado) {
+    public void setAbonado(BigDecimal abonado) {
         this.abonado = abonado;
     }
 
-    public double getTotal() {
+    public BigDecimal getTotal() {
         return total;
     }
 
-    public void setTotal(double total) {
+    public void setTotal(BigDecimal total) {
         this.total = total;
     }
 
-    
+   
     
 }
 

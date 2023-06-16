@@ -5,6 +5,7 @@
 package yanbal;
 
 import java.awt.event.KeyEvent;
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -232,9 +233,9 @@ public class MiCuenta extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            String pagoText = txtMisCuentasModificarPago.getText();
+            String pagoText = txtMisCuentasModificarPago.getText().replace(".", "");
             if (!pagoText.isEmpty()) {
-                double pagoCamp = Double.parseDouble(pagoText);
+                BigDecimal pagoCamp = new BigDecimal(pagoText); 
                 mc.setPagoCampania(pagoCamp);
                 misven.ActualizarMisCuentas(mc);
                 ActualizarMisCuentas();
@@ -300,11 +301,17 @@ public class MiCuenta extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     public void registrarMisCuentas() {
-
-        double montoVenta = misven.MontoVentaMisCuentas();
-        double pagoCampanial = misven.PagoCampanialMisCuentas();
-        double recaudado = misven.RecaudoMisCuentas();
-        double totalGan = montoVenta - pagoCampanial;
+        
+        String pagoCampanial_ = JOptionPane.showInputDialog(null, "Digite el valor: ").replace(".", "");
+        String montoventa_ = misven.MontoVentaMisCuentas().toString();
+        String recaudado_ = misven.RecaudoMisCuentas().toString();
+        
+        BigDecimal montoVenta = new BigDecimal(montoventa_);
+        BigDecimal pagoCampanial = new BigDecimal(pagoCampanial_);
+        BigDecimal recaudado = new BigDecimal(recaudado_);
+        
+        
+        BigDecimal totalGan = montoVenta.subtract(pagoCampanial); // Resta de montoVenta - pagoCampanial
         mc.setMontoVenta(montoVenta);
         mc.setPagoCampania(pagoCampanial);
         mc.setRecaudado(recaudado);
@@ -314,7 +321,7 @@ public class MiCuenta extends javax.swing.JFrame {
     }
 
     public void mostrarMisCuentas() {
-        //double pagoCamp = mc.getPagoCampania();
+        //BigDecimal pagoCamp = mc.getPagoCampania();
         int id = misven.idMisCuentas();
         labelMisCuentasPagoCampania.setText("$" +formatoDecimal.format(mc.getPagoCampania()) );
         labelMisCuentasMontoVenta.setText("$" + formatoDecimal.format(mc.getMontoVenta()));
@@ -325,10 +332,17 @@ public class MiCuenta extends javax.swing.JFrame {
 
     public void ActualizarMisCuentas() {
         int id = misven.idMisCuentas();
-        double montoVenta = misven.MontoVentaMisCuentas();
-        double pagoCampanial = misven.PagoCampanialMisCuentas();
-        double recaudado = misven.RecaudoMisCuentas();
-        double totalGan = montoVenta - pagoCampanial;
+        
+        String montoVenta_ = misven.MontoVentaMisCuentas().toString();
+        String pagoCampanial_ = misven.PagoCampanialMisCuentas().toString();
+        String recaudado_ =  misven.RecaudoMisCuentas().toString();        
+        
+        BigDecimal montoVenta = new BigDecimal(montoVenta_);
+        BigDecimal pagoCampanial = new BigDecimal(pagoCampanial_);
+        BigDecimal recaudado = new BigDecimal(recaudado_);
+        BigDecimal totalGan = montoVenta.subtract(pagoCampanial);
+        
+//        System.out.println(montoVenta+"\n"+pagoCampanial+"\n"+recaudado+"\n"+totalGan);
 
         mc.setMontoVenta(montoVenta);
         mc.setPagoCampania(pagoCampanial);

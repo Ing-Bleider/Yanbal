@@ -4,16 +4,13 @@
  */
 package yanbal;
 
-//import com.itextpdf.text.BaseColor;
-//import com.itextpdf.text.Chunk;
+
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
-//import java.io.File;
-//import java.io.FileOutputStream;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,11 +50,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
-//import com.sun.source.tree.BreakTree;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.math.BigDecimal;
+
 //import java.util.logging.Level;
 //import java.util.logging.Logger;
 
@@ -88,7 +86,7 @@ public class Principal extends javax.swing.JFrame {
     DefaultTableModel modelo = new DefaultTableModel();
     DefaultTableModel tmp = new DefaultTableModel();
     int item;
-    private double total_pagar = 0.00;
+    private BigDecimal total_pagar = BigDecimal.ZERO;// inicializamos total_pagar en cero
     private JButton ultimoBotonSeleccionado = null;
 
     DecimalFormat formatoDecimal = new DecimalFormat("#,##0.00");
@@ -172,10 +170,12 @@ public class Principal extends javax.swing.JFrame {
             ob[0] = ListarPr.get(i).getId();
             ob[1] = ListarPr.get(i).getCodigo();
             ob[2] = ListarPr.get(i).getNombre();
-            ob[3] = ListarPr.get(i).getPrecio();
+            ob[3] = ListarPr.get(i).formatoDecimal.format(ListarPr.get(i).getPrecio()); // agregamos formato decimal al precio
+
             modelo.addRow(ob);
         }
         tableProductos.setModel(modelo);
+
     }
 
     public void ListarMisVentasRegistro() {
@@ -186,9 +186,9 @@ public class Principal extends javax.swing.JFrame {
             ob[0] = ListarMv.get(i).getId();
             ob[1] = ListarMv.get(i).getCodigo_cliente();
             ob[2] = ListarMv.get(i).getNombreCliente();
-            ob[3] = ListarMv.get(i).getDebe();
-            ob[4] = ListarMv.get(i).getAbonado();
-            ob[5] = ListarMv.get(i).getTotal();
+            ob[3] = ListarMv.get(i).formatoDecimal.format(ListarMv.get(i).getDebe());
+            ob[4] = ListarMv.get(i).formatoDecimal.format(ListarMv.get(i).getAbonado());
+            ob[5] = ListarMv.get(i).formatoDecimal.format(ListarMv.get(i).getTotal());
             modelo.addRow(ob);
         }
         tableMisVentasRegistro.setModel(modelo);
@@ -387,7 +387,6 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 102, 102));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnClientes.setBackground(new java.awt.Color(255, 153, 153));
         btnClientes.setFont(new java.awt.Font("Goudy Old Style", 1, 20)); // NOI18N
@@ -399,7 +398,6 @@ public class Principal extends javax.swing.JFrame {
                 btnClientesActionPerformed(evt);
             }
         });
-        jPanel1.add(btnClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 426, 250, 45));
 
         btnTotalVentas.setBackground(new java.awt.Color(255, 153, 153));
         btnTotalVentas.setFont(new java.awt.Font("Goudy Old Style", 1, 20)); // NOI18N
@@ -411,7 +409,6 @@ public class Principal extends javax.swing.JFrame {
                 btnTotalVentasActionPerformed(evt);
             }
         });
-        jPanel1.add(btnTotalVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 298, 250, 49));
 
         btnProductos.setBackground(new java.awt.Color(255, 153, 153));
         btnProductos.setFont(new java.awt.Font("Goudy Old Style", 1, 20)); // NOI18N
@@ -423,7 +420,6 @@ public class Principal extends javax.swing.JFrame {
                 btnProductosActionPerformed(evt);
             }
         });
-        jPanel1.add(btnProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 365, 250, 43));
 
         btnNuevaVenta.setBackground(new java.awt.Color(255, 153, 153));
         btnNuevaVenta.setFont(new java.awt.Font("Goudy Old Style", 1, 20)); // NOI18N
@@ -435,7 +431,6 @@ public class Principal extends javax.swing.JFrame {
                 btnNuevaVentaActionPerformed(evt);
             }
         });
-        jPanel1.add(btnNuevaVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 221, 250, 48));
 
         btnVendedores.setBackground(new java.awt.Color(255, 153, 153));
         btnVendedores.setFont(new java.awt.Font("Goudy Old Style", 1, 20)); // NOI18N
@@ -447,7 +442,6 @@ public class Principal extends javax.swing.JFrame {
                 btnVendedoresActionPerformed(evt);
             }
         });
-        jPanel1.add(btnVendedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 497, 250, 45));
 
         btnMisVentasRegistroMisCuentas.setBackground(new java.awt.Color(255, 153, 153));
         btnMisVentasRegistroMisCuentas.setFont(new java.awt.Font("Goudy Old Style", 1, 20)); // NOI18N
@@ -459,7 +453,6 @@ public class Principal extends javax.swing.JFrame {
                 btnMisVentasRegistroMisCuentasActionPerformed(evt);
             }
         });
-        jPanel1.add(btnMisVentasRegistroMisCuentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1, 560, 250, 50));
 
         btnLogoPersonal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LogoBleider5.png"))); // NOI18N
         btnLogoPersonal.setBorder(javax.swing.BorderFactory.createMatteBorder(5, 4, 5, 4, new java.awt.Color(255, 51, 51)));
@@ -469,7 +462,40 @@ public class Principal extends javax.swing.JFrame {
                 btnLogoPersonalActionPerformed(evt);
             }
         });
-        jPanel1.add(btnLogoPersonal, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 160, 150));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(btnLogoPersonal, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(btnNuevaVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(btnTotalVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(btnProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(btnClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(btnVendedores, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(btnMisVentasRegistroMisCuentas, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(btnLogoPersonal, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52)
+                .addComponent(btnNuevaVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnTotalVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnVendedores, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnMisVentasRegistroMisCuentas, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 720));
 
@@ -745,10 +771,10 @@ public class Principal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnMisVentasAgregarEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addGap(65, 65, 65)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel18)
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -765,11 +791,11 @@ public class Principal extends javax.swing.JFrame {
                                     .addComponent(btnMisVentasAgregarGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(2, 2, 2))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
+                        .addGap(57, 57, 57)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtMisVentasAgregarDireccionCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtMisVentasAgregarTelefonoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap())
+                .addGap(382, 382, 382))
         );
 
         jTabbedPane1.addTab("tab1", jPanel3);
@@ -929,10 +955,8 @@ public class Principal extends javax.swing.JFrame {
                             .addComponent(txtMisVendedoresAgregarCodigoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(35, 35, 35)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel4))
-                            .addComponent(txtMisVendedoresAgregarNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtMisVendedoresAgregarNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
                         .addGap(34, 34, 34)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
@@ -983,16 +1007,16 @@ public class Principal extends javax.swing.JFrame {
                                     .addComponent(txtMisVendedoresAgregarCodigoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(txtMisVendedoresAgregarIdProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGap(13, 13, 13)
                             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(btnMisVendedoresAgregarEliminar, javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                                     .addComponent(jLabel6)
-                                    .addGap(2, 2, 2)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(txtMisVendedoresAgregarPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                                     .addComponent(jLabel4)
-                                    .addGap(2, 2, 2)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(txtMisVendedoresAgregarNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(35, 35, 35)
@@ -1043,11 +1067,6 @@ public class Principal extends javax.swing.JFrame {
 
         txtProductosCodigo.setBackground(new java.awt.Color(204, 255, 204));
         txtProductosCodigo.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(0, 153, 153)));
-        txtProductosCodigo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtProductosCodigoActionPerformed(evt);
-            }
-        });
         txtProductosCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtProductosCodigoKeyTyped(evt);
@@ -1935,14 +1954,19 @@ public class Principal extends javax.swing.JFrame {
             return;
         }
 
-        cl = client.BuscarClientes(Integer.parseInt(txtClientesCodigo.getText()));
+        cl = client.BuscarClientesXCodigo(Integer.parseInt(txtClientesCodigo.getText()));
         if (cl.getId() != 0) {
-            JOptionPane.showMessageDialog(null, "Error, ya hay un cliente con ese codigo");
+            JOptionPane.showMessageDialog(null, "Error, ya existe un cliente con ese codigo");
+            return;
+        }
+        cl = client.BuscarClientesXNombre(txtClientesNombre.getText().trim().replaceAll(" +", " "));
+        if (cl.getId() != 0) {
+            JOptionPane.showMessageDialog(null, "Error, ya existe un cliente con ese nombre");
         } else {
             if (!"".equals(txtClientesCodigo.getText()) && !"".equals(txtClientesNombre.getText())) {
 
                 cl.setCodigo(Integer.parseInt(txtClientesCodigo.getText()));
-                cl.setNombre(txtClientesNombre.getText());
+                cl.setNombre(txtClientesNombre.getText().trim().replaceAll(" +", " "));//Omitir espacios entre cadenas
                 cl.setDireccion(txtClientesDireccion.getText());
                 cl.setTelefono(txtClientesTelefono.getText());
                 client.RegistrarCliente(cl);
@@ -2056,14 +2080,19 @@ public class Principal extends javax.swing.JFrame {
             return;
         }
 
-        ve = vend.BuscarVendedores(Integer.parseInt(txtVendedoresCodigo.getText()));
+        ve = vend.BuscarVendedoresXCodigo(Integer.parseInt(txtVendedoresCodigo.getText()));
         if (ve.getId() != 0) {
-            JOptionPane.showMessageDialog(null, "Error, ya hay un vendedor con ese codigo");
+            JOptionPane.showMessageDialog(null, "Error, ya existe un vendedor con ese codigo");
+            return;
+        }
+        ve = vend.BuscarVendedoresXNombre(txtVendedoresNombre.getText().trim().replaceAll(" +", " "));
+        if (ve.getId() != 0) {
+            JOptionPane.showMessageDialog(null, "Error, ya existe un vendedor con ese nombre");
         } else {
             if (!"".equals(txtVendedoresCodigo.getText()) && !"".equals(txtVendedoresNombre.getText())) {
 
                 ve.setCodigo(Integer.parseInt(txtVendedoresCodigo.getText()));
-                ve.setNombre(txtVendedoresNombre.getText());
+                ve.setNombre(txtVendedoresNombre.getText().trim().replaceAll(" +", " "));
                 ve.setDireccion(txtVendedoresDireccion.getText());
                 ve.setTelefono(txtVendedoresTelefono.getText());
                 vend.RegistrarVendedor(ve);
@@ -2162,15 +2191,20 @@ public class Principal extends javax.swing.JFrame {
             return;
         }
 
-        pr = produ.BuscarProductos(Integer.parseInt(txtProductosCodigo.getText()));
+        pr = produ.BuscarProductosXCodigo(Integer.parseInt(txtProductosCodigo.getText()));
         if (pr.getId() != 0) {
-            JOptionPane.showMessageDialog(null, "Error, ya hay un producto con ese codigo");
+            JOptionPane.showMessageDialog(null, "Error, ya existe un producto con ese codigo");
+            return;
+        }
+        pr = produ.BuscarProductosXNombre(txtProductosNombre.getText().trim().replaceAll(" +", " "));
+        if (pr.getId() != 0) {
+            JOptionPane.showMessageDialog(null, "Error, ya existe un producto con ese nombre");
         } else {
             if (!"".equals(txtProductosCodigo.getText()) && !"".equals(txtProductosNombre.getText()) && !"".equals(txtProductosPrecio.getText())) {
 
                 pr.setCodigo(Integer.parseInt(txtProductosCodigo.getText()));
-                pr.setNombre(txtProductosNombre.getText());
-                pr.setPrecio(Double.parseDouble(txtProductosPrecio.getText()));
+                pr.setNombre(txtProductosNombre.getText().trim().replaceAll(" +", " "));
+                pr.setPrecio(new BigDecimal(txtProductosPrecio.getText().replace(".", "").replace(",", ".")));
                 produ.RegistrarProducto(pr);
 
                 LimpiarTable();
@@ -2219,10 +2253,11 @@ public class Principal extends javax.swing.JFrame {
             if (pregunta == 0) {
                 int id = Integer.parseInt(txtProductosId.getText());
                 produ.EliminarProducto(id);
-                JOptionPane.showMessageDialog(null, "Producto Eliminado Con Exito");
+
                 LimpiarTable();
                 LimpiarProducto();
                 ListarProductos();
+                JOptionPane.showMessageDialog(null, "Producto Eliminado Con Exito");
                 txtProductosCodigo.requestFocus();
             }
         }
@@ -2239,7 +2274,7 @@ public class Principal extends javax.swing.JFrame {
                 if (!"".equals(txtProductosCodigo.getText()) && !"".equals(txtProductosNombre.getText()) && !"".equals(txtProductosPrecio.getText())) {
                     pr.setCodigo(Integer.parseInt(txtProductosCodigo.getText()));
                     pr.setNombre(txtProductosNombre.getText());
-                    pr.setPrecio(Double.parseDouble(txtProductosPrecio.getText()));
+                    pr.setPrecio(new BigDecimal(txtProductosPrecio.getText().replace(".", "").replace(",", ".")));
                     pr.setId(Integer.parseInt(txtProductosId.getText()));
                     produ.ActualizarProducto(pr);
                     JOptionPane.showMessageDialog(null, "Producto Actualizado Con Exito");
@@ -2269,7 +2304,7 @@ public class Principal extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (!"".equals(txtMisVendedoresAgregarCodigoVendedor.getText())) {
                 int codigoVendedor = Integer.parseInt(txtMisVendedoresAgregarCodigoVendedor.getText());
-                ve = vend.BuscarVendedores(codigoVendedor);
+                ve = vend.BuscarVendedoresXCodigo(codigoVendedor);
                 if (ve.getNombre() != null) {
                     txtMisVendedoresAgregarNombreVendedor.setText("" + ve.getNombre());
                     dcMisVendedoresAgregarFechaLimite.requestFocus();
@@ -2292,7 +2327,7 @@ public class Principal extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (!"".equals(txtMisVentasAgregarCodigoCliente.getText())) {
                 int codigoCliente = Integer.parseInt(txtMisVentasAgregarCodigoCliente.getText());
-                cl = client.BuscarClientes(codigoCliente);
+                cl = client.BuscarClientesXCodigo(codigoCliente);
                 if (cl.getNombre() != null) {
                     txtMisVentasAgregarNombreCliente.setText("" + cl.getNombre());
                     txtMisVentasAgregarDireccionCliente.setText("" + cl.getDireccion());
@@ -2315,10 +2350,10 @@ public class Principal extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (!"".equals(txtMisVendedoresAgregarCodigoProducto.getText())) {
                 int codigoProducto = Integer.parseInt(txtMisVendedoresAgregarCodigoProducto.getText());
-                pr = produ.BuscarProductos(codigoProducto);
+                pr = produ.BuscarProductosXCodigo(codigoProducto);
                 if (pr.getNombre() != null) {
                     txtMisVendedoresAgregarNombreProducto.setText("" + pr.getNombre());
-                    txtMisVendedoresAgregarPrecio.setText("" + pr.getPrecio());
+                    txtMisVendedoresAgregarPrecio.setText("" + formatoDecimal.format(pr.getPrecio()));
                     txtMisVendedoresAgregarIdProducto.setText("" + pr.getId());
                     txtMisVendedoresAgregarPrecio.requestFocus();
                 } else {
@@ -2382,10 +2417,12 @@ public class Principal extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (!"".equals(txtMisVentasAgregarCodigoProducto.getText())) {
                 int codigoProducto = Integer.parseInt(txtMisVentasAgregarCodigoProducto.getText());
-                pr = produ.BuscarProductos(codigoProducto);
+                pr = produ.BuscarProductosXCodigo(codigoProducto);
                 if (pr.getNombre() != null) {
                     txtMisVentasAgregarNombreProducto.setText("" + pr.getNombre());
-                    txtMisVentasAgregarPrecioFactura.setText("" + pr.getPrecio());
+                    //txtMisVentasAgregarPrecioFactura.setText( "" + pr.getPrecio());
+                    txtMisVentasAgregarPrecioFactura.setText("" + formatoDecimal.format(pr.getPrecio()));
+
                     txtMisVentasAgregarIdProducto.setText("" + pr.getId());
                     txtMisVentasAgregarPrecioVendido.requestFocus();
                 } else {
@@ -2405,11 +2442,22 @@ public class Principal extends javax.swing.JFrame {
             if (!"".equals(txtMisVentasAgregarPrecioVendido.getText())) {
                 int codigoPro = Integer.parseInt(txtMisVentasAgregarCodigoProducto.getText());
                 String nombrePro = txtMisVentasAgregarNombreProducto.getText();
-                double precioFact = Double.parseDouble(txtMisVentasAgregarPrecioFactura.getText());
-                double precioVend = Double.parseDouble(txtMisVentasAgregarPrecioVendido.getText());
+
+                //Quitamos punto y donde iba coma, ponemos punto 
+                String textoPrecio = txtMisVentasAgregarPrecioFactura.getText().replace(".", "").replace(",", ".");
+                BigDecimal precioFact = new BigDecimal(textoPrecio);
+                String precioFactFormateado = formatoDecimal.format(precioFact);
+
+                String textoPrecioVendido = txtMisVentasAgregarPrecioVendido.getText().replace(".", "").replace(",", ".");
+                BigDecimal precioVend = new BigDecimal((textoPrecioVendido));
+                String precioVendFormateado = formatoDecimal.format(precioVend);
+
                 int cantidad = Integer.parseInt(spinnerMisVentasAgregarCantidad.getValue().toString());
-                double total = precioVend * cantidad;
+                BigDecimal total = precioVend.multiply(new BigDecimal(cantidad)); // multiplicamos precioVend * cantidad
+                String totalFormateado = formatoDecimal.format(total);
+
                 item++;
+
                 tmp = (DefaultTableModel) tableMisVentasAgregar.getModel();
                 for (int i = 0; i < tableMisVentasAgregar.getRowCount(); i++) {
                     if (tableMisVentasAgregar.getValueAt(i, 1).equals(txtMisVentasAgregarNombreProducto.getText())) {
@@ -2417,23 +2465,26 @@ public class Principal extends javax.swing.JFrame {
                         return;
                     }
                 }
+
                 ArrayList lista = new ArrayList();
                 lista.add(item);
                 lista.add(codigoPro);
                 lista.add(nombrePro);
                 lista.add(cantidad);
-                lista.add(precioFact);
-                lista.add(precioVend);
-                lista.add(total);
-                Object[] O = new Object[6];
+                lista.add(precioFactFormateado);
+                lista.add(precioVendFormateado);
+                lista.add(totalFormateado);
+                Object[] O = new Object[7];
                 O[0] = lista.get(1);
                 O[1] = lista.get(2);
                 O[2] = lista.get(3);
                 O[3] = lista.get(4);
                 O[4] = lista.get(5);
                 O[5] = lista.get(6);
-                tmp.addRow(O);
+                O[6] = lista.get(0);
+
                 tableMisVentasAgregar.setModel(tmp);
+                tmp.addRow(O);
                 TotalPagarMisVentas();
                 LimpiarMiVenta();
                 txtMisVentasAgregarCodigoProducto.requestFocus();
@@ -2450,8 +2501,8 @@ public class Principal extends javax.swing.JFrame {
         } else {
             int pregunta = JOptionPane.showConfirmDialog(null, "¿Está Seguro De Eliminar?");
             if (pregunta == 0) {
-                modelo = (DefaultTableModel) tableMisVentasAgregar.getModel();
-                modelo.removeRow(tableMisVentasAgregar.getSelectedRow());
+                tmp = (DefaultTableModel) tableMisVentasAgregar.getModel();
+                tmp.removeRow(tableMisVentasAgregar.getSelectedRow());
                 TotalPagarMisVentas();
                 LimpiarMiVenta();
                 txtMisVentasAgregarCodigoProducto.requestFocus();
@@ -2473,7 +2524,6 @@ public class Principal extends javax.swing.JFrame {
         }
         registrarMisVentas();
         registrarDetalleMisVentas();
-        // pdfMiVenta();
 
         LimpiarTableAgregarMiVenta();
         LimpiarMiVenta();
@@ -2557,8 +2607,14 @@ public class Principal extends javax.swing.JFrame {
                 int codigoPro = Integer.parseInt(txtMisVendedoresAgregarCodigoProducto.getText());
                 String nombrePro = txtMisVendedoresAgregarNombreProducto.getText();
                 int cantidad = Integer.parseInt(spinnerMisVendedoresAgregarCantidad.getValue().toString());
-                double precio = Double.parseDouble(txtMisVendedoresAgregarPrecio.getText());
-                double total = precio * cantidad;
+
+                String textoPrecio = txtMisVendedoresAgregarPrecio.getText().replace(".", "").replace(",", ".");
+                BigDecimal precio = new BigDecimal(textoPrecio);
+                String precioFormateado = formatoDecimal.format(precio);
+
+                //String textoTotal = txtMisVendedoresAgregarPrecio.getText().replace(".", "").replace(",", ".");
+                BigDecimal total = precio.multiply(new BigDecimal(cantidad));// muliplicamos precio * cantidad
+                String totalFormateado = formatoDecimal.format(total);
                 item++;
                 tmp = (DefaultTableModel) tableMisVendedoresAgregar.getModel();
                 for (int i = 0; i < tableMisVendedoresAgregar.getRowCount(); i++) {
@@ -2572,14 +2628,15 @@ public class Principal extends javax.swing.JFrame {
                 lista.add(codigoPro);
                 lista.add(nombrePro);
                 lista.add(cantidad);
-                lista.add(precio);
-                lista.add(total);
-                Object[] O = new Object[5];
+                lista.add(precioFormateado);
+                lista.add(totalFormateado);
+                Object[] O = new Object[6];
                 O[0] = lista.get(1);
                 O[1] = lista.get(2);
                 O[2] = lista.get(3);
                 O[3] = lista.get(4);
                 O[4] = lista.get(5);
+                O[5] = lista.get(0);
                 tmp.addRow(O);
                 tableMisVendedoresAgregar.setModel(tmp);
                 TotalPagarMisVendedores();
@@ -2786,13 +2843,11 @@ public class Principal extends javax.swing.JFrame {
         botonActual.setBackground(new Color(255, 153, 255)); // Cambia el color del botón actual
         ultimoBotonSeleccionado = botonActual;
 
-        if (misven.PagoCampanialMisCuentas() == 0) {
+        if (misven.PagoCampanialMisCuentas() == BigDecimal.ZERO) { //Equivalente a: misven.PagoCampanialMisCuentas() == 0 
             int confirmar = JOptionPane.showConfirmDialog(null, "¿Desea registrar un valor para pago de campaña?");
             if (confirmar == 0) {
-                double pagoCamp = Double.parseDouble(JOptionPane.showInputDialog(null, "Digite el valor: "));
-                mc.setPagoCampania(pagoCamp);
-                misven.RegistrarMisCuentas(mc);
-                micu.ActualizarMisCuentas();
+
+                micu.registrarMisCuentas();
                 micu.mostrarMisCuentas();
                 micu.setVisible(true);
             }
@@ -2833,10 +2888,6 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         pdfMiVendedores();
     }//GEN-LAST:event_btnMisVendedoresRegistroPdfActionPerformed
-
-    private void txtProductosCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProductosCodigoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtProductosCodigoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -3104,21 +3155,23 @@ public class Principal extends javax.swing.JFrame {
     }
 
     private void TotalPagarMisVentas() {
-        total_pagar = 0.00;
+        total_pagar = BigDecimal.ZERO;
         int nFila = tableMisVentasAgregar.getRowCount();
         for (int i = 0; i < nFila; i++) {
-            double calcular = Double.parseDouble("" + tableMisVentasAgregar.getModel().getValueAt(i, 5));
-            total_pagar += calcular;
+            String calcular_ = tableMisVentasAgregar.getModel().getValueAt(i, 5).toString().replace(".", "").replace(",", ".");
+            BigDecimal calcular = new BigDecimal(calcular_);
+            total_pagar = total_pagar.add(calcular);
         }
         labelMisVentasAgregarTotalPagar.setText("$" + formatoDecimal.format(total_pagar));
     }
 
     private void TotalPagarMisVendedores() {
-        total_pagar = 0.00;
+        total_pagar = BigDecimal.ZERO;
         int nFila = tableMisVendedoresAgregar.getRowCount();
         for (int i = 0; i < nFila; i++) {
-            double calcular = Double.parseDouble("" + tableMisVendedoresAgregar.getModel().getValueAt(i, 4));
-            total_pagar += calcular;
+            String calcular_ = tableMisVendedoresAgregar.getModel().getValueAt(i, 4).toString().replace(".", "").replace(",", ".");
+            BigDecimal calcular = new BigDecimal(calcular_);
+            total_pagar = total_pagar.add(calcular);
         }
         labelMisVendedoresAgregarTotalPagar.setText("$" + formatoDecimal.format(total_pagar));
     }
@@ -3127,9 +3180,9 @@ public class Principal extends javax.swing.JFrame {
 
         int codigoCliente = Integer.parseInt(txtMisVentasAgregarCodigoCliente.getText());
         String nombreCliente = txtMisVentasAgregarNombreCliente.getText();
-        double abonar = 0.0;
-        double deuda = total_pagar - abonar;
-        double total = total_pagar;
+        BigDecimal abonar = BigDecimal.ZERO;
+        BigDecimal deuda = total_pagar.subtract(abonar);
+        BigDecimal total = total_pagar;
         mv.setCodigo_cliente(codigoCliente);
         mv.setNombreCliente(nombreCliente);
         mv.setDebe(deuda);
@@ -3144,12 +3197,14 @@ public class Principal extends javax.swing.JFrame {
         String nombreVendedor = txtMisVendedoresAgregarNombreVendedor.getText();
         java.util.Date fechaUtil = dcMisVendedoresAgregarFechaLimite.getDate();
         java.sql.Date fechaSql = new java.sql.Date(fechaUtil.getTime());
-        double total = total_pagar;
+        BigDecimal total = total_pagar;
         mvr.setCodigoVendedor(codigoVendedor);
         mvr.setNombreVendedor(nombreVendedor);
+        //mvr.setFecha(fechaSql);
         mvr.setFecha(fechaSql);
         mvr.setTotal(total);
         misvendedor.RegistrarVentaMisVendedores(mvr);
+
     }
 
     private void registrarDetalleMisVentas() {
@@ -3157,9 +3212,13 @@ public class Principal extends javax.swing.JFrame {
         for (int i = 0; i < tableMisVentasAgregar.getRowCount(); i++) {
             int codPro = Integer.parseInt(tableMisVentasAgregar.getValueAt(i, 0).toString());
             int cant = Integer.parseInt(tableMisVentasAgregar.getValueAt(i, 2).toString());
-            double precFact = Double.parseDouble(tableMisVentasAgregar.getValueAt(i, 3).toString());
-            double precVend = Double.parseDouble(tableMisVentasAgregar.getValueAt(i, 4).toString());
-            double total = Double.parseDouble(tableMisVentasAgregar.getValueAt(i, 5).toString());
+            String precFactura = tableMisVentasAgregar.getValueAt(i, 3).toString().replace(".", "").replace(",", ".");
+            String precVendido = tableMisVentasAgregar.getValueAt(i, 4).toString().replace(".", "").replace(",", ".");
+            String total_ = tableMisVentasAgregar.getValueAt(i, 5).toString().replace(".", "").replace(",", ".");
+
+            BigDecimal precFact = new BigDecimal(precFactura);
+            BigDecimal precVend = new BigDecimal(precVendido);
+            BigDecimal total = new BigDecimal(total_);
 
             dmv.setCodigoProducto(codPro);
             dmv.setCantidad(cant);
@@ -3176,8 +3235,12 @@ public class Principal extends javax.swing.JFrame {
         for (int i = 0; i < tableMisVendedoresAgregar.getRowCount(); i++) {
             int codPro = Integer.parseInt(tableMisVendedoresAgregar.getValueAt(i, 0).toString());
             int cant = Integer.parseInt(tableMisVendedoresAgregar.getValueAt(i, 2).toString());
-            double prec = Double.parseDouble(tableMisVendedoresAgregar.getValueAt(i, 3).toString());
-            double total = Double.parseDouble(tableMisVendedoresAgregar.getValueAt(i, 4).toString());
+
+            String prec_ = tableMisVendedoresAgregar.getValueAt(i, 3).toString().replace(".", "").replace(",", ".");
+            String total_ = tableMisVendedoresAgregar.getValueAt(i, 4).toString().replace(".", "").replace(",", ".");
+
+            BigDecimal prec = new BigDecimal(prec_);
+            BigDecimal total = new BigDecimal(total_);
 
             dmvr.setCodigoProducto(codPro);
             dmvr.setCantidad(cant);
@@ -3197,29 +3260,35 @@ public class Principal extends javax.swing.JFrame {
         }
 
         int id = Integer.parseInt(tableMisVentasRegistro.getValueAt(filaSeleccionada, 0).toString());
-        double debe = Double.parseDouble(tableMisVentasRegistro.getValueAt(filaSeleccionada, 3).toString());
-        double abono = Double.parseDouble(tableMisVentasRegistro.getValueAt(filaSeleccionada, 4).toString());
-        double total = Double.parseDouble(tableMisVentasRegistro.getValueAt(filaSeleccionada, 5).toString());
+        String debe_ = tableMisVentasRegistro.getValueAt(filaSeleccionada, 3).toString().replace(".", "").replace(",", ".");
+        String abono_ = tableMisVentasRegistro.getValueAt(filaSeleccionada, 4).toString().replace(".", "").replace(",", ".");
+        String total_ = tableMisVentasRegistro.getValueAt(filaSeleccionada, 5).toString().replace(".", "").replace(",", ".");
+
+        BigDecimal debe = new BigDecimal(debe_);
+        BigDecimal abono = new BigDecimal(abono_);
+        BigDecimal total = new BigDecimal(total_);
 
         if ("".equals(txtMisVentasRegistroAbonar.getText())) {
             JOptionPane.showMessageDialog(null, "Debe ingresar un saldo");
             return;
         }
-        if (Double.parseDouble(txtMisVentasRegistroAbonar.getText()) < 0) {
+        //Comparamos si txtMisVentasRegistroAbonar es menor a cero
+        if (new BigDecimal(txtMisVentasRegistroAbonar.getText()).compareTo(BigDecimal.ZERO) < 0) { // 
             JOptionPane.showMessageDialog(null, "El saldo debe ser positivo");
             return;
         }
-        if (Double.parseDouble(txtMisVentasRegistroAbonar.getText()) > debe) {
+        // Comparamos si txtMisVentasRegistroAbonar sea mayor a 'debe'
+        if (new BigDecimal(txtMisVentasRegistroAbonar.getText()).compareTo(debe) > 0) {
             JOptionPane.showMessageDialog(null, "El saldo ingresado es mayor a la deuda actual");
             return;
         }
-        if (Double.parseDouble(txtMisVentasRegistroAbonar.getText()) == debe) {
+        if (new BigDecimal(txtMisVentasRegistroAbonar.getText()).compareTo(debe) == 0) {
             JOptionPane.showMessageDialog(null, "¡Cuenta saldada exitosamente!");
         }
-
-        double abonar = Double.parseDouble(txtMisVentasRegistroAbonar.getText());
-        double abonoActual = abono + abonar;
-        double deudaActual = total - abonoActual;
+        String abonarAux = txtMisVentasRegistroAbonar.getText().replace(".", "");
+        BigDecimal abonar = new BigDecimal(abonarAux);
+        BigDecimal abonoActual = abono.add(abonar);
+        BigDecimal deudaActual = total.subtract(abonoActual);
 
         misven.ActualizarMisVentas(deudaActual, abonoActual, id);
 
@@ -3233,8 +3302,8 @@ public class Principal extends javax.swing.JFrame {
             int id = misven.idMaxMisVentas();
             int idMaxDtm = misven.idMaxDetalleMisVentas();
             FileOutputStream archivo;
-            //File directory = new File("C:\\Users\\Eduard\\Desktop\\YanbalPdf");
-            File directory = new File("C:\\Users\\57301\\Desktop\\YanbalPdf");
+            File directory = new File("C:\\Users\\Eduard\\Desktop\\YanbalPdf");
+            //File directory = new File("C:\\Users\\57301\\Desktop\\YanbalPdf");
             if (!directory.exists()) {
                 directory.mkdirs();
             }
@@ -3305,7 +3374,9 @@ public class Principal extends javax.swing.JFrame {
                 // obtenemos los registros de la tabla mis ventas por medio del id
                 mv = misven.BuscarIdRegistroMisVentas(i);
                 int codiClie = mv.getCodigo_cliente(); // Obtenemos codigo del cliente
-                cl = client.BuscarClientes(codiClie); // Por medio del codigo obtenemos los demas datos del cliente
+                
+                if (codiClie != 0) {
+                cl = client.BuscarClientesXCodigo(codiClie); // Por medio del codigo obtenemos los demas datos del cliente
                 String nombrCli = cl.getNombre();
                 String dirCli = cl.getDireccion();
                 String telCli = cl.getTelefono();
@@ -3357,20 +3428,20 @@ public class Principal extends javax.swing.JFrame {
 
                         int codipro = dmv.getCodigoProducto();
                         int canti = dmv.getCantidad();
-                        double precfact = dmv.getPrecioFactura();
-                        double precvend = dmv.getPrecioVendido();
-                        double tot = dmv.getTotal();
+                        BigDecimal precfact = dmv.getPrecioFactura();
+                        BigDecimal precvend = dmv.getPrecioVendido();
+                        BigDecimal tot = dmv.getTotal();
 
                         //buscamos el nombre del producto
-                        pr = produ.BuscarProductos(codipro);
+                        pr = produ.BuscarProductosXCodigo(codipro);
                         String nombrePro = pr.getNombre();
 
                         tabProducto.addCell("" + codipro);
                         tabProducto.addCell("" + nombrePro);
                         tabProducto.addCell("" + canti);
-                        tabProducto.addCell("" + precfact);
-                        tabProducto.addCell("" + precvend);
-                        tabProducto.addCell("" + tot);
+                        tabProducto.addCell("$" + formatoDecimal.format(precfact));
+                        tabProducto.addCell("$" + formatoDecimal.format(precvend));
+                        tabProducto.addCell("$" + formatoDecimal.format(tot));
 
                     }
                 }
@@ -3401,9 +3472,9 @@ public class Principal extends javax.swing.JFrame {
                 tabAbono.addCell(ab2);
                 tabAbono.addCell(ab3);
 
-                double abona = mv.getAbonado();
-                double debe = mv.getDebe();
-                double pagaTotal = mv.getTotal();
+                BigDecimal abona = mv.getAbonado();
+                BigDecimal debe = mv.getDebe();
+                BigDecimal pagaTotal = mv.getTotal();
 
                 tabAbono.addCell("$" + formatoDecimal.format(abona));
                 tabAbono.addCell("$" + formatoDecimal.format(debe));
@@ -3419,6 +3490,7 @@ public class Principal extends javax.swing.JFrame {
                                       
                                       
                                       """));
+                }
             }
             //Cliente
 
@@ -3437,8 +3509,8 @@ public class Principal extends javax.swing.JFrame {
             int idMVendedores = misvendedor.idMisVendedores();
             int idDetMVendedores = misvendedor.idDetalleMisVendedores();
             FileOutputStream archivo;
-            //File directory = new File("C:\\Users\\Eduard\\Desktop\\YanbalPdf");
-            File directory = new File("C:\\Users\\57301\\Desktop\\YanbalPdf");
+            File directory = new File("C:\\Users\\Eduard\\Desktop\\YanbalPdf");
+            //File directory = new File("C:\\Users\\57301\\Desktop\\YanbalPdf");
             if (!directory.exists()) {
                 directory.mkdirs();
             }
@@ -3485,8 +3557,8 @@ public class Principal extends javax.swing.JFrame {
             doc.add(cliente);
 //-----------------------------------------------------------------------------
 
-            
             for (int i = 1; i <= idMVendedores; i++) {
+
                 //Vendedor
                 PdfPTable tabVendedor = new PdfPTable(4);
                 tabVendedor.setWidthPercentage(100);
@@ -3509,96 +3581,98 @@ public class Principal extends javax.swing.JFrame {
 
                 // obtenemos los registros de la tabla mis ventas por medio del id
                 mvr = misvendedor.BuscarIdRegistroMisVendedores(i);
-                int codiVende = mvr.getCodigoVendedor(); // Obtenemos codigo del cliente
-                ve = vend.BuscarVendedores(codiVende); // Por medio del codigo obtenemos los demas datos del cliente
-                String nombrVende = ve.getNombre();
-                String dirVende = ve.getDireccion();
-                String telVende = ve.getTelefono();
+                if (mvr.getFecha() != null) {
 
-                tabVendedor.addCell("" + codiVende);
-                tabVendedor.addCell(nombrVende);
-                tabVendedor.addCell(dirVende);
-                tabVendedor.addCell(telVende);
+                    int codiVende = mvr.getCodigoVendedor(); // Obtenemos codigo del vendedor
+                    ve = vend.BuscarVendedoresXCodigo(codiVende); // Por medio del codigo obtenemos los demas datos del vendedor
+                    String nombrVende = ve.getNombre();
+                    String dirVende = ve.getDireccion();
+                    String telVende = ve.getTelefono();
 
-                doc.add(tabVendedor);
+                    tabVendedor.addCell("" + codiVende);
+                    tabVendedor.addCell(nombrVende);
+                    tabVendedor.addCell(dirVende);
+                    tabVendedor.addCell(telVende);
 
-                doc.add(new Paragraph("\n"));// Salto de linea entre tablas
+                    doc.add(tabVendedor);
+
+                    doc.add(new Paragraph("\n"));// Salto de linea entre tablas
 //-----------------------------------------------------------------------------------
-                //Productos
+                    //Productos
 
-                PdfPTable tabProducto = new PdfPTable(5);
-                tabProducto.setWidthPercentage(100);
-                tabProducto.getDefaultCell().setBorder(0);
-                float[] columProducto = new float[]{45f, 50f, 25f, 40f, 40f};
-                tabProducto.setWidths(columProducto);
-                tabProducto.setHorizontalAlignment(Element.ALIGN_LEFT);
-                PdfPCell pr1 = new PdfPCell(new Phrase("Codigo Producto", negrita));
-                PdfPCell pr2 = new PdfPCell(new Phrase("Nombre Producto", negrita));
-                PdfPCell pr3 = new PdfPCell(new Phrase("Cantidad", negrita));
-                PdfPCell pr4 = new PdfPCell(new Phrase("Precio ", negrita));
-                PdfPCell pr5 = new PdfPCell(new Phrase("Total", negrita));
-                pr1.setBorder(0);
-                pr2.setBorder(0);
-                pr3.setBorder(0);
-                pr4.setBorder(0);
-                pr5.setBorder(0);
-                pr1.setBackgroundColor(BaseColor.PINK);
-                pr2.setBackgroundColor(BaseColor.PINK);
-                pr3.setBackgroundColor(BaseColor.PINK);
-                pr4.setBackgroundColor(BaseColor.PINK);
-                pr5.setBackgroundColor(BaseColor.PINK);
-                tabProducto.addCell(pr1);
-                tabProducto.addCell(pr2);
-                tabProducto.addCell(pr3);
-                tabProducto.addCell(pr4);
-                tabProducto.addCell(pr5);
+                    PdfPTable tabProducto = new PdfPTable(5);
+                    tabProducto.setWidthPercentage(100);
+                    tabProducto.getDefaultCell().setBorder(0);
+                    float[] columProducto = new float[]{45f, 50f, 25f, 40f, 40f};
+                    tabProducto.setWidths(columProducto);
+                    tabProducto.setHorizontalAlignment(Element.ALIGN_LEFT);
+                    PdfPCell pr1 = new PdfPCell(new Phrase("Codigo Producto", negrita));
+                    PdfPCell pr2 = new PdfPCell(new Phrase("Nombre Producto", negrita));
+                    PdfPCell pr3 = new PdfPCell(new Phrase("Cantidad", negrita));
+                    PdfPCell pr4 = new PdfPCell(new Phrase("Precio ", negrita));
+                    PdfPCell pr5 = new PdfPCell(new Phrase("Total", negrita));
+                    pr1.setBorder(0);
+                    pr2.setBorder(0);
+                    pr3.setBorder(0);
+                    pr4.setBorder(0);
+                    pr5.setBorder(0);
+                    pr1.setBackgroundColor(BaseColor.PINK);
+                    pr2.setBackgroundColor(BaseColor.PINK);
+                    pr3.setBackgroundColor(BaseColor.PINK);
+                    pr4.setBackgroundColor(BaseColor.PINK);
+                    pr5.setBackgroundColor(BaseColor.PINK);
+                    tabProducto.addCell(pr1);
+                    tabProducto.addCell(pr2);
+                    tabProducto.addCell(pr3);
+                    tabProducto.addCell(pr4);
+                    tabProducto.addCell(pr5);
 
-                for (int j = 1; j <= idDetMVendedores; j++) {// idDetMVendedores --> id maximo de la tabla 'detalle_mis_vendedores'
-                    dmvr = misvendedor.BuscarIdMisVendedores(j); // traemos los datos por el id de la tabla `detalle mis vendedores`
-                    if (dmvr.getIdMisVendedores() == i) {
-                        // hacer proceso
-                        int codipro = dmvr.getCodigoProducto();
-                        int canti = dmvr.getCantidad();
-                        double prec = dmvr.getPrecio();
-                        double tot = dmvr.getTotal();
+                    for (int j = 1; j <= idDetMVendedores; j++) {// idDetMVendedores --> id maximo de la tabla 'detalle_mis_vendedores'
+                        dmvr = misvendedor.BuscarIdMisVendedores(j); // traemos los datos por el id de la tabla `detalle mis vendedores`
+                        if (dmvr.getIdMisVendedores() == i) {
+                            // hacer proceso
+                            int codipro = dmvr.getCodigoProducto();
+                            int canti = dmvr.getCantidad();
+                            BigDecimal prec = dmvr.getPrecio();
+                            BigDecimal tot = dmvr.getTotal();
 
-                        //buscamos el nombre del producto
-                        pr = produ.BuscarProductos(codipro);
-                        String nombrePro = pr.getNombre();
+                            //buscamos el nombre del producto
+                            pr = produ.BuscarProductosXCodigo(codipro);
+                            String nombrePro = pr.getNombre();
 
-                        tabProducto.addCell("" + codipro);
-                        tabProducto.addCell("" + nombrePro);
-                        tabProducto.addCell("" + canti);
-                        tabProducto.addCell("" + prec);
-                        tabProducto.addCell("" + tot);
+                            tabProducto.addCell("" + codipro);
+                            tabProducto.addCell("" + nombrePro);
+                            tabProducto.addCell("" + canti);
+                            tabProducto.addCell("" + formatoDecimal.format(prec));
+                            tabProducto.addCell("" + formatoDecimal.format(tot));
+                        }
                     }
-                }
 
-                doc.add(tabProducto);
+                    doc.add(tabProducto);
 
-                doc.add(new Paragraph("\n"));// Salto de linea entre tablas
+                    doc.add(new Paragraph("\n"));// Salto de linea entre tablas
 
 //----------------------------------------------------------------------------
-                
-                //Fecha limite 
-                Paragraph fechaLimite = new Paragraph();
-                Date fechaVence = mvr.getFecha();
-                fechaLimite.add(Chunk.NEWLINE);
-                fechaLimite.setAlignment(Element.ALIGN_RIGHT);
-                fechaLimite.add("Fecha limite: " + new SimpleDateFormat("dd-MM-yyyy").format(fechaVence));
-                doc.add(fechaLimite);
-                
+                    //Fecha limite 
+                    Paragraph fechaLimite = new Paragraph();
+                    Date fechaVence = mvr.getFecha();
+                    fechaLimite.add(Chunk.NEWLINE);
+                    fechaLimite.setAlignment(Element.ALIGN_RIGHT);
+                    fechaLimite.add("Fecha limite: " + new SimpleDateFormat("dd-MM-yyyy").format(fechaVence));
+                    doc.add(fechaLimite);
+
 //-----------------------------------------------------------------------------
-
-                //falta paragraph de total a pagar
-                Paragraph pTotal = new Paragraph();
-                double pagaTotal = mvr.getTotal();
-                pTotal.add(Chunk.NEWLINE);
-                pTotal.setAlignment(Element.ALIGN_RIGHT);
-                pTotal.add("Total a pagar:  $" + formatoDecimal.format(pagaTotal));
-                doc.add(pTotal);
-
-                doc.add(new Paragraph("""
+                    //falta paragraph de total a pagar
+                    Paragraph pTotal = new Paragraph();
+                    String pagaTotal_ = mvr.getTotal().toString();
+                    BigDecimal pagaTotal = new BigDecimal(pagaTotal_);
+                    String pagaTotalFormateado = formatoDecimal.format(pagaTotal);
+                    pTotal.add(Chunk.NEWLINE);
+                    pTotal.setAlignment(Element.ALIGN_RIGHT);
+                    pTotal.add("Total a pagar:  $" + pagaTotalFormateado);
+                    doc.add(pTotal);
+                    
+                    doc.add(new Paragraph("""
                                       
                                       
                                       ______________________________________________________________________________
@@ -3606,9 +3680,12 @@ public class Principal extends javax.swing.JFrame {
                                       
                                       
                                       """));
+                }
             }
 
 //----------------------------------------------------------------------------
+            
+
             doc.close();
             archivo.close();
             Desktop.getDesktop().open(file);

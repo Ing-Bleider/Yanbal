@@ -106,7 +106,7 @@ public class VendedoresDAO {
         }
     }
     
-    public Vendedores BuscarVendedores(int codigo){
+    public Vendedores BuscarVendedoresXCodigo(int codigo){
         Vendedores vendedor = new Vendedores();
         String sql = "SELECT * FROM vendedores WHERE codigo =?";
         try {
@@ -117,6 +117,26 @@ public class VendedoresDAO {
             if (rs.next()) {
                 vendedor.setId(rs.getInt("id"));
                 vendedor.setNombre(rs.getString("nombre"));
+                vendedor.setDireccion(rs.getString("direccion"));
+                vendedor.setTelefono(rs.getString("telefono"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return vendedor;
+    }
+    
+    public Vendedores BuscarVendedoresXNombre(String nombre){
+        Vendedores vendedor = new Vendedores();
+        String sql = "SELECT * FROM vendedores WHERE nombre =?";
+        try {
+            con = cn.getConecction();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, nombre);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                vendedor.setId(rs.getInt("id"));
+                vendedor.setId(rs.getInt("codigo"));
                 vendedor.setDireccion(rs.getString("direccion"));
                 vendedor.setTelefono(rs.getString("telefono"));
             }

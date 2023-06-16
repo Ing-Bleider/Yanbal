@@ -1,18 +1,22 @@
 
 package modelo;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+
+
 
 public class Productos {
-    
+    public DecimalFormat formatoDecimal = new DecimalFormat("#,##0.00");
     private int id;
     private int codigo;
     private String nombre;
-    private double precio;
+    private BigDecimal precio;
 
     public Productos() {
     }
 
-    public Productos(int id, int codigo, String nombre, double precio) {
+    public Productos(int id, int codigo, String nombre, BigDecimal precio) {
         this.id = id;
         this.codigo = codigo;
         this.nombre = nombre;
@@ -43,11 +47,11 @@ public class Productos {
         this.nombre = nombre;
     }
 
-    public double getPrecio() {
+    public BigDecimal getPrecio() {
         return precio;
     }
 
-    public void setPrecio(double precio) {
+    public void setPrecio(BigDecimal precio) {
         this.precio = precio;
     }
     

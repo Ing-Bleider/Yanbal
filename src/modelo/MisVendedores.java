@@ -1,6 +1,7 @@
 
 package modelo;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 
 
@@ -10,12 +11,12 @@ public class MisVendedores {
     private int codigoVendedor;
     private String nombreVendedor;
     private Date fecha;
-    private double total;
+    private BigDecimal total;
 
     public MisVendedores() {
     }
 
-    public MisVendedores(int id, int codigoVendedor, String nombreVendedor, Date fecha, double total) {
+    public MisVendedores(int id, int codigoVendedor, String nombreVendedor, Date fecha, BigDecimal total) {
         this.id = id;
         this.codigoVendedor = codigoVendedor;
         this.nombreVendedor = nombreVendedor;
@@ -47,21 +48,21 @@ public class MisVendedores {
         this.nombreVendedor = nombreVendedor;
     }
 
-    public void setFecha(java.util.Date fecha) { // Cambio realizado aquí
-        this.fecha = new java.sql.Date(fecha.getTime());
-    }
-
-    public java.sql.Date getFecha() { // Cambio realizado aquí
+    public Date getFecha() {
         return fecha;
     }
 
-    public double getTotal() {
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public BigDecimal getTotal() {
         return total;
     }
 
-    public void setTotal(double total) {
+    public void setTotal(BigDecimal total) {
         this.total = total;
     }
-    
+
     
 }
