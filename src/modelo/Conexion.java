@@ -12,9 +12,17 @@ public class Conexion {
     
     public Connection getConecction(){
         try {
+            /*
+//            Con xampp
             String myBD = "jdbc:mysql://localhost:3306/yanbal?serverTimezone=UTC";
-           //con = DriverManager.getConnection(myBD, "root", "123456");//123456
             con = DriverManager.getConnection(myBD, "root", "");// sin contrasenia 
+//            con = DriverManager.getConnection(myBD, "root", "123456");//123456
+            */
+            
+//           Con Workbench
+            String myBD = "jdbc:mysql://127.0.0.1:3306/yanbal?serverTimezone=UTC";
+            con = DriverManager.getConnection(myBD, "root", "root");
+           
             return con;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.toString());

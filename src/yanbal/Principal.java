@@ -123,7 +123,6 @@ public class Principal extends javax.swing.JFrame {
         spinnerMisVendedoresAgregarCantidad.setModel(ModeloSpinner);
         JFormattedTextField txtField2 = ((JSpinner.DefaultEditor) spinnerMisVendedoresAgregarCantidad.getEditor()).getTextField();
         txtField2.setEditable(false);
-
     }
 
     public void ListarClientes() {
@@ -503,10 +502,10 @@ public class Principal extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
+            .addGap(0, 170, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 960, 150));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 960, 170));
 
         jTabbedPane1.setBackground(new java.awt.Color(204, 255, 204));
 

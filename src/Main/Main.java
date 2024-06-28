@@ -17,13 +17,14 @@ public class Main {
    public static void main(String[] args) {
        
        
-       SplashScreen splashScreen = new SplashScreen();
+        SplashScreen splashScreen = new SplashScreen();
         splashScreen.setVisible(true);
         
         // Simula una carga de trabajo
         try {
             Thread.sleep(3000); // Espera 3 segundos
         } catch (InterruptedException e) {
+            
         }
         
         // Cierra la SplashScreen y continúa con la aplicación principal
