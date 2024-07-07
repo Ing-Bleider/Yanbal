@@ -50,6 +50,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
+import javax.swing.JLabel;
 
 //import java.util.logging.Level;
 //import java.util.logging.Logger;
@@ -100,6 +101,7 @@ public class Principal extends javax.swing.JFrame {
         setTitle("Yanbal");
         setIconImage(new ImageIcon(getClass().getResource("/images/miniLogo.png")).getImage());
 
+        this.jPanelContenedorNuevaVentaUsuario.setVisible(false);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         setImageButton(btnLogoPersonal, "/images/LogoBleider5.png");
@@ -245,8 +247,9 @@ public class Principal extends javax.swing.JFrame {
         btnLogoPersonal = new javax.swing.JButton();
         jPanel2 = new FondoPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel10 = new YanbalBienvenidaPanel();
-        jPanel3 = new javax.swing.JPanel();
+        jPanelBienvenida = new YanbalBienvenidaPanel();
+        jPanelNuevaVentaUsuario = new javax.swing.JPanel();
+        jPanelContenedorNuevaVentaUsuario = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -264,14 +267,16 @@ public class Principal extends javax.swing.JFrame {
         btnMisVentasAgregarEliminar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableMisVentasAgregar = new javax.swing.JTable();
-        jLabel22 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         labelMisVentasAgregarTotalPagar = new javax.swing.JLabel();
         spinnerMisVentasAgregarCantidad = new javax.swing.JSpinner();
         txtMisVentasAgregarIdProducto = new javax.swing.JTextField();
         txtMisVentasAgregarDireccionCliente = new javax.swing.JTextField();
         txtMisVentasAgregarTelefonoCliente = new javax.swing.JTextField();
-        jPanel4 = new javax.swing.JPanel();
+        lblTab1NuevaVentaVendedor = new javax.swing.JLabel();
+        lblTab1NuevaVentaUsuario = new javax.swing.JLabel();
+        jPanelNuevaVentaVendedor = new javax.swing.JPanel();
+        jPanelContenedorNuevaVentaVendedor = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtMisVendedoresAgregarCodigoProducto = new javax.swing.JTextField();
@@ -292,9 +297,10 @@ public class Principal extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         labelMisVendedoresAgregarTotalPagar = new javax.swing.JLabel();
         btnMisVendedoresAgregarGuardar = new javax.swing.JButton();
-        jLabel26 = new javax.swing.JLabel();
         txtMisVendedoresAgregarIdProducto = new javax.swing.JTextField();
-        jPanel5 = new javax.swing.JPanel();
+        lblTab2NuevaVentaUsuario = new javax.swing.JLabel();
+        lblTab2NuevaVentaVendedor = new javax.swing.JLabel();
+        jPanelProductos = new javax.swing.JPanel();
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
@@ -309,7 +315,7 @@ public class Principal extends javax.swing.JFrame {
         btnProductosGuardar = new javax.swing.JButton();
         btnProductosNuevo = new javax.swing.JButton();
         txtProductosId = new javax.swing.JTextField();
-        jPanel6 = new javax.swing.JPanel();
+        jPanelClientes = new javax.swing.JPanel();
         jLabel34 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
@@ -327,7 +333,7 @@ public class Principal extends javax.swing.JFrame {
         txtClientesTelefono = new javax.swing.JTextField();
         txtClientesId = new javax.swing.JTextField();
         btnClientesNuevo = new javax.swing.JButton();
-        jPanel7 = new javax.swing.JPanel();
+        jPanelVendedores = new javax.swing.JPanel();
         jLabel39 = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
         jLabel41 = new javax.swing.JLabel();
@@ -344,7 +350,7 @@ public class Principal extends javax.swing.JFrame {
         tableVendedores = new javax.swing.JTable();
         txtVendedoresId = new javax.swing.JTextField();
         btnVendedoresNuevo = new javax.swing.JButton();
-        jPanel8 = new javax.swing.JPanel();
+        jPanelVentasUsuario = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         tableMisVentasRegistro = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -361,7 +367,7 @@ public class Principal extends javax.swing.JFrame {
         btnMisVentasRegistrosPdf = new javax.swing.JButton();
         jLabel25 = new javax.swing.JLabel();
         txtMisVentasRegistroId = new javax.swing.JTextField();
-        jPanel9 = new javax.swing.JPanel();
+        jPanelVentasVendedores = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
         tableMisVendedoresRegistro = new javax.swing.JTable();
         btnMisVendedoresRegistroPdf = new javax.swing.JButton();
@@ -376,7 +382,9 @@ public class Principal extends javax.swing.JFrame {
         jLabel2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1220, 730));
+        setMaximumSize(new java.awt.Dimension(1220, 700));
+        setMinimumSize(new java.awt.Dimension(1220, 700));
+        setPreferredSize(new java.awt.Dimension(1220, 700));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 102, 102));
@@ -475,22 +483,22 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(btnLogoPersonal, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
+                .addGap(51, 51, 51)
                 .addComponent(btnNuevaVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnTotalVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnVendedores, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnMisVentasRegistroMisCuentas, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 720));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 690));
 
         jPanel2.setBackground(new java.awt.Color(255, 153, 102));
 
@@ -502,27 +510,29 @@ public class Principal extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 170, Short.MAX_VALUE)
+            .addGap(0, 140, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 960, 170));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 960, 140));
 
         jTabbedPane1.setBackground(new java.awt.Color(204, 255, 204));
 
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 955, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPanelBienvenidaLayout = new javax.swing.GroupLayout(jPanelBienvenida);
+        jPanelBienvenida.setLayout(jPanelBienvenidaLayout);
+        jPanelBienvenidaLayout.setHorizontalGroup(
+            jPanelBienvenidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 960, Short.MAX_VALUE)
         );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 560, Short.MAX_VALUE)
+        jPanelBienvenidaLayout.setVerticalGroup(
+            jPanelBienvenidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 515, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("tab8", jPanel10);
+        jTabbedPane1.addTab("tab8", jPanelBienvenida);
 
-        jPanel3.setBackground(new java.awt.Color(255, 204, 255));
+        jPanelNuevaVentaUsuario.setPreferredSize(new java.awt.Dimension(960, 432));
+
+        jPanelContenedorNuevaVentaUsuario.setBackground(new java.awt.Color(204, 188, 255));
 
         jLabel13.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
         jLabel13.setText("Codigo Producto *");
@@ -545,7 +555,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel19.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
         jLabel19.setText("Nombre Cliente");
 
-        txtMisVentasAgregarCodigoProducto.setBackground(new java.awt.Color(255, 204, 255));
+        txtMisVentasAgregarCodigoProducto.setBackground(new java.awt.Color(204, 188, 255));
         txtMisVentasAgregarCodigoProducto.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(255, 102, 51)));
         txtMisVentasAgregarCodigoProducto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -556,7 +566,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        txtMisVentasAgregarNombreProducto.setBackground(new java.awt.Color(255, 204, 255));
+        txtMisVentasAgregarNombreProducto.setBackground(new java.awt.Color(204, 188, 255));
         txtMisVentasAgregarNombreProducto.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(255, 102, 51)));
         txtMisVentasAgregarNombreProducto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -565,10 +575,10 @@ public class Principal extends javax.swing.JFrame {
         });
 
         txtMisVentasAgregarPrecioFactura.setEditable(false);
-        txtMisVentasAgregarPrecioFactura.setBackground(new java.awt.Color(255, 204, 255));
+        txtMisVentasAgregarPrecioFactura.setBackground(new java.awt.Color(204, 188, 255));
         txtMisVentasAgregarPrecioFactura.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(255, 102, 51)));
 
-        txtMisVentasAgregarPrecioVendido.setBackground(new java.awt.Color(255, 204, 255));
+        txtMisVentasAgregarPrecioVendido.setBackground(new java.awt.Color(204, 188, 255));
         txtMisVentasAgregarPrecioVendido.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(255, 102, 51)));
         txtMisVentasAgregarPrecioVendido.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -579,7 +589,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        txtMisVentasAgregarCodigoCliente.setBackground(new java.awt.Color(255, 204, 255));
+        txtMisVentasAgregarCodigoCliente.setBackground(new java.awt.Color(204, 188, 255));
         txtMisVentasAgregarCodigoCliente.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(255, 102, 51)));
         txtMisVentasAgregarCodigoCliente.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -590,7 +600,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        txtMisVentasAgregarNombreCliente.setBackground(new java.awt.Color(255, 204, 255));
+        txtMisVentasAgregarNombreCliente.setBackground(new java.awt.Color(204, 188, 255));
         txtMisVentasAgregarNombreCliente.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(255, 102, 51)));
         txtMisVentasAgregarNombreCliente.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -616,7 +626,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        tableMisVentasAgregar.setBackground(new java.awt.Color(255, 153, 255));
+        tableMisVentasAgregar.setBackground(new java.awt.Color(204, 203, 255));
         tableMisVentasAgregar.setFont(new java.awt.Font("Verdana", 0, 13)); // NOI18N
         tableMisVentasAgregar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -649,14 +659,6 @@ public class Principal extends javax.swing.JFrame {
             tableMisVentasAgregar.getColumnModel().getColumn(5).setPreferredWidth(15);
         }
 
-        jLabel22.setBackground(new java.awt.Color(255, 204, 204));
-        jLabel22.setFont(new java.awt.Font("Monotype Corsiva", 0, 36)); // NOI18N
-        jLabel22.setForeground(new java.awt.Color(255, 153, 153));
-        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel22.setText("AGREGAR MIS VENTAS");
-        jLabel22.setToolTipText("");
-        jLabel22.setOpaque(true);
-
         jLabel24.setFont(new java.awt.Font("Rockwell", 1, 18)); // NOI18N
         jLabel24.setText("Total a Pagar: ");
 
@@ -669,131 +671,164 @@ public class Principal extends javax.swing.JFrame {
 
         txtMisVentasAgregarIdProducto.setBorder(null);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel13)
-                    .addComponent(txtMisVentasAgregarCodigoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtMisVentasAgregarNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14))
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelContenedorNuevaVentaUsuarioLayout = new javax.swing.GroupLayout(jPanelContenedorNuevaVentaUsuario);
+        jPanelContenedorNuevaVentaUsuario.setLayout(jPanelContenedorNuevaVentaUsuarioLayout);
+        jPanelContenedorNuevaVentaUsuarioLayout.setHorizontalGroup(
+            jPanelContenedorNuevaVentaUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelContenedorNuevaVentaUsuarioLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanelContenedorNuevaVentaUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelContenedorNuevaVentaUsuarioLayout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabel14)
+                        .addGap(55, 55, 55)
+                        .addComponent(jLabel15)
+                        .addGap(38, 38, 38)
+                        .addComponent(jLabel17)
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel16))
+                    .addGroup(jPanelContenedorNuevaVentaUsuarioLayout.createSequentialGroup()
+                        .addComponent(txtMisVentasAgregarCodigoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(txtMisVentasAgregarNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20)
-                        .addComponent(jLabel15))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(txtMisVentasAgregarPrecioFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(32, 32, 32)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel17)
-                    .addComponent(spinnerMisVentasAgregarCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel16)
-                    .addComponent(txtMisVentasAgregarPrecioVendido, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addComponent(txtMisVentasAgregarIdProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnMisVentasAgregarEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 904, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(23, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txtMisVentasAgregarPrecioFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(spinnerMisVentasAgregarCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(55, 55, 55)
+                        .addComponent(txtMisVentasAgregarPrecioVendido, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(txtMisVentasAgregarIdProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(btnMisVentasAgregarEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 904, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanelContenedorNuevaVentaUsuarioLayout.createSequentialGroup()
+                        .addGroup(jPanelContenedorNuevaVentaUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel18)
                             .addComponent(txtMisVentasAgregarCodigoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(29, 29, 29)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanelContenedorNuevaVentaUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel19)
                             .addComponent(txtMisVentasAgregarNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(74, 74, 74)
+                        .addGap(80, 80, 80)
                         .addComponent(btnMisVentasAgregarGuardar)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel24)
-                                .addGap(9, 9, 9)
-                                .addComponent(labelMisVentasAgregarTotalPagar)
-                                .addGap(127, 127, 127))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(40, 40, 40)
-                                .addComponent(txtMisVentasAgregarDireccionCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtMisVentasAgregarTelefonoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                        .addGap(36, 36, 36)
+                        .addComponent(txtMisVentasAgregarDireccionCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(txtMisVentasAgregarTelefonoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(jLabel24)
+                        .addGap(10, 10, 10)
+                        .addComponent(labelMisVentasAgregarTotalPagar)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel17)
-                                .addGap(18, 18, 18)
-                                .addComponent(spinnerMisVentasAgregarCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel16)
-                            .addComponent(jLabel15)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel13)
-                                    .addComponent(jLabel14))
-                                .addGap(22, 22, 22)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtMisVentasAgregarCodigoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(txtMisVentasAgregarNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtMisVentasAgregarPrecioFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(txtMisVentasAgregarPrecioVendido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtMisVentasAgregarIdProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnMisVentasAgregarEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+        jPanelContenedorNuevaVentaUsuarioLayout.setVerticalGroup(
+            jPanelContenedorNuevaVentaUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelContenedorNuevaVentaUsuarioLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanelContenedorNuevaVentaUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel14)
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel17)
+                    .addComponent(jLabel16))
+                .addGap(2, 2, 2)
+                .addGroup(jPanelContenedorNuevaVentaUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(spinnerMisVentasAgregarCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanelContenedorNuevaVentaUsuarioLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanelContenedorNuevaVentaUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtMisVentasAgregarCodigoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMisVentasAgregarNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMisVentasAgregarPrecioFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMisVentasAgregarPrecioVendido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMisVentasAgregarIdProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnMisVentasAgregarEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(10, 10, 10)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel18)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel19)
-                                .addGap(11, 11, 11)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtMisVentasAgregarNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtMisVentasAgregarCodigoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel24)
-                                        .addComponent(labelMisVentasAgregarTotalPagar))
-                                    .addComponent(btnMisVentasAgregarGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(2, 2, 2))))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtMisVentasAgregarDireccionCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtMisVentasAgregarTelefonoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(382, 382, 382))
+                .addGap(22, 22, 22)
+                .addGroup(jPanelContenedorNuevaVentaUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelContenedorNuevaVentaUsuarioLayout.createSequentialGroup()
+                        .addComponent(jLabel18)
+                        .addGap(12, 12, 12)
+                        .addComponent(txtMisVentasAgregarCodigoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelContenedorNuevaVentaUsuarioLayout.createSequentialGroup()
+                        .addComponent(jLabel19)
+                        .addGap(12, 12, 12)
+                        .addComponent(txtMisVentasAgregarNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelContenedorNuevaVentaUsuarioLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(btnMisVentasAgregarGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMisVentasAgregarDireccionCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMisVentasAgregarTelefonoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanelContenedorNuevaVentaUsuarioLayout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel24))
+                    .addGroup(jPanelContenedorNuevaVentaUsuarioLayout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(labelMisVentasAgregarTotalPagar)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("tab1", jPanel3);
+        lblTab1NuevaVentaVendedor.setBackground(new java.awt.Color(255, 204, 255));
+        lblTab1NuevaVentaVendedor.setFont(new java.awt.Font("MV Boli", 0, 24)); // NOI18N
+        lblTab1NuevaVentaVendedor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTab1NuevaVentaVendedor.setText("PARA VENDEDOR");
+        lblTab1NuevaVentaVendedor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblTab1NuevaVentaVendedor.setOpaque(true);
+        lblTab1NuevaVentaVendedor.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lblTab1NuevaVentaVendedorMouseMoved(evt);
+            }
+        });
+        lblTab1NuevaVentaVendedor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblTab1NuevaVentaVendedorMouseClicked(evt);
+            }
+        });
 
-        jPanel4.setBackground(new java.awt.Color(255, 204, 255));
+        lblTab1NuevaVentaUsuario.setBackground(new java.awt.Color(204, 188, 255));
+        lblTab1NuevaVentaUsuario.setFont(new java.awt.Font("MV Boli", 0, 24)); // NOI18N
+        lblTab1NuevaVentaUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTab1NuevaVentaUsuario.setText("PARA USUARIO");
+        lblTab1NuevaVentaUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblTab1NuevaVentaUsuario.setOpaque(true);
+        lblTab1NuevaVentaUsuario.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lblTab1NuevaVentaUsuarioMouseMoved(evt);
+            }
+        });
+        lblTab1NuevaVentaUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblTab1NuevaVentaUsuarioMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelNuevaVentaUsuarioLayout = new javax.swing.GroupLayout(jPanelNuevaVentaUsuario);
+        jPanelNuevaVentaUsuario.setLayout(jPanelNuevaVentaUsuarioLayout);
+        jPanelNuevaVentaUsuarioLayout.setHorizontalGroup(
+            jPanelNuevaVentaUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelNuevaVentaUsuarioLayout.createSequentialGroup()
+                .addGap(470, 470, 470)
+                .addComponent(lblTab1NuevaVentaVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanelContenedorNuevaVentaUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblTab1NuevaVentaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        jPanelNuevaVentaUsuarioLayout.setVerticalGroup(
+            jPanelNuevaVentaUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblTab1NuevaVentaVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanelNuevaVentaUsuarioLayout.createSequentialGroup()
+                .addGap(57, 57, 57)
+                .addComponent(jPanelContenedorNuevaVentaUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(lblTab1NuevaVentaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        jTabbedPane1.addTab("tab1", jPanelNuevaVentaUsuario);
+
+        jPanelNuevaVentaVendedor.setBackground(new java.awt.Color(255, 204, 255));
+
+        jPanelContenedorNuevaVentaVendedor.setBackground(new java.awt.Color(255, 204, 255));
 
         jLabel3.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
         jLabel3.setText("Codigo Producto *");
@@ -829,7 +864,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        tableMisVendedoresAgregar.setBackground(new java.awt.Color(255, 153, 255));
+        tableMisVendedoresAgregar.setBackground(new java.awt.Color(255, 181, 255));
         tableMisVendedoresAgregar.setFont(new java.awt.Font("Verdana", 0, 13)); // NOI18N
         tableMisVendedoresAgregar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -912,6 +947,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Rockwell", 1, 18)); // NOI18N
         jLabel11.setText("Total a Pagar: ");
 
+        labelMisVendedoresAgregarTotalPagar.setBackground(new java.awt.Color(255, 204, 255));
         labelMisVendedoresAgregarTotalPagar.setFont(new java.awt.Font("Rockwell", 1, 18)); // NOI18N
         labelMisVendedoresAgregarTotalPagar.setText("--------");
 
@@ -924,130 +960,156 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jLabel26.setBackground(new java.awt.Color(255, 204, 204));
-        jLabel26.setFont(new java.awt.Font("Monotype Corsiva", 0, 36)); // NOI18N
-        jLabel26.setForeground(new java.awt.Color(255, 153, 153));
-        jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel26.setText("AGREGAR VENTAS A MIS VENDEDORES");
-        jLabel26.setOpaque(true);
-
         txtMisVendedoresAgregarIdProducto.setBackground(new java.awt.Color(255, 204, 255));
         txtMisVendedoresAgregarIdProducto.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(255, 102, 51)));
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(txtMisVendedoresAgregarCodigoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(35, 35, 35)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtMisVendedoresAgregarNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addGap(34, 34, 34)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(spinnerMisVendedoresAgregarCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(45, 45, 45)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(txtMisVendedoresAgregarPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(44, 44, 44)
-                        .addComponent(btnMisVendedoresAgregarEliminar)
-                        .addGap(46, 46, 46)
-                        .addComponent(txtMisVendedoresAgregarIdProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 877, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(43, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(txtMisVendedoresAgregarCodigoVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel9)
-                    .addComponent(txtMisVendedoresAgregarNombreVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(dcMisVendedoresAgregarFechaLimite, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addComponent(btnMisVendedoresAgregarGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(labelMisVendedoresAgregarTotalPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel4Layout.createSequentialGroup()
-                            .addGap(39, 39, 39)
-                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jPanel4Layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addGap(7, 7, 7)
-                                    .addComponent(txtMisVendedoresAgregarCodigoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(txtMisVendedoresAgregarIdProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                            .addGap(13, 13, 13)
-                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btnMisVendedoresAgregarEliminar, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                    .addComponent(jLabel6)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtMisVendedoresAgregarPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                    .addComponent(jLabel4)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtMisVendedoresAgregarNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
+        javax.swing.GroupLayout jPanelContenedorNuevaVentaVendedorLayout = new javax.swing.GroupLayout(jPanelContenedorNuevaVentaVendedor);
+        jPanelContenedorNuevaVentaVendedor.setLayout(jPanelContenedorNuevaVentaVendedorLayout);
+        jPanelContenedorNuevaVentaVendedorLayout.setHorizontalGroup(
+            jPanelContenedorNuevaVentaVendedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelContenedorNuevaVentaVendedorLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(jPanelContenedorNuevaVentaVendedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelContenedorNuevaVentaVendedorLayout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(38, 38, 38)
+                        .addComponent(jLabel4)
+                        .addGap(85, 85, 85)
                         .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(spinnerMisVendedoresAgregarCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(40, 40, 40)
+                        .addComponent(jLabel6))
+                    .addGroup(jPanelContenedorNuevaVentaVendedorLayout.createSequentialGroup()
+                        .addComponent(txtMisVendedoresAgregarCodigoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50)
+                        .addComponent(txtMisVendedoresAgregarNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(spinnerMisVendedoresAgregarCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50)
+                        .addComponent(txtMisVendedoresAgregarPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(22, 22, 22)
+                        .addComponent(btnMisVendedoresAgregarEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(60, 60, 60)
+                        .addComponent(txtMisVendedoresAgregarIdProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 877, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanelContenedorNuevaVentaVendedorLayout.createSequentialGroup()
+                        .addGroup(jPanelContenedorNuevaVentaVendedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
-                            .addComponent(jLabel9))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtMisVendedoresAgregarCodigoVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtMisVendedoresAgregarNombreVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(73, 73, 73))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnMisVendedoresAgregarGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel11)
-                                        .addComponent(labelMisVendedoresAgregarTotalPagar))))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dcMisVendedoresAgregarFechaLimite, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap())))
+                            .addComponent(txtMisVendedoresAgregarCodigoVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanelContenedorNuevaVentaVendedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(txtMisVendedoresAgregarNombreVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(17, 17, 17)
+                        .addGroup(jPanelContenedorNuevaVentaVendedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10)
+                            .addComponent(dcMisVendedoresAgregarFechaLimite, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addComponent(btnMisVendedoresAgregarGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel11)
+                        .addGap(0, 0, 0)
+                        .addComponent(labelMisVendedoresAgregarTotalPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(59, Short.MAX_VALUE))
+        );
+        jPanelContenedorNuevaVentaVendedorLayout.setVerticalGroup(
+            jPanelContenedorNuevaVentaVendedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelContenedorNuevaVentaVendedorLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(jPanelContenedorNuevaVentaVendedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel6))
+                .addGap(2, 2, 2)
+                .addGroup(jPanelContenedorNuevaVentaVendedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(spinnerMisVendedoresAgregarCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMisVendedoresAgregarEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanelContenedorNuevaVentaVendedorLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanelContenedorNuevaVentaVendedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtMisVendedoresAgregarCodigoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMisVendedoresAgregarNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMisVendedoresAgregarPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMisVendedoresAgregarIdProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(6, 6, 6)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
+                .addGroup(jPanelContenedorNuevaVentaVendedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelContenedorNuevaVentaVendedorLayout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(2, 2, 2)
+                        .addComponent(txtMisVendedoresAgregarCodigoVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelContenedorNuevaVentaVendedorLayout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(2, 2, 2)
+                        .addComponent(txtMisVendedoresAgregarNombreVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelContenedorNuevaVentaVendedorLayout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addGap(2, 2, 2)
+                        .addComponent(dcMisVendedoresAgregarFechaLimite, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelContenedorNuevaVentaVendedorLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(btnMisVendedoresAgregarGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelContenedorNuevaVentaVendedorLayout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel11))
+                    .addGroup(jPanelContenedorNuevaVentaVendedorLayout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(labelMisVendedoresAgregarTotalPagar)))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("tab2", jPanel4);
+        lblTab2NuevaVentaUsuario.setBackground(new java.awt.Color(204, 188, 255));
+        lblTab2NuevaVentaUsuario.setFont(new java.awt.Font("MV Boli", 0, 24)); // NOI18N
+        lblTab2NuevaVentaUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTab2NuevaVentaUsuario.setText("PARA USUARIO");
+        lblTab2NuevaVentaUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblTab2NuevaVentaUsuario.setOpaque(true);
+        lblTab2NuevaVentaUsuario.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lblTab2NuevaVentaUsuarioMouseMoved(evt);
+            }
+        });
+        lblTab2NuevaVentaUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblTab2NuevaVentaUsuarioMouseClicked(evt);
+            }
+        });
 
-        jPanel5.setBackground(new java.awt.Color(204, 255, 204));
+        lblTab2NuevaVentaVendedor.setBackground(new java.awt.Color(255, 204, 255));
+        lblTab2NuevaVentaVendedor.setFont(new java.awt.Font("MV Boli", 0, 24)); // NOI18N
+        lblTab2NuevaVentaVendedor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTab2NuevaVentaVendedor.setText("PARA VENDEDOR");
+        lblTab2NuevaVentaVendedor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblTab2NuevaVentaVendedor.setOpaque(true);
+        lblTab2NuevaVentaVendedor.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lblTab2NuevaVentaVendedorMouseMoved(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelNuevaVentaVendedorLayout = new javax.swing.GroupLayout(jPanelNuevaVentaVendedor);
+        jPanelNuevaVentaVendedor.setLayout(jPanelNuevaVentaVendedorLayout);
+        jPanelNuevaVentaVendedorLayout.setHorizontalGroup(
+            jPanelNuevaVentaVendedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelNuevaVentaVendedorLayout.createSequentialGroup()
+                .addComponent(lblTab2NuevaVentaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(lblTab2NuevaVentaVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanelContenedorNuevaVentaVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        jPanelNuevaVentaVendedorLayout.setVerticalGroup(
+            jPanelNuevaVentaVendedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelNuevaVentaVendedorLayout.createSequentialGroup()
+                .addGroup(jPanelNuevaVentaVendedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTab2NuevaVentaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTab2NuevaVentaVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanelContenedorNuevaVentaVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        jTabbedPane1.addTab("tab2", jPanelNuevaVentaVendedor);
+
+        jPanelProductos.setBackground(new java.awt.Color(204, 255, 204));
 
         jLabel30.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
         jLabel30.setText("Codigo *");
@@ -1152,77 +1214,78 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanelProductosLayout = new javax.swing.GroupLayout(jPanelProductos);
+        jPanelProductos.setLayout(jPanelProductosLayout);
+        jPanelProductosLayout.setHorizontalGroup(
+            jPanelProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelProductosLayout.createSequentialGroup()
+                .addContainerGap(48, Short.MAX_VALUE)
+                .addGroup(jPanelProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 880, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addGroup(jPanelProductosLayout.createSequentialGroup()
+                        .addGroup(jPanelProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelProductosLayout.createSequentialGroup()
                                 .addComponent(jLabel30)
                                 .addGap(70, 70, 70)
                                 .addComponent(jLabel31)
                                 .addGap(66, 66, 66)
                                 .addComponent(jLabel32))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelProductosLayout.createSequentialGroup()
+                                .addGroup(jPanelProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtProductosCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnProductosGuardar))
                                 .addGap(29, 29, 29)
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanelProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtProductosNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnProductosActualizar))
                                 .addGap(30, 30, 30)
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanelProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnProductosEliminar)
                                     .addComponent(txtProductosPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanelProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelProductosLayout.createSequentialGroup()
                                 .addGap(11, 11, 11)
                                 .addComponent(btnProductosNuevo)
                                 .addGap(105, 105, 105)
                                 .addComponent(btnProductosPdf, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
+                            .addGroup(jPanelProductosLayout.createSequentialGroup()
                                 .addGap(50, 50, 50)
                                 .addComponent(txtProductosId, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(25, 25, 25))
+                .addGap(32, 32, 32))
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(70, 70, 70)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanelProductosLayout.setVerticalGroup(
+            jPanelProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelProductosLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(jPanelProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelProductosLayout.createSequentialGroup()
+                        .addGroup(jPanelProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel30)
                             .addComponent(jLabel31)
                             .addComponent(jLabel32))
                         .addGap(2, 2, 2)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanelProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(txtProductosNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(txtProductosCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addGroup(jPanelProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(txtProductosPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(txtProductosId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(28, 28, 28)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanelProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnProductosGuardar)
                             .addComponent(btnProductosActualizar)
                             .addComponent(btnProductosEliminar)
                             .addComponent(btnProductosNuevo)))
                     .addComponent(btnProductosPdf, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("tab3", jPanel5);
+        jTabbedPane1.addTab("tab3", jPanelProductos);
 
-        jPanel6.setBackground(new java.awt.Color(204, 255, 204));
+        jPanelClientes.setBackground(new java.awt.Color(204, 255, 204));
 
         jLabel34.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
         jLabel34.setText("Codigo *");
@@ -1359,80 +1422,79 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+        javax.swing.GroupLayout jPanelClientesLayout = new javax.swing.GroupLayout(jPanelClientes);
+        jPanelClientes.setLayout(jPanelClientesLayout);
+        jPanelClientesLayout.setHorizontalGroup(
+            jPanelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelClientesLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(jPanelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelClientesLayout.createSequentialGroup()
+                        .addGroup(jPanelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel34)
-                            .addComponent(txtClientesCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
-                            .addComponent(btnClientesGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
+                            .addComponent(txtClientesCodigo)
+                            .addComponent(btnClientesGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanelClientesLayout.createSequentialGroup()
                                     .addComponent(jLabel35)
                                     .addGap(91, 91, 91))
-                                .addGroup(jPanel6Layout.createSequentialGroup()
-                                    .addComponent(txtClientesNombre)
+                                .addGroup(jPanelClientesLayout.createSequentialGroup()
+                                    .addComponent(txtClientesNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(30, 30, 30)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelClientesLayout.createSequentialGroup()
                                 .addComponent(btnClientesActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(30, 30, 30)))
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtClientesDireccion)
                             .addComponent(jLabel36)
-                            .addComponent(btnClientesEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE))
+                            .addComponent(btnClientesEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(27, 27, 27)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelClientesLayout.createSequentialGroup()
+                                .addGroup(jPanelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel38)
-                                    .addGroup(jPanel6Layout.createSequentialGroup()
+                                    .addGroup(jPanelClientesLayout.createSequentialGroup()
                                         .addComponent(txtClientesTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(49, 49, 49)
                                         .addComponent(txtClientesId, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGap(244, 244, 244))
+                            .addGroup(jPanelClientesLayout.createSequentialGroup()
+                                .addGroup(jPanelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnClientesEliminarTodo, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel6Layout.createSequentialGroup()
+                                    .addGroup(jPanelClientesLayout.createSequentialGroup()
                                         .addGap(183, 183, 183)
                                         .addComponent(btnClientesNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnClientesPdf, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(112, 112, 112))))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 877, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38))))
+                                .addGap(74, 74, 74))))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 877, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(54, 54, 54))
         );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(78, 78, 78)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        jPanelClientesLayout.setVerticalGroup(
+            jPanelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelClientesLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(jPanelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel34)
                         .addComponent(jLabel35))
-                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(jPanelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel38)
                         .addComponent(jLabel36)))
                 .addGap(12, 12, 12)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtClientesNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtClientesCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(jPanelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtClientesDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtClientesTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txtClientesId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnClientesActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnClientesGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnClientesEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1441,12 +1503,12 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(btnClientesPdf))
                 .addGap(20, 20, 20)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("tab4", jPanel6);
+        jTabbedPane1.addTab("tab4", jPanelClientes);
 
-        jPanel7.setBackground(new java.awt.Color(204, 255, 204));
+        jPanelVendedores.setBackground(new java.awt.Color(204, 255, 204));
 
         jLabel39.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
         jLabel39.setText("Codigo *");
@@ -1564,88 +1626,88 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(44, Short.MAX_VALUE)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanelVendedoresLayout = new javax.swing.GroupLayout(jPanelVendedores);
+        jPanelVendedores.setLayout(jPanelVendedoresLayout);
+        jPanelVendedoresLayout.setHorizontalGroup(
+            jPanelVendedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelVendedoresLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(jPanelVendedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 885, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanelVendedoresLayout.createSequentialGroup()
+                        .addGroup(jPanelVendedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel39)
                             .addComponent(txtVendedoresCodigo)
-                            .addComponent(btnVendedoresGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE))
+                            .addComponent(btnVendedoresGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanelVendedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel40)
                             .addComponent(txtVendedoresNombre)
                             .addComponent(btnVendedoresActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(43, 43, 43)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanelVendedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel41)
                             .addComponent(txtVendedoresTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnVendedoresEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(44, 44, 44)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanelVendedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanelVendedoresLayout.createSequentialGroup()
+                                .addGroup(jPanelVendedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel42)
                                     .addComponent(txtVendedoresDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(90, 90, 90)
                                 .addComponent(txtVendedoresId, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel7Layout.createSequentialGroup()
+                            .addGroup(jPanelVendedoresLayout.createSequentialGroup()
                                 .addComponent(btnVendedoresNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnVendedoresPdf)))))
-                .addGap(26, 26, 26))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(72, 72, 72)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
+        jPanelVendedoresLayout.setVerticalGroup(
+            jPanelVendedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelVendedoresLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(jPanelVendedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelVendedoresLayout.createSequentialGroup()
                         .addComponent(jLabel41)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtVendedoresTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanelVendedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnVendedoresEliminar)
                             .addComponent(btnVendedoresNuevo)))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel7Layout.createSequentialGroup()
+                    .addGroup(jPanelVendedoresLayout.createSequentialGroup()
+                        .addGroup(jPanelVendedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelVendedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanelVendedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanelVendedoresLayout.createSequentialGroup()
                                         .addGap(25, 25, 25)
                                         .addComponent(txtVendedoresId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel7Layout.createSequentialGroup()
+                                    .addGroup(jPanelVendedoresLayout.createSequentialGroup()
                                         .addComponent(jLabel39)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(txtVendedoresCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addGroup(jPanelVendedoresLayout.createSequentialGroup()
                                     .addComponent(jLabel42)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(txtVendedoresDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel7Layout.createSequentialGroup()
+                            .addGroup(jPanelVendedoresLayout.createSequentialGroup()
                                 .addComponent(jLabel40)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtVendedoresNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(28, 28, 28)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanelVendedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnVendedoresGuardar)
                             .addComponent(btnVendedoresActualizar)
                             .addComponent(btnVendedoresPdf))))
                 .addGap(29, 29, 29)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("tab5", jPanel7);
+        jTabbedPane1.addTab("tab5", jPanelVendedores);
 
-        jPanel8.setBackground(new java.awt.Color(255, 204, 255));
+        jPanelVentasUsuario.setBackground(new java.awt.Color(255, 204, 255));
 
         tableMisVentasRegistro.setBackground(new java.awt.Color(255, 153, 255));
         tableMisVentasRegistro.setFont(new java.awt.Font("Verdana", 0, 13)); // NOI18N
@@ -1754,81 +1816,86 @@ public class Principal extends javax.swing.JFrame {
         jLabel25.setText("MIS VENTAS");
         jLabel25.setOpaque(true);
 
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 953, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+        javax.swing.GroupLayout jPanelVentasUsuarioLayout = new javax.swing.GroupLayout(jPanelVentasUsuario);
+        jPanelVentasUsuario.setLayout(jPanelVentasUsuarioLayout);
+        jPanelVentasUsuarioLayout.setHorizontalGroup(
+            jPanelVentasUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelVentasUsuarioLayout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 953, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanelVentasUsuarioLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
                 .addComponent(txtMisVentasRegistroId, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 877, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtMisVentasRegistroCodigoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(33, 33, 33)
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel12)
-                            .addComponent(txtMisVentasRegistroNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(39, 39, 39)
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel21)
-                            .addComponent(txtMisVentasRegistroDeuda, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(40, 40, 40)
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(txtMisVentasRegistroAbonar, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addComponent(btnMisVentasRegistroActualizar)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnMisVentasRegistroEliminar))
-                            .addComponent(MisVentasRegistroEliminarTodo, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(46, 46, 46)
-                        .addComponent(btnMisVentasRegistrosPdf, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(69, 69, 69))))
+                .addGap(31, 31, 31)
+                .addGroup(jPanelVentasUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(txtMisVentasRegistroCodigoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addGroup(jPanelVentasUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel12)
+                    .addComponent(txtMisVentasRegistroNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
+                .addGroup(jPanelVentasUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel21)
+                    .addComponent(txtMisVentasRegistroDeuda, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
+                .addGroup(jPanelVentasUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(txtMisVentasRegistroAbonar, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(jPanelVentasUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelVentasUsuarioLayout.createSequentialGroup()
+                        .addComponent(btnMisVentasRegistroActualizar)
+                        .addGap(19, 19, 19)
+                        .addComponent(btnMisVentasRegistroEliminar))
+                    .addComponent(MisVentasRegistroEliminarTodo, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(46, 46, 46)
+                .addComponent(btnMisVentasRegistrosPdf, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanelVentasUsuarioLayout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 877, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+        jPanelVentasUsuarioLayout.setVerticalGroup(
+            jPanelVentasUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelVentasUsuarioLayout.createSequentialGroup()
                 .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel21)
+                .addGap(24, 24, 24)
+                .addGroup(jPanelVentasUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelVentasUsuarioLayout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(txtMisVentasRegistroId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelVentasUsuarioLayout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(12, 12, 12)
+                        .addComponent(txtMisVentasRegistroCodigoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelVentasUsuarioLayout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addGap(12, 12, 12)
+                        .addComponent(txtMisVentasRegistroNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelVentasUsuarioLayout.createSequentialGroup()
+                        .addComponent(jLabel21)
+                        .addGap(12, 12, 12)
+                        .addComponent(txtMisVentasRegistroDeuda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelVentasUsuarioLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(12, 12, 12)
+                        .addComponent(txtMisVentasRegistroAbonar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelVentasUsuarioLayout.createSequentialGroup()
+                        .addGroup(jPanelVentasUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnMisVentasRegistroActualizar)
                             .addComponent(btnMisVentasRegistroEliminar))
-                        .addGap(3, 3, 3)
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(MisVentasRegistroEliminarTodo)
-                            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtMisVentasRegistroAbonar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtMisVentasRegistroCodigoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtMisVentasRegistroNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtMisVentasRegistroDeuda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtMisVentasRegistroId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addComponent(MisVentasRegistroEliminarTodo))
+                    .addGroup(jPanelVentasUsuarioLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
                         .addComponent(btnMisVentasRegistrosPdf)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(118, 118, 118))
+                .addGap(4, 4, 4)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jTabbedPane1.addTab("tab6", jPanel8);
+        jTabbedPane1.addTab("tab6", jPanelVentasUsuario);
 
-        jPanel9.setBackground(new java.awt.Color(255, 204, 255));
+        jPanelVentasVendedores.setBackground(new java.awt.Color(255, 204, 255));
 
         tableMisVendedoresRegistro.setBackground(new java.awt.Color(255, 153, 255));
         tableMisVendedoresRegistro.setFont(new java.awt.Font("Verdana", 0, 13)); // NOI18N
@@ -1895,85 +1962,48 @@ public class Principal extends javax.swing.JFrame {
         jLabel47.setText("VENTAS DE MIS VENDEDORES");
         jLabel47.setOpaque(true);
 
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGap(108, 108, 108)
+        javax.swing.GroupLayout jPanelVentasVendedoresLayout = new javax.swing.GroupLayout(jPanelVentasVendedores);
+        jPanelVentasVendedores.setLayout(jPanelVentasVendedoresLayout);
+        jPanelVentasVendedoresLayout.setHorizontalGroup(
+            jPanelVentasVendedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 960, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanelVentasVendedoresLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 903, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanelVentasVendedoresLayout.createSequentialGroup()
+                .addGap(100, 100, 100)
                 .addComponent(txtMisVendedoresRegistroId, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(398, 398, 398)
                 .addComponent(btnMisVendedoresRegistroEliminar)
-                .addGap(32, 32, 32)
+                .addGap(30, 30, 30)
                 .addComponent(btnMisVendedoresRegistroEliminarTodo)
-                .addGap(59, 59, 59)
-                .addComponent(btnMisVendedoresRegistroPdf, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42))
-            .addComponent(jLabel47, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 903, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addGap(60, 60, 60)
+                .addComponent(btnMisVendedoresRegistroPdf, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
+        jPanelVentasVendedoresLayout.setVerticalGroup(
+            jPanelVentasVendedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelVentasVendedoresLayout.createSequentialGroup()
                 .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addGap(27, 27, 27)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnMisVendedoresRegistroEliminarTodo)
-                        .addComponent(btnMisVendedoresRegistroEliminar)
-                        .addComponent(txtMisVendedoresRegistroId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnMisVendedoresRegistroPdf, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addGap(10, 10, 10)
+                .addGroup(jPanelVentasVendedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnMisVendedoresRegistroPdf)
+                    .addGroup(jPanelVentasVendedoresLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanelVentasVendedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtMisVendedoresRegistroId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnMisVendedoresRegistroEliminar)
+                            .addComponent(btnMisVendedoresRegistroEliminarTodo)))))
         );
 
-        jTabbedPane1.addTab("tab7", jPanel9);
+        jTabbedPane1.addTab("tab7", jPanelVentasVendedores);
 
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, 960, 590));
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, 960, 550));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
-    private void btnClientesGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesGuardarActionPerformed
-        // TODO add your handling code here:
-
-        if (txtClientesCodigo.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Debe ingresar un codigo");
-            return;
-        }
-
-        cl = client.BuscarClientesXCodigo(Integer.parseInt(txtClientesCodigo.getText()));
-        if (cl.getId() != 0) {
-            JOptionPane.showMessageDialog(null, "Error, ya existe un cliente con ese codigo");
-            return;
-        }
-        cl = client.BuscarClientesXNombre(txtClientesNombre.getText().trim().replaceAll(" +", " "));
-        if (cl.getId() != 0) {
-            JOptionPane.showMessageDialog(null, "Error, ya existe un cliente con ese nombre");
-        } else {
-            if (!"".equals(txtClientesCodigo.getText()) && !"".equals(txtClientesNombre.getText())) {
-
-                cl.setCodigo(Integer.parseInt(txtClientesCodigo.getText()));
-                cl.setNombre(txtClientesNombre.getText().trim().replaceAll(" +", " "));//Omitir espacios entre cadenas
-                cl.setDireccion(txtClientesDireccion.getText());
-                cl.setTelefono(txtClientesTelefono.getText());
-                client.RegistrarCliente(cl);
-
-                LimpiarTable();
-                LimpiarCliente();
-                ListarClientes();
-                JOptionPane.showMessageDialog(null, "Cliente Registrado Con Exito");
-                txtClientesCodigo.requestFocus();
-            } else {
-                JOptionPane.showMessageDialog(null, "Hay Campos Requeridos Vacios");
-            }
-        }
-    }//GEN-LAST:event_btnClientesGuardarActionPerformed
 
     private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
         // TODO add your handling code here:
@@ -1987,119 +2017,8 @@ public class Principal extends javax.swing.JFrame {
         LimpiarTable();
         LimpiarCliente();
         ListarClientes();
-        jTabbedPane1.setSelectedComponent(jPanel6);
+        jTabbedPane1.setSelectedComponent(jPanelClientes);
     }//GEN-LAST:event_btnClientesActionPerformed
-
-    private void tableClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableClientesMouseClicked
-        // TODO add your handling code here:
-        int fila = tableClientes.rowAtPoint(evt.getPoint());
-        txtClientesId.setText(tableClientes.getValueAt(fila, 0).toString());
-        txtClientesCodigo.setText(tableClientes.getValueAt(fila, 1).toString());
-        txtClientesNombre.setText(tableClientes.getValueAt(fila, 2).toString());
-        txtClientesDireccion.setText(tableClientes.getValueAt(fila, 3).toString());
-        txtClientesTelefono.setText(tableClientes.getValueAt(fila, 4).toString());
-    }//GEN-LAST:event_tableClientesMouseClicked
-
-    private void btnClientesEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesEliminarActionPerformed
-        // TODO add your handling code here:
-        if ("".equals(txtClientesId.getText())) {
-            JOptionPane.showMessageDialog(null, "Seleccione una fila");
-        } else {
-
-            int pregunta = JOptionPane.showConfirmDialog(null, "¿Está Seguro De eliminar?");
-            if (pregunta == 0) {
-                int id = Integer.parseInt(txtClientesId.getText());
-                client.EliminarCliente(id);
-
-                LimpiarTable();
-                LimpiarCliente();
-                ListarClientes();
-                JOptionPane.showMessageDialog(null, "Cliente Eliminado Con Exito");
-            }
-        }
-    }//GEN-LAST:event_btnClientesEliminarActionPerformed
-
-    private void btnClientesActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActualizarActionPerformed
-        // TODO add your handling code here:
-        if ("".equals(txtClientesId.getText())) {
-            JOptionPane.showMessageDialog(null, "Seleccione una fila");
-        } else {
-            if (!"".equals(txtClientesCodigo.getText()) && !"".equals(txtClientesNombre.getText())) {
-                cl.setCodigo(Integer.parseInt(txtClientesCodigo.getText()));
-                cl.setNombre(txtClientesNombre.getText());
-                cl.setDireccion(txtClientesDireccion.getText());
-                cl.setTelefono(txtClientesTelefono.getText());
-                cl.setId(Integer.parseInt(txtClientesId.getText()));
-                client.ActualizarCliente(cl);
-
-                LimpiarTable();
-                LimpiarCliente();
-                ListarClientes();
-                JOptionPane.showMessageDialog(null, "Cliente Actualizado Con Exito");
-                txtClientesCodigo.requestFocus();
-            } else {
-                JOptionPane.showMessageDialog(null, "Hay Campos Requeridos Vacios");
-            }
-        }
-    }//GEN-LAST:event_btnClientesActualizarActionPerformed
-
-    private void btnClientesNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesNuevoActionPerformed
-        // TODO add your handling code here:
-        LimpiarCliente();
-        LimpiarTable();
-        ListarClientes();
-        txtClientesCodigo.requestFocus();
-    }//GEN-LAST:event_btnClientesNuevoActionPerformed
-
-    private void btnClientesEliminarTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesEliminarTodoActionPerformed
-        // TODO add your handling code here:
-        int pregunta = JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminar todos los registros?");
-        if (pregunta == 0) {
-            client.EliminarTodosLosClientes();
-
-            LimpiarTable();
-            LimpiarCliente();
-            ListarClientes();
-            JOptionPane.showMessageDialog(null, "Se Han Eliminado Todos Los Registros");
-            txtClientesId.setText("");
-        }
-    }//GEN-LAST:event_btnClientesEliminarTodoActionPerformed
-
-    private void btnVendedoresGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendedoresGuardarActionPerformed
-        // TODO add your handling code here:
-
-        if (txtVendedoresCodigo.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Debe ingresar un codigo");
-            return;
-        }
-
-        ve = vend.BuscarVendedoresXCodigo(Integer.parseInt(txtVendedoresCodigo.getText()));
-        if (ve.getId() != 0) {
-            JOptionPane.showMessageDialog(null, "Error, ya existe un vendedor con ese codigo");
-            return;
-        }
-        ve = vend.BuscarVendedoresXNombre(txtVendedoresNombre.getText().trim().replaceAll(" +", " "));
-        if (ve.getId() != 0) {
-            JOptionPane.showMessageDialog(null, "Error, ya existe un vendedor con ese nombre");
-        } else {
-            if (!"".equals(txtVendedoresCodigo.getText()) && !"".equals(txtVendedoresNombre.getText())) {
-
-                ve.setCodigo(Integer.parseInt(txtVendedoresCodigo.getText()));
-                ve.setNombre(txtVendedoresNombre.getText().trim().replaceAll(" +", " "));
-                ve.setDireccion(txtVendedoresDireccion.getText());
-                ve.setTelefono(txtVendedoresTelefono.getText());
-                vend.RegistrarVendedor(ve);
-
-                LimpiarTable();
-                ListarVendedores();
-                LimpiarVendedor();
-                JOptionPane.showMessageDialog(null, "Vendedor Registrado Con Exito");
-                txtVendedoresCodigo.requestFocus();
-            } else {
-                JOptionPane.showMessageDialog(null, "Hay Campos Requeridos Vacios");
-            }
-        }
-    }//GEN-LAST:event_btnVendedoresGuardarActionPerformed
 
     private void btnVendedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendedoresActionPerformed
         // TODO add your handling code here:
@@ -2114,8 +2033,390 @@ public class Principal extends javax.swing.JFrame {
         LimpiarVendedor();
         ListarVendedores();
 
-        jTabbedPane1.setSelectedComponent(jPanel7);
+        jTabbedPane1.setSelectedComponent(jPanelVendedores);
     }//GEN-LAST:event_btnVendedoresActionPerformed
+
+    private void btnProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductosActionPerformed
+        // TODO add your handling code here:
+        if (ultimoBotonSeleccionado != null) {
+            ultimoBotonSeleccionado.setBackground(new Color(255, 153, 153)); // Restaura el color original
+        }
+        JButton botonActual = (JButton) evt.getSource();
+        botonActual.setBackground(new Color(255, 153, 255)); // Cambia el color del botón actual
+        ultimoBotonSeleccionado = botonActual;
+
+        LimpiarTable();
+        LimpiarProducto();
+        ListarProductos();
+        jTabbedPane1.setSelectedComponent(jPanelProductos);
+    }//GEN-LAST:event_btnProductosActionPerformed
+
+    private void btnNuevaVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaVentaActionPerformed
+        // TODO add your handling code here:
+        // Cambia el color del botón actual y restaura el color del botón anterior
+        if (ultimoBotonSeleccionado != null) {
+            ultimoBotonSeleccionado.setBackground(new Color(255, 153, 153)); // Restaura el color original
+        }
+        JButton botonActual = (JButton) evt.getSource();
+        botonActual.setBackground(new Color(255, 153, 255)); // Cambia el color del botón actual
+        ultimoBotonSeleccionado = botonActual;        
+        
+        this.jPanelContenedorNuevaVentaUsuario.setVisible(false);
+        jTabbedPane1.setSelectedComponent(jPanelNuevaVentaUsuario);
+//        String[] opcionVenta = {"Usuario", "Mis Vendedores"};
+//        int opcionSeleccionada = JOptionPane.showOptionDialog(null, "Nueva venta para: ", "Nueva Venta", 0, JOptionPane.QUESTION_MESSAGE, null, opcionVenta, EXIT_ON_CLOSE);
+//        if (opcionSeleccionada == 0) {
+//            jTabbedPane1.setSelectedComponent(jPanelNuevaVentaUsuario);
+//        }
+//        if (opcionSeleccionada == 1) {
+//            jTabbedPane1.setSelectedComponent(jPanelNuevaVentaVendedor);
+//        }
+
+    }//GEN-LAST:event_btnNuevaVentaActionPerformed
+
+    private void btnTotalVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTotalVentasActionPerformed
+        // TODO add your handling code here:
+        if (ultimoBotonSeleccionado != null) {
+            ultimoBotonSeleccionado.setBackground(new Color(255, 153, 153)); // Restaura el color original
+        }
+        JButton botonActual = (JButton) evt.getSource();
+        botonActual.setBackground(new Color(255, 153, 255)); // Cambia el color del botón actual
+        ultimoBotonSeleccionado = botonActual;
+//-------------------------------------------------------------------------------
+        String[] opcionVenta = {"Usuario", "Vendedor"};
+        int opcionSeleccionada = JOptionPane.showOptionDialog(null, "¿Qué ventas desea ver?", "Venta Realizadas", 0, JOptionPane.QUESTION_MESSAGE, null, opcionVenta, EXIT_ON_CLOSE);
+        if (opcionSeleccionada == 0) {
+            jTabbedPane1.setSelectedComponent(jPanelVentasUsuario);
+            LimpiarTable();
+            ListarMisVentasRegistro();
+        }
+        if (opcionSeleccionada == 1) {
+            jTabbedPane1.setSelectedComponent(jPanelVentasVendedores);
+            LimpiarTable();
+            ListarRegistroMisVendedores();
+        }
+    }//GEN-LAST:event_btnTotalVentasActionPerformed
+
+    private void btnMisVentasRegistroMisCuentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMisVentasRegistroMisCuentasActionPerformed
+        // TODO add your handling code here:
+        if (ultimoBotonSeleccionado != null) {
+            ultimoBotonSeleccionado.setBackground(new Color(255, 153, 153)); // Restaura el color original
+        }
+        JButton botonActual = (JButton) evt.getSource();
+        botonActual.setBackground(new Color(255, 153, 255)); // Cambia el color del botón actual
+        ultimoBotonSeleccionado = botonActual;
+
+        if (misven.PagoCampanialMisCuentas() == BigDecimal.ZERO) { //Equivalente a: misven.PagoCampanialMisCuentas() == 0 
+            int confirmar = JOptionPane.showConfirmDialog(null, "¿Desea registrar un valor para pago de campaña?");
+            if (confirmar == 0) {
+
+                micu.registrarMisCuentas();
+                micu.mostrarMisCuentas();
+                micu.setVisible(true);
+            }
+        } else {
+            micu.setVisible(true);
+            micu.ActualizarMisCuentas();
+            micu.mostrarMisCuentas();
+        }
+
+    }//GEN-LAST:event_btnMisVentasRegistroMisCuentasActionPerformed
+
+    private void btnLogoPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoPersonalActionPerformed
+        // TODO add your handling code here:
+        acd.setVisible(true);
+    }//GEN-LAST:event_btnLogoPersonalActionPerformed
+
+    private void tableMisVentasAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMisVentasAgregarMouseClicked
+        // TODO add your handling code here:
+        int fila = tableMisVentasAgregar.rowAtPoint(evt.getPoint());
+        txtMisVentasAgregarCodigoProducto.setText(tableMisVentasAgregar.getValueAt(fila, 0).toString());
+        txtMisVentasAgregarNombreProducto.setText(tableMisVentasAgregar.getValueAt(fila, 1).toString());
+        txtMisVentasAgregarPrecioFactura.setText(tableMisVentasAgregar.getValueAt(fila, 3).toString());
+        txtMisVentasAgregarPrecioVendido.setText(tableMisVentasAgregar.getValueAt(fila, 4).toString());
+
+        int cantidad = Integer.parseInt(tableMisVentasAgregar.getValueAt(fila, 2).toString());
+        spinnerMisVentasAgregarCantidad.setValue(cantidad);
+    }//GEN-LAST:event_tableMisVentasAgregarMouseClicked
+
+    private void btnMisVentasAgregarEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMisVentasAgregarEliminarActionPerformed
+        // TODO add your handling code here:
+        if (tableMisVentasAgregar.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una fila");
+        } else {
+            int pregunta = JOptionPane.showConfirmDialog(null, "¿Está Seguro De Eliminar?");
+            if (pregunta == 0) {
+                tmp = (DefaultTableModel) tableMisVentasAgregar.getModel();
+                tmp.removeRow(tableMisVentasAgregar.getSelectedRow());
+                TotalPagarMisVentas();
+                LimpiarMiVenta();
+                txtMisVentasAgregarCodigoProducto.requestFocus();
+                labelMisVentasAgregarTotalPagar.setText("--------");
+                JOptionPane.showMessageDialog(null, "Producto Eliminado Con Exito");
+
+            }
+        }
+    }//GEN-LAST:event_btnMisVentasAgregarEliminarActionPerformed
+
+    private void btnMisVentasAgregarGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMisVentasAgregarGuardarActionPerformed
+        // TODO add your handling code here:
+        if (tableMisVentasAgregar.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar productos a la tabla");
+            return;
+        }
+        registrarMisVentas();
+        registrarDetalleMisVentas();
+
+        LimpiarTableAgregarMiVenta();
+        LimpiarMiVenta();
+        labelMisVentasAgregarTotalPagar.setText("-----");
+        JOptionPane.showMessageDialog(null, "Venta agregada con éxito");
+    }//GEN-LAST:event_btnMisVentasAgregarGuardarActionPerformed
+
+    private void txtMisVentasAgregarNombreClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMisVentasAgregarNombreClienteKeyTyped
+        // TODO add your handling code here:
+        event.textKeyPress(evt);
+    }//GEN-LAST:event_txtMisVentasAgregarNombreClienteKeyTyped
+
+    private void txtMisVentasAgregarCodigoClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMisVentasAgregarCodigoClienteKeyTyped
+        // TODO add your handling code here:
+        event.numberKeyPress(evt);
+    }//GEN-LAST:event_txtMisVentasAgregarCodigoClienteKeyTyped
+
+    private void txtMisVentasAgregarCodigoClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMisVentasAgregarCodigoClienteKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (!"".equals(txtMisVentasAgregarCodigoCliente.getText())) {
+                int codigoCliente = Integer.parseInt(txtMisVentasAgregarCodigoCliente.getText());
+                cl = client.BuscarClientesXCodigo(codigoCliente);
+                if (cl.getNombre() != null) {
+                    txtMisVentasAgregarNombreCliente.setText("" + cl.getNombre());
+                    txtMisVentasAgregarDireccionCliente.setText("" + cl.getDireccion());
+                    txtMisVentasAgregarTelefonoCliente.setText("" + cl.getTelefono());
+
+                } else {
+                    txtMisVentasAgregarCodigoCliente.setText("");
+                    txtMisVentasAgregarCodigoCliente.requestFocus();
+                    JOptionPane.showMessageDialog(null, "El cliente no existe");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Ingrese el codigo del cliente");
+                txtMisVentasAgregarCodigoCliente.requestFocus();
+            }
+        }
+    }//GEN-LAST:event_txtMisVentasAgregarCodigoClienteKeyPressed
+
+    private void txtMisVentasAgregarPrecioVendidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMisVentasAgregarPrecioVendidoKeyTyped
+        // TODO add your handling code here:
+        event.numberDecimalKeyPress(evt, txtMisVentasAgregarPrecioVendido);
+    }//GEN-LAST:event_txtMisVentasAgregarPrecioVendidoKeyTyped
+
+    private void txtMisVentasAgregarPrecioVendidoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMisVentasAgregarPrecioVendidoKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (!"".equals(txtMisVentasAgregarPrecioVendido.getText())) {
+                int codigoPro = Integer.parseInt(txtMisVentasAgregarCodigoProducto.getText());
+                String nombrePro = txtMisVentasAgregarNombreProducto.getText();
+
+                //Quitamos punto y donde iba coma, ponemos punto
+                String agregarPrecioFactura = convertirABigDecimal(txtMisVentasAgregarPrecioFactura.getText());
+                String agregarPrecioVendido = convertirABigDecimal(txtMisVentasAgregarPrecioVendido.getText());
+
+                int cantidad = Integer.parseInt(spinnerMisVentasAgregarCantidad.getValue().toString());
+                String pVendidoPorCantidad = multiPrecioPorCantidad(cantidad, txtMisVentasAgregarPrecioVendido.getText());
+
+                item++;
+                tmp = (DefaultTableModel) tableMisVentasAgregar.getModel();
+                for (int i = 0; i < tableMisVentasAgregar.getRowCount(); i++) {
+                    if (tableMisVentasAgregar.getValueAt(i, 1).equals(txtMisVentasAgregarNombreProducto.getText())) {
+                        JOptionPane.showMessageDialog(null, "El producto ya esta registrado");
+                        return;
+                    }
+                }
+
+                ArrayList lista = new ArrayList();
+                lista.add(item);
+                lista.add(codigoPro);
+                lista.add(nombrePro);
+                lista.add(cantidad);
+                lista.add(agregarPrecioFactura);
+                lista.add(agregarPrecioVendido);
+                lista.add(pVendidoPorCantidad);
+                Object[] O = new Object[7];
+                O[0] = lista.get(1);
+                O[1] = lista.get(2);
+                O[2] = lista.get(3);
+                O[3] = lista.get(4);
+                O[4] = lista.get(5);
+                O[5] = lista.get(6);
+                O[6] = lista.get(0);
+
+                tableMisVentasAgregar.setModel(tmp);
+                tmp.addRow(O);
+                TotalPagarMisVentas();
+                LimpiarMiVenta();
+                txtMisVentasAgregarCodigoProducto.requestFocus();
+            } else {
+                JOptionPane.showMessageDialog(null, "Ingrese el precio a vender");
+            }
+        }
+    }//GEN-LAST:event_txtMisVentasAgregarPrecioVendidoKeyPressed
+
+    private void txtMisVentasAgregarNombreProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMisVentasAgregarNombreProductoKeyTyped
+        // TODO add your handling code here:
+        event.textKeyPress(evt);
+    }//GEN-LAST:event_txtMisVentasAgregarNombreProductoKeyTyped
+
+    private void txtMisVentasAgregarCodigoProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMisVentasAgregarCodigoProductoKeyTyped
+        // TODO add your handling code here:
+        event.numberKeyPress(evt);
+    }//GEN-LAST:event_txtMisVentasAgregarCodigoProductoKeyTyped
+
+    private void txtMisVentasAgregarCodigoProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMisVentasAgregarCodigoProductoKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (!"".equals(txtMisVentasAgregarCodigoProducto.getText())) {
+                int codigoProducto = Integer.parseInt(txtMisVentasAgregarCodigoProducto.getText());
+                pr = produ.BuscarProductosXCodigo(codigoProducto);
+                if (pr.getNombre() != null) {
+                    txtMisVentasAgregarNombreProducto.setText("" + pr.getNombre());
+                    //txtMisVentasAgregarPrecioFactura.setText( "" + pr.getPrecio());
+                    txtMisVentasAgregarPrecioFactura.setText("" + formatoDecimal.format(pr.getPrecio()));
+
+                    txtMisVentasAgregarIdProducto.setText("" + pr.getId());
+                    txtMisVentasAgregarPrecioVendido.requestFocus();
+                } else {
+                    LimpiarMiVenta();
+                    txtMisVentasAgregarCodigoProducto.requestFocus();
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Ingrese el codigo del producto");
+                txtMisVentasAgregarCodigoProducto.requestFocus();
+            }
+        }
+    }//GEN-LAST:event_txtMisVentasAgregarCodigoProductoKeyPressed
+
+    private void btnMisVendedoresRegistroEliminarTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMisVendedoresRegistroEliminarTodoActionPerformed
+        // TODO add your handling code here:
+        int pregunta = JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminar todos los registros?");
+        if (pregunta == 0) {
+            misvendedor.EliminarTodasVentasMisVendedores();
+            misvendedor.EliminarTodoDetalleMisVendedores();
+
+            limpiarTablaMisVendedoresRegistro();
+            ListarRegistroMisVendedores();
+            txtMisVendedoresRegistroId.setText("");
+            JOptionPane.showMessageDialog(null, "Ventas eliminadas con éxito");
+        }
+    }//GEN-LAST:event_btnMisVendedoresRegistroEliminarTodoActionPerformed
+
+    private void btnMisVendedoresRegistroEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMisVendedoresRegistroEliminarActionPerformed
+        // TODO add your handling code here:
+        if (tableMisVendedoresRegistro.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Seleccione una fila");
+        } else {
+
+            int pregunta = JOptionPane.showConfirmDialog(null, "¿Está Seguro De eliminar?");
+            if (pregunta == 0) {
+                int id = Integer.parseInt(txtMisVendedoresRegistroId.getText());
+                misvendedor.EliminarVentasMisVendedores(id);
+                misvendedor.EliminarDetalleMisVendedores(id);
+
+                limpiarTablaMisVendedoresRegistro();
+                ListarRegistroMisVendedores();
+                txtMisVendedoresRegistroId.setText("");
+
+                JOptionPane.showMessageDialog(null, "Venta Eliminada Con Exito");
+            }
+        }
+    }//GEN-LAST:event_btnMisVendedoresRegistroEliminarActionPerformed
+
+    private void btnMisVendedoresRegistroPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMisVendedoresRegistroPdfActionPerformed
+        // TODO add your handling code here:
+        pdfMiVendedores();
+    }//GEN-LAST:event_btnMisVendedoresRegistroPdfActionPerformed
+
+    private void tableMisVendedoresRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMisVendedoresRegistroMouseClicked
+        // TODO add your handling code here:
+        int fila = tableMisVendedoresRegistro.rowAtPoint(evt.getPoint());
+        txtMisVendedoresRegistroId.setText(tableMisVendedoresRegistro.getValueAt(fila, 0).toString());
+    }//GEN-LAST:event_tableMisVendedoresRegistroMouseClicked
+
+    private void btnMisVentasRegistrosPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMisVentasRegistrosPdfActionPerformed
+
+        pdfMiVenta();
+
+        //        if (tableMisVentasRegistro.getSelectedRow() == -1) {
+            //            JOptionPane.showMessageDialog(null, "Debe seleccionar una fila");
+            //        } else {
+            //            pdfMiVenta();
+            ////            try {
+                ////                // TODO add your handling code here:
+                ////                int id = Integer.parseInt(txtMisVentasRegistroId.getText());
+                ////                File file = new File("src/pdf/miVenta" + id + ".pdf");
+                ////                Desktop.getDesktop().open(file);
+                ////            } catch (IOException ex) {
+                ////                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                ////                System.out.println(ex.toString());
+                ////            }
+            //        }
+    }//GEN-LAST:event_btnMisVentasRegistrosPdfActionPerformed
+
+    private void MisVentasRegistroEliminarTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MisVentasRegistroEliminarTodoActionPerformed
+        // TODO add your handling code here:
+        int pregunta = JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminar todos los registros?");
+        if (pregunta == 0) {
+            misven.EliminarTodasMisVentas();
+            misven.EliminarTodoDetalleMisVentas();
+
+            limpiarTablaMisVentasRegistro();
+            ListarMisVentasRegistro();
+            LimpiarMiVentaRegistro();
+            JOptionPane.showMessageDialog(null, "Ventas eliminadas con éxito");
+        }
+    }//GEN-LAST:event_MisVentasRegistroEliminarTodoActionPerformed
+
+    private void btnMisVentasRegistroEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMisVentasRegistroEliminarActionPerformed
+        // TODO add your handling code here:
+        if (tableMisVentasRegistro.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Seleccione una fila");
+        } else {
+
+            int pregunta = JOptionPane.showConfirmDialog(null, "¿Está Seguro De eliminar?");
+            if (pregunta == 0) {
+                int id = Integer.parseInt(txtMisVentasRegistroId.getText());
+                misven.EliminarMisVentas(id);
+                misven.EliminarDetalleMisVentas(id);
+
+                limpiarTablaMisVentasRegistro();
+                ListarMisVentasRegistro();
+                LimpiarMiVentaRegistro();
+                JOptionPane.showMessageDialog(null, "Venta Eliminada Con Exito");
+            }
+        }
+    }//GEN-LAST:event_btnMisVentasRegistroEliminarActionPerformed
+
+    private void btnMisVentasRegistroActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMisVentasRegistroActualizarActionPerformed
+        // TODO add your handling code here:
+
+        actualizarMisVentas();
+        LimpiarMiVentaRegistro();
+    }//GEN-LAST:event_btnMisVentasRegistroActualizarActionPerformed
+
+    private void txtMisVentasRegistroAbonarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMisVentasRegistroAbonarKeyTyped
+        // TODO add your handling code here:
+        event.numberDecimalKeyPress(evt, txtMisVentasRegistroAbonar);
+    }//GEN-LAST:event_txtMisVentasRegistroAbonarKeyTyped
+
+    private void tableMisVentasRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMisVentasRegistroMouseClicked
+        // TODO add your handling code here:
+        int fila = tableMisVentasRegistro.rowAtPoint(evt.getPoint());
+        txtMisVentasRegistroId.setText(tableMisVentasRegistro.getValueAt(fila, 0).toString());
+        txtMisVentasRegistroCodigoCliente.setText(tableMisVentasRegistro.getValueAt(fila, 1).toString());
+        txtMisVentasRegistroNombreCliente.setText(tableMisVentasRegistro.getValueAt(fila, 2).toString());
+        txtMisVentasRegistroDeuda.setText(tableMisVentasRegistro.getValueAt(fila, 3).toString());
+        //txtMisVentasRegistroAbonar.setText(tableMisVentasRegistro.getValueAt(fila, 4).toString());
+    }//GEN-LAST:event_tableMisVentasRegistroMouseClicked
 
     private void btnVendedoresNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendedoresNuevoActionPerformed
         // TODO add your handling code here:
@@ -2177,6 +2478,201 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnVendedoresActualizarActionPerformed
 
+    private void btnVendedoresGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendedoresGuardarActionPerformed
+        // TODO add your handling code here:
+
+        if (txtVendedoresCodigo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar un codigo");
+            return;
+        }
+
+        ve = vend.BuscarVendedoresXCodigo(Integer.parseInt(txtVendedoresCodigo.getText()));
+        if (ve.getId() != 0) {
+            JOptionPane.showMessageDialog(null, "Error, ya existe un vendedor con ese codigo");
+            return;
+        }
+        ve = vend.BuscarVendedoresXNombre(txtVendedoresNombre.getText().trim().replaceAll(" +", " "));
+        if (ve.getId() != 0) {
+            JOptionPane.showMessageDialog(null, "Error, ya existe un vendedor con ese nombre");
+        } else {
+            if (!"".equals(txtVendedoresCodigo.getText()) && !"".equals(txtVendedoresNombre.getText())) {
+
+                ve.setCodigo(Integer.parseInt(txtVendedoresCodigo.getText()));
+                ve.setNombre(txtVendedoresNombre.getText().trim().replaceAll(" +", " "));
+                ve.setDireccion(txtVendedoresDireccion.getText());
+                ve.setTelefono(txtVendedoresTelefono.getText());
+                vend.RegistrarVendedor(ve);
+
+                LimpiarTable();
+                ListarVendedores();
+                LimpiarVendedor();
+                JOptionPane.showMessageDialog(null, "Vendedor Registrado Con Exito");
+                txtVendedoresCodigo.requestFocus();
+            } else {
+                JOptionPane.showMessageDialog(null, "Hay Campos Requeridos Vacios");
+            }
+        }
+    }//GEN-LAST:event_btnVendedoresGuardarActionPerformed
+
+    private void txtVendedoresDireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtVendedoresDireccionKeyTyped
+        // TODO add your handling code here:
+        event.textKeyPress(evt);
+    }//GEN-LAST:event_txtVendedoresDireccionKeyTyped
+
+    private void txtVendedoresTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtVendedoresTelefonoKeyTyped
+        // TODO add your handling code here:
+        event.numberKeyPress(evt);
+    }//GEN-LAST:event_txtVendedoresTelefonoKeyTyped
+
+    private void txtVendedoresNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtVendedoresNombreKeyTyped
+        // TODO add your handling code here:
+        event.textKeyPress(evt);
+    }//GEN-LAST:event_txtVendedoresNombreKeyTyped
+
+    private void txtVendedoresCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtVendedoresCodigoKeyTyped
+        // TODO add your handling code here:
+        event.numberKeyPress(evt);
+    }//GEN-LAST:event_txtVendedoresCodigoKeyTyped
+
+    private void btnClientesNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesNuevoActionPerformed
+        // TODO add your handling code here:
+        LimpiarCliente();
+        LimpiarTable();
+        ListarClientes();
+        txtClientesCodigo.requestFocus();
+    }//GEN-LAST:event_btnClientesNuevoActionPerformed
+
+    private void txtClientesTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClientesTelefonoKeyTyped
+        // TODO add your handling code here:
+        event.numberKeyPress(evt);
+    }//GEN-LAST:event_txtClientesTelefonoKeyTyped
+
+    private void tableClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableClientesMouseClicked
+        // TODO add your handling code here:
+        int fila = tableClientes.rowAtPoint(evt.getPoint());
+        txtClientesId.setText(tableClientes.getValueAt(fila, 0).toString());
+        txtClientesCodigo.setText(tableClientes.getValueAt(fila, 1).toString());
+        txtClientesNombre.setText(tableClientes.getValueAt(fila, 2).toString());
+        txtClientesDireccion.setText(tableClientes.getValueAt(fila, 3).toString());
+        txtClientesTelefono.setText(tableClientes.getValueAt(fila, 4).toString());
+    }//GEN-LAST:event_tableClientesMouseClicked
+
+    private void btnClientesEliminarTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesEliminarTodoActionPerformed
+        // TODO add your handling code here:
+        int pregunta = JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminar todos los registros?");
+        if (pregunta == 0) {
+            client.EliminarTodosLosClientes();
+
+            LimpiarTable();
+            LimpiarCliente();
+            ListarClientes();
+            JOptionPane.showMessageDialog(null, "Se Han Eliminado Todos Los Registros");
+            txtClientesId.setText("");
+        }
+    }//GEN-LAST:event_btnClientesEliminarTodoActionPerformed
+
+    private void btnClientesEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesEliminarActionPerformed
+        // TODO add your handling code here:
+        if ("".equals(txtClientesId.getText())) {
+            JOptionPane.showMessageDialog(null, "Seleccione una fila");
+        } else {
+
+            int pregunta = JOptionPane.showConfirmDialog(null, "¿Está Seguro De eliminar?");
+            if (pregunta == 0) {
+                int id = Integer.parseInt(txtClientesId.getText());
+                client.EliminarCliente(id);
+
+                LimpiarTable();
+                LimpiarCliente();
+                ListarClientes();
+                JOptionPane.showMessageDialog(null, "Cliente Eliminado Con Exito");
+            }
+        }
+    }//GEN-LAST:event_btnClientesEliminarActionPerformed
+
+    private void btnClientesGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesGuardarActionPerformed
+        // TODO add your handling code here:
+
+        if (txtClientesCodigo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar un codigo");
+            return;
+        }
+
+        cl = client.BuscarClientesXCodigo(Integer.parseInt(txtClientesCodigo.getText()));
+        if (cl.getId() != 0) {
+            JOptionPane.showMessageDialog(null, "Error, ya existe un cliente con ese codigo");
+            return;
+        }
+        cl = client.BuscarClientesXNombre(txtClientesNombre.getText().trim().replaceAll(" +", " "));
+        if (cl.getId() != 0) {
+            JOptionPane.showMessageDialog(null, "Error, ya existe un cliente con ese nombre");
+        } else {
+            if (!"".equals(txtClientesCodigo.getText()) && !"".equals(txtClientesNombre.getText())) {
+
+                cl.setCodigo(Integer.parseInt(txtClientesCodigo.getText()));
+                cl.setNombre(txtClientesNombre.getText().trim().replaceAll(" +", " "));//Omitir espacios entre cadenas
+                cl.setDireccion(txtClientesDireccion.getText());
+                cl.setTelefono(txtClientesTelefono.getText());
+                client.RegistrarCliente(cl);
+
+                LimpiarTable();
+                LimpiarCliente();
+                ListarClientes();
+                JOptionPane.showMessageDialog(null, "Cliente Registrado Con Exito");
+                txtClientesCodigo.requestFocus();
+            } else {
+                JOptionPane.showMessageDialog(null, "Hay Campos Requeridos Vacios");
+            }
+        }
+    }//GEN-LAST:event_btnClientesGuardarActionPerformed
+
+    private void btnClientesActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActualizarActionPerformed
+        // TODO add your handling code here:
+        if ("".equals(txtClientesId.getText())) {
+            JOptionPane.showMessageDialog(null, "Seleccione una fila");
+        } else {
+            if (!"".equals(txtClientesCodigo.getText()) && !"".equals(txtClientesNombre.getText())) {
+                cl.setCodigo(Integer.parseInt(txtClientesCodigo.getText()));
+                cl.setNombre(txtClientesNombre.getText());
+                cl.setDireccion(txtClientesDireccion.getText());
+                cl.setTelefono(txtClientesTelefono.getText());
+                cl.setId(Integer.parseInt(txtClientesId.getText()));
+                client.ActualizarCliente(cl);
+
+                LimpiarTable();
+                LimpiarCliente();
+                ListarClientes();
+                JOptionPane.showMessageDialog(null, "Cliente Actualizado Con Exito");
+                txtClientesCodigo.requestFocus();
+            } else {
+                JOptionPane.showMessageDialog(null, "Hay Campos Requeridos Vacios");
+            }
+        }
+    }//GEN-LAST:event_btnClientesActualizarActionPerformed
+
+    private void txtClientesDireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClientesDireccionKeyTyped
+        // TODO add your handling code here:
+        event.textKeyPress(evt);
+    }//GEN-LAST:event_txtClientesDireccionKeyTyped
+
+    private void txtClientesNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClientesNombreKeyTyped
+        // TODO add your handling code here:
+        event.textKeyPress(evt);
+    }//GEN-LAST:event_txtClientesNombreKeyTyped
+
+    private void txtClientesCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClientesCodigoKeyTyped
+        // TODO add your handling code here:
+        event.numberKeyPress(evt);
+    }//GEN-LAST:event_txtClientesCodigoKeyTyped
+
+    private void btnProductosNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductosNuevoActionPerformed
+        // TODO add your handling code here:
+        LimpiarProducto();
+        LimpiarTable();
+        ListarProductos();
+        txtProductosCodigo.requestFocus();
+    }//GEN-LAST:event_btnProductosNuevoActionPerformed
+
     private void btnProductosGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductosGuardarActionPerformed
 
         if (txtProductosCodigo.getText().isEmpty()) {
@@ -2210,7 +2706,6 @@ public class Principal extends javax.swing.JFrame {
             }
         }
 
-
     }//GEN-LAST:event_btnProductosGuardarActionPerformed
 
     private void tableProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProductosMouseClicked
@@ -2221,21 +2716,6 @@ public class Principal extends javax.swing.JFrame {
         txtProductosNombre.setText(tableProductos.getValueAt(fila, 2).toString());
         txtProductosPrecio.setText(tableProductos.getValueAt(fila, 3).toString());
     }//GEN-LAST:event_tableProductosMouseClicked
-
-    private void btnProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductosActionPerformed
-        // TODO add your handling code here:
-        if (ultimoBotonSeleccionado != null) {
-            ultimoBotonSeleccionado.setBackground(new Color(255, 153, 153)); // Restaura el color original
-        }
-        JButton botonActual = (JButton) evt.getSource();
-        botonActual.setBackground(new Color(255, 153, 255)); // Cambia el color del botón actual
-        ultimoBotonSeleccionado = botonActual;
-
-        LimpiarTable();
-        LimpiarProducto();
-        ListarProductos();
-        jTabbedPane1.setSelectedComponent(jPanel5);
-    }//GEN-LAST:event_btnProductosActionPerformed
 
     private void btnProductosEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductosEliminarActionPerformed
         // TODO add your handling code here:
@@ -2282,14 +2762,45 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnProductosActualizarActionPerformed
 
-    private void btnProductosNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductosNuevoActionPerformed
+    private void txtProductosPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProductosPrecioKeyTyped
         // TODO add your handling code here:
-        LimpiarProducto();
-        LimpiarTable();
-        ListarProductos();
-        txtProductosCodigo.requestFocus();
+        event.numberDecimalKeyPress(evt, txtProductosPrecio);
+    }//GEN-LAST:event_txtProductosPrecioKeyTyped
 
-    }//GEN-LAST:event_btnProductosNuevoActionPerformed
+    private void txtProductosNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProductosNombreKeyTyped
+        // TODO add your handling code here:
+        event.textKeyPress(evt);
+    }//GEN-LAST:event_txtProductosNombreKeyTyped
+
+    private void txtProductosCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProductosCodigoKeyTyped
+        // TODO add your handling code here:
+        event.numberKeyPress(evt);
+    }//GEN-LAST:event_txtProductosCodigoKeyTyped
+
+    private void btnMisVendedoresAgregarGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMisVendedoresAgregarGuardarActionPerformed
+        // TODO add your handling code here:
+        if (tableMisVendedoresAgregar.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar productos a la tabla");
+            return;
+        }
+        registrarVentasMisVendedores();
+        registrarDetalleMisVendedores();
+        LimpiarMisVendedores();
+        LimpiarTableAgregarMisVendedores();
+        labelMisVendedoresAgregarTotalPagar.setText("--------");
+        JOptionPane.showMessageDialog(null, "Venta agregada con éxito");
+
+    }//GEN-LAST:event_btnMisVendedoresAgregarGuardarActionPerformed
+
+    private void txtMisVendedoresAgregarNombreVendedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMisVendedoresAgregarNombreVendedorKeyTyped
+        // TODO add your handling code here:
+        event.textKeyPress(evt);
+    }//GEN-LAST:event_txtMisVendedoresAgregarNombreVendedorKeyTyped
+
+    private void txtMisVendedoresAgregarCodigoVendedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMisVendedoresAgregarCodigoVendedorKeyTyped
+        // TODO add your handling code here:
+        event.numberKeyPress(evt);
+    }//GEN-LAST:event_txtMisVendedoresAgregarCodigoVendedorKeyTyped
 
     private void txtMisVendedoresAgregarCodigoVendedorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMisVendedoresAgregarCodigoVendedorKeyPressed
         // TODO add your handling code here:
@@ -2314,287 +2825,18 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtMisVendedoresAgregarCodigoVendedorKeyPressed
 
-    private void txtMisVentasAgregarCodigoClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMisVentasAgregarCodigoClienteKeyPressed
-        // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (!"".equals(txtMisVentasAgregarCodigoCliente.getText())) {
-                int codigoCliente = Integer.parseInt(txtMisVentasAgregarCodigoCliente.getText());
-                cl = client.BuscarClientesXCodigo(codigoCliente);
-                if (cl.getNombre() != null) {
-                    txtMisVentasAgregarNombreCliente.setText("" + cl.getNombre());
-                    txtMisVentasAgregarDireccionCliente.setText("" + cl.getDireccion());
-                    txtMisVentasAgregarTelefonoCliente.setText("" + cl.getTelefono());
-
-                } else {
-                    txtMisVentasAgregarCodigoCliente.setText("");
-                    txtMisVentasAgregarCodigoCliente.requestFocus();
-                    JOptionPane.showMessageDialog(null, "El cliente no existe");
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Ingrese el codigo del cliente");
-                txtMisVentasAgregarCodigoCliente.requestFocus();
-            }
-        }
-    }//GEN-LAST:event_txtMisVentasAgregarCodigoClienteKeyPressed
-
-    private void txtMisVendedoresAgregarCodigoProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMisVendedoresAgregarCodigoProductoKeyPressed
-        // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (!"".equals(txtMisVendedoresAgregarCodigoProducto.getText())) {
-                int codigoProducto = Integer.parseInt(txtMisVendedoresAgregarCodigoProducto.getText());
-                pr = produ.BuscarProductosXCodigo(codigoProducto);
-                if (pr.getNombre() != null) {
-                    txtMisVendedoresAgregarNombreProducto.setText("" + pr.getNombre());
-                    txtMisVendedoresAgregarPrecio.setText("" + formatoDecimal.format(pr.getPrecio()));
-                    txtMisVendedoresAgregarIdProducto.setText("" + pr.getId());
-                    txtMisVendedoresAgregarPrecio.requestFocus();
-                } else {
-                    LimpiarMisVendedores();
-                    txtMisVendedoresAgregarCodigoProducto.requestFocus();
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Ingrese el codigo del producto");
-                txtMisVendedoresAgregarCodigoProducto.requestFocus();
-            }
-        }
-
-    }//GEN-LAST:event_txtMisVendedoresAgregarCodigoProductoKeyPressed
-
-    private void btnNuevaVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaVentaActionPerformed
-        // TODO add your handling code here:
-        // Cambia el color del botón actual y restaura el color del botón anterior
-        if (ultimoBotonSeleccionado != null) {
-            ultimoBotonSeleccionado.setBackground(new Color(255, 153, 153)); // Restaura el color original
-        }
-        JButton botonActual = (JButton) evt.getSource();
-        botonActual.setBackground(new Color(255, 153, 255)); // Cambia el color del botón actual
-        ultimoBotonSeleccionado = botonActual;
-
-        String[] opcionVenta = {"Usuario", "Mis Vendedores"};
-        int opcionSeleccionada = JOptionPane.showOptionDialog(null, "Nueva venta para: ", "Nueva Venta", 0, JOptionPane.QUESTION_MESSAGE, null, opcionVenta, EXIT_ON_CLOSE);
-        if (opcionSeleccionada == 0) {
-            jTabbedPane1.setSelectedComponent(jPanel3);
-        }
-        if (opcionSeleccionada == 1) {
-            jTabbedPane1.setSelectedComponent(jPanel4);
-        }
-
-    }//GEN-LAST:event_btnNuevaVentaActionPerformed
-
-    private void btnTotalVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTotalVentasActionPerformed
-        // TODO add your handling code here:
-        if (ultimoBotonSeleccionado != null) {
-            ultimoBotonSeleccionado.setBackground(new Color(255, 153, 153)); // Restaura el color original
-        }
-        JButton botonActual = (JButton) evt.getSource();
-        botonActual.setBackground(new Color(255, 153, 255)); // Cambia el color del botón actual
-        ultimoBotonSeleccionado = botonActual;
-//-------------------------------------------------------------------------------
-        String[] opcionVenta = {"Usuario", "Vendedor"};
-        int opcionSeleccionada = JOptionPane.showOptionDialog(null, "¿Qué ventas desea ver?", "Venta Realizadas", 0, JOptionPane.QUESTION_MESSAGE, null, opcionVenta, EXIT_ON_CLOSE);
-        if (opcionSeleccionada == 0) {
-            jTabbedPane1.setSelectedComponent(jPanel8);
-            LimpiarTable();
-            ListarMisVentasRegistro();
-        }
-        if (opcionSeleccionada == 1) {
-            jTabbedPane1.setSelectedComponent(jPanel9);
-            LimpiarTable();
-            ListarRegistroMisVendedores();
-        }
-    }//GEN-LAST:event_btnTotalVentasActionPerformed
-
-    private void txtMisVentasAgregarCodigoProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMisVentasAgregarCodigoProductoKeyPressed
-        // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (!"".equals(txtMisVentasAgregarCodigoProducto.getText())) {
-                int codigoProducto = Integer.parseInt(txtMisVentasAgregarCodigoProducto.getText());
-                pr = produ.BuscarProductosXCodigo(codigoProducto);
-                if (pr.getNombre() != null) {
-                    txtMisVentasAgregarNombreProducto.setText("" + pr.getNombre());
-                    //txtMisVentasAgregarPrecioFactura.setText( "" + pr.getPrecio());
-                    txtMisVentasAgregarPrecioFactura.setText("" + formatoDecimal.format(pr.getPrecio()));
-
-                    txtMisVentasAgregarIdProducto.setText("" + pr.getId());
-                    txtMisVentasAgregarPrecioVendido.requestFocus();
-                } else {
-                    LimpiarMiVenta();
-                    txtMisVentasAgregarCodigoProducto.requestFocus();
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Ingrese el codigo del producto");
-                txtMisVentasAgregarCodigoProducto.requestFocus();
-            }
-        }
-    }//GEN-LAST:event_txtMisVentasAgregarCodigoProductoKeyPressed
-
-    private void txtMisVentasAgregarPrecioVendidoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMisVentasAgregarPrecioVendidoKeyPressed
-        // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (!"".equals(txtMisVentasAgregarPrecioVendido.getText())) {
-                int codigoPro = Integer.parseInt(txtMisVentasAgregarCodigoProducto.getText());
-                String nombrePro = txtMisVentasAgregarNombreProducto.getText();
-
-                //Quitamos punto y donde iba coma, ponemos punto 
-                String agregarPrecioFactura = convertirABigDecimal(txtMisVentasAgregarPrecioFactura.getText());
-                String agregarPrecioVendido = convertirABigDecimal(txtMisVentasAgregarPrecioVendido.getText());
-                
-                int cantidad = Integer.parseInt(spinnerMisVentasAgregarCantidad.getValue().toString());                
-                String pVendidoPorCantidad = multiPrecioPorCantidad(cantidad, txtMisVentasAgregarPrecioVendido.getText());
-                                
-                item++;
-                tmp = (DefaultTableModel) tableMisVentasAgregar.getModel();
-                for (int i = 0; i < tableMisVentasAgregar.getRowCount(); i++) {
-                    if (tableMisVentasAgregar.getValueAt(i, 1).equals(txtMisVentasAgregarNombreProducto.getText())) {
-                        JOptionPane.showMessageDialog(null, "El producto ya esta registrado");
-                        return;
-                    }
-                }
-
-                
-                ArrayList lista = new ArrayList();
-                lista.add(item);
-                lista.add(codigoPro);
-                lista.add(nombrePro);
-                lista.add(cantidad);
-                lista.add(agregarPrecioFactura);
-                lista.add(agregarPrecioVendido);
-                lista.add(pVendidoPorCantidad);
-                Object[] O = new Object[7];
-                O[0] = lista.get(1);
-                O[1] = lista.get(2);
-                O[2] = lista.get(3);
-                O[3] = lista.get(4);
-                O[4] = lista.get(5);
-                O[5] = lista.get(6);
-                O[6] = lista.get(0);
-
-                tableMisVentasAgregar.setModel(tmp);
-                tmp.addRow(O);
-                TotalPagarMisVentas();
-                LimpiarMiVenta();
-                txtMisVentasAgregarCodigoProducto.requestFocus();
-            } else {
-                JOptionPane.showMessageDialog(null, "Ingrese el precio a vender");
-            }
-        }
-    }//GEN-LAST:event_txtMisVentasAgregarPrecioVendidoKeyPressed
-
-    private void btnMisVentasAgregarEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMisVentasAgregarEliminarActionPerformed
-        // TODO add your handling code here:
-        if (tableMisVentasAgregar.getSelectedRow() == -1) {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar una fila");
-        } else {
-            int pregunta = JOptionPane.showConfirmDialog(null, "¿Está Seguro De Eliminar?");
-            if (pregunta == 0) {
-                tmp = (DefaultTableModel) tableMisVentasAgregar.getModel();
-                tmp.removeRow(tableMisVentasAgregar.getSelectedRow());
-                TotalPagarMisVentas();
-                LimpiarMiVenta();
-                txtMisVentasAgregarCodigoProducto.requestFocus();
-                labelMisVentasAgregarTotalPagar.setText("--------");
-                JOptionPane.showMessageDialog(null, "Producto Eliminado Con Exito");
-
-            }
-        }
-    }//GEN-LAST:event_btnMisVentasAgregarEliminarActionPerformed
-
-    private void btnMisVentasAgregarGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMisVentasAgregarGuardarActionPerformed
-        // TODO add your handling code here:
-        if (tableMisVentasAgregar.getRowCount() == 0) {
-            JOptionPane.showMessageDialog(null, "Debe ingresar productos a la tabla");
-            return;
-        }
-        registrarMisVentas();
-        registrarDetalleMisVentas();
-
-        LimpiarTableAgregarMiVenta();
-        LimpiarMiVenta();
-        labelMisVentasAgregarTotalPagar.setText("-----");
-        JOptionPane.showMessageDialog(null, "Venta agregada con éxito");
-    }//GEN-LAST:event_btnMisVentasAgregarGuardarActionPerformed
-
-    private void tableMisVentasRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMisVentasRegistroMouseClicked
-        // TODO add your handling code here:
-        int fila = tableMisVentasRegistro.rowAtPoint(evt.getPoint());
-        txtMisVentasRegistroId.setText(tableMisVentasRegistro.getValueAt(fila, 0).toString());
-        txtMisVentasRegistroCodigoCliente.setText(tableMisVentasRegistro.getValueAt(fila, 1).toString());
-        txtMisVentasRegistroNombreCliente.setText(tableMisVentasRegistro.getValueAt(fila, 2).toString());
-        txtMisVentasRegistroDeuda.setText(tableMisVentasRegistro.getValueAt(fila, 3).toString());
-        //txtMisVentasRegistroAbonar.setText(tableMisVentasRegistro.getValueAt(fila, 4).toString());
-    }//GEN-LAST:event_tableMisVentasRegistroMouseClicked
-
-    private void btnMisVentasRegistroActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMisVentasRegistroActualizarActionPerformed
-        // TODO add your handling code here:
-
-        actualizarMisVentas();
-        LimpiarMiVentaRegistro();
-
-    }//GEN-LAST:event_btnMisVentasRegistroActualizarActionPerformed
-
-    private void btnMisVentasRegistroEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMisVentasRegistroEliminarActionPerformed
-        // TODO add your handling code here:
-        if (tableMisVentasRegistro.getSelectedRow() == -1) {
-            JOptionPane.showMessageDialog(null, "Seleccione una fila");
-        } else {
-
-            int pregunta = JOptionPane.showConfirmDialog(null, "¿Está Seguro De eliminar?");
-            if (pregunta == 0) {
-                int id = Integer.parseInt(txtMisVentasRegistroId.getText());
-                misven.EliminarMisVentas(id);
-                misven.EliminarDetalleMisVentas(id);
-
-                limpiarTablaMisVentasRegistro();
-                ListarMisVentasRegistro();
-                LimpiarMiVentaRegistro();
-                JOptionPane.showMessageDialog(null, "Venta Eliminada Con Exito");
-            }
-        }
-
-    }//GEN-LAST:event_btnMisVentasRegistroEliminarActionPerformed
-
-    private void MisVentasRegistroEliminarTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MisVentasRegistroEliminarTodoActionPerformed
-        // TODO add your handling code here:
-        int pregunta = JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminar todos los registros?");
-        if (pregunta == 0) {
-            misven.EliminarTodasMisVentas();
-            misven.EliminarTodoDetalleMisVentas();
-
-            limpiarTablaMisVentasRegistro();
-            ListarMisVentasRegistro();
-            LimpiarMiVentaRegistro();
-            JOptionPane.showMessageDialog(null, "Ventas eliminadas con éxito");
-        }
-    }//GEN-LAST:event_MisVentasRegistroEliminarTodoActionPerformed
-
-    private void btnMisVendedoresAgregarGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMisVendedoresAgregarGuardarActionPerformed
-        // TODO add your handling code here:
-        if (tableMisVendedoresAgregar.getRowCount() == 0) {
-            JOptionPane.showMessageDialog(null, "Debe ingresar productos a la tabla");
-            return;
-        }
-        registrarVentasMisVendedores();
-        registrarDetalleMisVendedores();
-        LimpiarMisVendedores();
-        LimpiarTableAgregarMisVendedores();
-        labelMisVendedoresAgregarTotalPagar.setText("--------");
-        JOptionPane.showMessageDialog(null, "Venta agregada con éxito");
-
-
-    }//GEN-LAST:event_btnMisVendedoresAgregarGuardarActionPerformed
-
     private void txtMisVendedoresAgregarPrecioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMisVendedoresAgregarPrecioKeyPressed
         // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (!"".equals(txtMisVendedoresAgregarPrecio.getText())) {
                 int codigoPro = Integer.parseInt(txtMisVendedoresAgregarCodigoProducto.getText());
-                String nombrePro = txtMisVendedoresAgregarNombreProducto.getText();                
-                
+                String nombrePro = txtMisVendedoresAgregarNombreProducto.getText();
+
                 int cantidad = Integer.parseInt(spinnerMisVendedoresAgregarCantidad.getValue().toString());
                 // Convertimos a bigDecimal y luego a String
-                String vendedoresAgregarPrecio = convertirABigDecimal(txtMisVendedoresAgregarPrecio.getText());                
+                String vendedoresAgregarPrecio = convertirABigDecimal(txtMisVendedoresAgregarPrecio.getText());
                 String vendedoresPrecioTotal = multiPrecioPorCantidad(cantidad,txtMisVendedoresAgregarPrecio.getText());
-                
+
                 item++;
                 tmp = (DefaultTableModel) tableMisVendedoresAgregar.getModel();
                 for (int i = 0; i < tableMisVendedoresAgregar.getRowCount(); i++) {
@@ -2603,7 +2845,7 @@ public class Principal extends javax.swing.JFrame {
                         return;
                     }
                 }
-                
+
                 ArrayList lista = new ArrayList();
                 lista.add(item);
                 lista.add(codigoPro);
@@ -2627,6 +2869,17 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtMisVendedoresAgregarPrecioKeyPressed
 
+    private void tableMisVendedoresAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMisVendedoresAgregarMouseClicked
+        // TODO add your handling code here:
+        int fila = tableMisVendedoresAgregar.rowAtPoint(evt.getPoint());
+        txtMisVendedoresAgregarCodigoProducto.setText(tableMisVendedoresAgregar.getValueAt(fila, 0).toString());
+        txtMisVendedoresAgregarNombreProducto.setText(tableMisVendedoresAgregar.getValueAt(fila, 1).toString());
+        txtMisVendedoresAgregarPrecio.setText(tableMisVendedoresAgregar.getValueAt(fila, 3).toString());
+
+        int cantidad = Integer.parseInt(tableMisVendedoresAgregar.getValueAt(fila, 2).toString());
+        spinnerMisVendedoresAgregarCantidad.setValue(cantidad);
+    }//GEN-LAST:event_tableMisVendedoresAgregarMouseClicked
+
     private void btnMisVendedoresAgregarEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMisVendedoresAgregarEliminarActionPerformed
         // TODO add your handling code here:
         if (tableMisVendedoresAgregar.getSelectedRow() == -1) {
@@ -2645,231 +2898,89 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnMisVendedoresAgregarEliminarActionPerformed
 
-    private void tableMisVentasAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMisVentasAgregarMouseClicked
-        // TODO add your handling code here:
-        int fila = tableMisVentasAgregar.rowAtPoint(evt.getPoint());
-        txtMisVentasAgregarCodigoProducto.setText(tableMisVentasAgregar.getValueAt(fila, 0).toString());
-        txtMisVentasAgregarNombreProducto.setText(tableMisVentasAgregar.getValueAt(fila, 1).toString());
-        txtMisVentasAgregarPrecioFactura.setText(tableMisVentasAgregar.getValueAt(fila, 3).toString());
-        txtMisVentasAgregarPrecioVendido.setText(tableMisVentasAgregar.getValueAt(fila, 4).toString());
-
-        int cantidad = Integer.parseInt(tableMisVentasAgregar.getValueAt(fila, 2).toString());
-        spinnerMisVentasAgregarCantidad.setValue(cantidad);
-
-    }//GEN-LAST:event_tableMisVentasAgregarMouseClicked
-
-    private void tableMisVendedoresAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMisVendedoresAgregarMouseClicked
-        // TODO add your handling code here:
-        int fila = tableMisVendedoresAgregar.rowAtPoint(evt.getPoint());
-        txtMisVendedoresAgregarCodigoProducto.setText(tableMisVendedoresAgregar.getValueAt(fila, 0).toString());
-        txtMisVendedoresAgregarNombreProducto.setText(tableMisVendedoresAgregar.getValueAt(fila, 1).toString());
-        txtMisVendedoresAgregarPrecio.setText(tableMisVendedoresAgregar.getValueAt(fila, 3).toString());
-
-        int cantidad = Integer.parseInt(tableMisVendedoresAgregar.getValueAt(fila, 2).toString());
-        spinnerMisVendedoresAgregarCantidad.setValue(cantidad);
-    }//GEN-LAST:event_tableMisVendedoresAgregarMouseClicked
-
-    private void btnMisVendedoresRegistroEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMisVendedoresRegistroEliminarActionPerformed
-        // TODO add your handling code here:
-        if (tableMisVendedoresRegistro.getSelectedRow() == -1) {
-            JOptionPane.showMessageDialog(null, "Seleccione una fila");
-        } else {
-
-            int pregunta = JOptionPane.showConfirmDialog(null, "¿Está Seguro De eliminar?");
-            if (pregunta == 0) {
-                int id = Integer.parseInt(txtMisVendedoresRegistroId.getText());
-                misvendedor.EliminarVentasMisVendedores(id);
-                misvendedor.EliminarDetalleMisVendedores(id);
-
-                limpiarTablaMisVendedoresRegistro();
-                ListarRegistroMisVendedores();
-                txtMisVendedoresRegistroId.setText("");
-
-                JOptionPane.showMessageDialog(null, "Venta Eliminada Con Exito");
-            }
-        }
-    }//GEN-LAST:event_btnMisVendedoresRegistroEliminarActionPerformed
-
-    private void tableMisVendedoresRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMisVendedoresRegistroMouseClicked
-        // TODO add your handling code here:
-        int fila = tableMisVendedoresRegistro.rowAtPoint(evt.getPoint());
-        txtMisVendedoresRegistroId.setText(tableMisVendedoresRegistro.getValueAt(fila, 0).toString());
-    }//GEN-LAST:event_tableMisVendedoresRegistroMouseClicked
-
-    private void btnMisVendedoresRegistroEliminarTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMisVendedoresRegistroEliminarTodoActionPerformed
-        // TODO add your handling code here:
-        int pregunta = JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminar todos los registros?");
-        if (pregunta == 0) {
-            misvendedor.EliminarTodasVentasMisVendedores();
-            misvendedor.EliminarTodoDetalleMisVendedores();
-
-            limpiarTablaMisVendedoresRegistro();
-            ListarRegistroMisVendedores();
-            txtMisVendedoresRegistroId.setText("");
-            JOptionPane.showMessageDialog(null, "Ventas eliminadas con éxito");
-        }
-    }//GEN-LAST:event_btnMisVendedoresRegistroEliminarTodoActionPerformed
-
-    private void txtMisVentasAgregarCodigoProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMisVentasAgregarCodigoProductoKeyTyped
-        // TODO add your handling code here:
-        event.numberKeyPress(evt);
-    }//GEN-LAST:event_txtMisVentasAgregarCodigoProductoKeyTyped
-
-    private void txtMisVentasAgregarNombreProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMisVentasAgregarNombreProductoKeyTyped
+    private void txtMisVendedoresAgregarNombreProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMisVendedoresAgregarNombreProductoKeyTyped
         // TODO add your handling code here:
         event.textKeyPress(evt);
-    }//GEN-LAST:event_txtMisVentasAgregarNombreProductoKeyTyped
-
-    private void txtMisVentasAgregarPrecioVendidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMisVentasAgregarPrecioVendidoKeyTyped
-        // TODO add your handling code here:
-        event.numberDecimalKeyPress(evt, txtMisVentasAgregarPrecioVendido);
-    }//GEN-LAST:event_txtMisVentasAgregarPrecioVendidoKeyTyped
-
-    private void txtMisVentasAgregarCodigoClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMisVentasAgregarCodigoClienteKeyTyped
-        // TODO add your handling code here:
-        event.numberKeyPress(evt);
-    }//GEN-LAST:event_txtMisVentasAgregarCodigoClienteKeyTyped
-
-    private void txtMisVentasAgregarNombreClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMisVentasAgregarNombreClienteKeyTyped
-        // TODO add your handling code here:
-        event.textKeyPress(evt);
-    }//GEN-LAST:event_txtMisVentasAgregarNombreClienteKeyTyped
+    }//GEN-LAST:event_txtMisVendedoresAgregarNombreProductoKeyTyped
 
     private void txtMisVendedoresAgregarCodigoProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMisVendedoresAgregarCodigoProductoKeyTyped
         // TODO add your handling code here:
         event.numberKeyPress(evt);
     }//GEN-LAST:event_txtMisVendedoresAgregarCodigoProductoKeyTyped
 
-    private void txtMisVendedoresAgregarNombreProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMisVendedoresAgregarNombreProductoKeyTyped
+    private void txtMisVendedoresAgregarCodigoProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMisVendedoresAgregarCodigoProductoKeyPressed
         // TODO add your handling code here:
-        event.textKeyPress(evt);
-    }//GEN-LAST:event_txtMisVendedoresAgregarNombreProductoKeyTyped
-
-    private void txtMisVendedoresAgregarCodigoVendedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMisVendedoresAgregarCodigoVendedorKeyTyped
-        // TODO add your handling code here:
-        event.numberKeyPress(evt);
-    }//GEN-LAST:event_txtMisVendedoresAgregarCodigoVendedorKeyTyped
-
-    private void txtMisVendedoresAgregarNombreVendedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMisVendedoresAgregarNombreVendedorKeyTyped
-        // TODO add your handling code here:
-        event.textKeyPress(evt);
-    }//GEN-LAST:event_txtMisVendedoresAgregarNombreVendedorKeyTyped
-
-    private void txtProductosCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProductosCodigoKeyTyped
-        // TODO add your handling code here:
-        event.numberKeyPress(evt);
-    }//GEN-LAST:event_txtProductosCodigoKeyTyped
-
-    private void txtProductosNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProductosNombreKeyTyped
-        // TODO add your handling code here:
-        event.textKeyPress(evt);
-    }//GEN-LAST:event_txtProductosNombreKeyTyped
-
-    private void txtProductosPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProductosPrecioKeyTyped
-        // TODO add your handling code here:
-        event.numberDecimalKeyPress(evt, txtProductosPrecio);
-    }//GEN-LAST:event_txtProductosPrecioKeyTyped
-
-    private void txtClientesCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClientesCodigoKeyTyped
-        // TODO add your handling code here:
-        event.numberKeyPress(evt);
-    }//GEN-LAST:event_txtClientesCodigoKeyTyped
-
-    private void txtClientesNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClientesNombreKeyTyped
-        // TODO add your handling code here:
-        event.textKeyPress(evt);
-    }//GEN-LAST:event_txtClientesNombreKeyTyped
-
-    private void txtClientesDireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClientesDireccionKeyTyped
-        // TODO add your handling code here:
-        event.textKeyPress(evt);
-    }//GEN-LAST:event_txtClientesDireccionKeyTyped
-
-    private void txtClientesTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClientesTelefonoKeyTyped
-        // TODO add your handling code here:
-        event.numberKeyPress(evt);
-    }//GEN-LAST:event_txtClientesTelefonoKeyTyped
-
-    private void txtVendedoresCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtVendedoresCodigoKeyTyped
-        // TODO add your handling code here:
-        event.numberKeyPress(evt);
-    }//GEN-LAST:event_txtVendedoresCodigoKeyTyped
-
-    private void txtVendedoresNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtVendedoresNombreKeyTyped
-        // TODO add your handling code here:
-        event.textKeyPress(evt);
-    }//GEN-LAST:event_txtVendedoresNombreKeyTyped
-
-    private void txtVendedoresTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtVendedoresTelefonoKeyTyped
-        // TODO add your handling code here:
-        event.numberKeyPress(evt);
-    }//GEN-LAST:event_txtVendedoresTelefonoKeyTyped
-
-    private void txtVendedoresDireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtVendedoresDireccionKeyTyped
-        // TODO add your handling code here:
-        event.textKeyPress(evt);
-    }//GEN-LAST:event_txtVendedoresDireccionKeyTyped
-
-    private void txtMisVentasRegistroAbonarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMisVentasRegistroAbonarKeyTyped
-        // TODO add your handling code here:
-        event.numberDecimalKeyPress(evt, txtMisVentasRegistroAbonar);
-    }//GEN-LAST:event_txtMisVentasRegistroAbonarKeyTyped
-
-    private void btnMisVentasRegistroMisCuentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMisVentasRegistroMisCuentasActionPerformed
-        // TODO add your handling code here:
-        if (ultimoBotonSeleccionado != null) {
-            ultimoBotonSeleccionado.setBackground(new Color(255, 153, 153)); // Restaura el color original
-        }
-        JButton botonActual = (JButton) evt.getSource();
-        botonActual.setBackground(new Color(255, 153, 255)); // Cambia el color del botón actual
-        ultimoBotonSeleccionado = botonActual;
-
-        if (misven.PagoCampanialMisCuentas() == BigDecimal.ZERO) { //Equivalente a: misven.PagoCampanialMisCuentas() == 0 
-            int confirmar = JOptionPane.showConfirmDialog(null, "¿Desea registrar un valor para pago de campaña?");
-            if (confirmar == 0) {
-
-                micu.registrarMisCuentas();
-                micu.mostrarMisCuentas();
-                micu.setVisible(true);
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (!"".equals(txtMisVendedoresAgregarCodigoProducto.getText())) {
+                int codigoProducto = Integer.parseInt(txtMisVendedoresAgregarCodigoProducto.getText());
+                pr = produ.BuscarProductosXCodigo(codigoProducto);
+                if (pr.getNombre() != null) {
+                    txtMisVendedoresAgregarNombreProducto.setText("" + pr.getNombre());
+                    txtMisVendedoresAgregarPrecio.setText("" + formatoDecimal.format(pr.getPrecio()));
+                    txtMisVendedoresAgregarIdProducto.setText("" + pr.getId());
+                    txtMisVendedoresAgregarPrecio.requestFocus();
+                } else {
+                    LimpiarMisVendedores();
+                    txtMisVendedoresAgregarCodigoProducto.requestFocus();
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Ingrese el codigo del producto");
+                txtMisVendedoresAgregarCodigoProducto.requestFocus();
             }
-        } else {
-            micu.setVisible(true);
-            micu.ActualizarMisCuentas();
-            micu.mostrarMisCuentas();
         }
+    }//GEN-LAST:event_txtMisVendedoresAgregarCodigoProductoKeyPressed
 
-    }//GEN-LAST:event_btnMisVentasRegistroMisCuentasActionPerformed
+    private void lblTab1NuevaVentaUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTab1NuevaVentaUsuarioMouseClicked
+        this.jPanelContenedorNuevaVentaUsuario.setVisible(true);
+       // jTabbedPane1.setSelectedComponent(jPanelContenedorNuevaVentaUsuario);
+    }//GEN-LAST:event_lblTab1NuevaVentaUsuarioMouseClicked
 
-    private void btnLogoPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoPersonalActionPerformed
+    private void lblTab1NuevaVentaVendedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTab1NuevaVentaVendedorMouseClicked
         // TODO add your handling code here:
-        acd.setVisible(true);
-    }//GEN-LAST:event_btnLogoPersonalActionPerformed
+        jTabbedPane1.setSelectedComponent(jPanelNuevaVentaVendedor);
+    }//GEN-LAST:event_lblTab1NuevaVentaVendedorMouseClicked
 
-    private void btnMisVentasRegistrosPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMisVentasRegistrosPdfActionPerformed
-
-        pdfMiVenta();
-
-//        if (tableMisVentasRegistro.getSelectedRow() == -1) {
-//            JOptionPane.showMessageDialog(null, "Debe seleccionar una fila");
-//        } else {
-//            pdfMiVenta();
-////            try {
-////                // TODO add your handling code here:
-////                int id = Integer.parseInt(txtMisVentasRegistroId.getText());
-////                File file = new File("src/pdf/miVenta" + id + ".pdf");
-////                Desktop.getDesktop().open(file);
-////            } catch (IOException ex) {
-////                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-////                System.out.println(ex.toString());
-////            }
-//        }
-    }//GEN-LAST:event_btnMisVentasRegistrosPdfActionPerformed
-
-    private void btnMisVendedoresRegistroPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMisVendedoresRegistroPdfActionPerformed
+    private void lblTab2NuevaVentaUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTab2NuevaVentaUsuarioMouseClicked
         // TODO add your handling code here:
-        pdfMiVendedores();
-    }//GEN-LAST:event_btnMisVendedoresRegistroPdfActionPerformed
+        jTabbedPane1.setSelectedComponent(jPanelNuevaVentaUsuario);
+        this.jPanelContenedorNuevaVentaUsuario.setVisible(true);
+    }//GEN-LAST:event_lblTab2NuevaVentaUsuarioMouseClicked
 
+    private void lblTab1NuevaVentaUsuarioMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTab1NuevaVentaUsuarioMouseMoved
+        // TODO add your handling code here:
+        configurarEfectoHoverEtiqueta(lblTab1NuevaVentaUsuario, 204,188,255);   // pasamos el label y el color RGB     
+    }//GEN-LAST:event_lblTab1NuevaVentaUsuarioMouseMoved
+
+    private void lblTab1NuevaVentaVendedorMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTab1NuevaVentaVendedorMouseMoved
+        // TODO add your handling code here:
+        configurarEfectoHoverEtiqueta(lblTab1NuevaVentaVendedor, 255, 204,255);
+    }//GEN-LAST:event_lblTab1NuevaVentaVendedorMouseMoved
+
+    private void lblTab2NuevaVentaUsuarioMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTab2NuevaVentaUsuarioMouseMoved
+        // TODO add your handling code here:
+        configurarEfectoHoverEtiqueta(lblTab2NuevaVentaUsuario, 204,188,255);
+    }//GEN-LAST:event_lblTab2NuevaVentaUsuarioMouseMoved
+
+    private void lblTab2NuevaVentaVendedorMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTab2NuevaVentaVendedorMouseMoved
+        // TODO add your handling code here:
+        configurarEfectoHoverEtiqueta(lblTab2NuevaVentaVendedor, 255,204,255);
+    }//GEN-LAST:event_lblTab2NuevaVentaVendedorMouseMoved
+
+    private void configurarEfectoHoverEtiqueta(JLabel label, int r, int g, int b) {
+        label.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                label.setBackground(new Color(230,196,255));
+             //   label.setOpaque(true);
+            }
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                label.setBackground(new Color(r, g, b));
+               // label.setOpaque(true);
+            }
+        });
+    }
     /**
      * @param args the command line arguments
      */
@@ -2948,10 +3059,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
@@ -2972,15 +3081,17 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
+    private javax.swing.JPanel jPanelBienvenida;
+    private javax.swing.JPanel jPanelClientes;
+    private javax.swing.JPanel jPanelContenedorNuevaVentaUsuario;
+    private javax.swing.JPanel jPanelContenedorNuevaVentaVendedor;
+    private javax.swing.JPanel jPanelNuevaVentaUsuario;
+    private javax.swing.JPanel jPanelNuevaVentaVendedor;
+    private javax.swing.JPanel jPanelProductos;
+    private javax.swing.JPanel jPanelVendedores;
+    private javax.swing.JPanel jPanelVentasUsuario;
+    private javax.swing.JPanel jPanelVentasVendedores;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -2991,6 +3102,10 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel labelMisVendedoresAgregarTotalPagar;
     private javax.swing.JLabel labelMisVentasAgregarTotalPagar;
+    private javax.swing.JLabel lblTab1NuevaVentaUsuario;
+    private javax.swing.JLabel lblTab1NuevaVentaVendedor;
+    private javax.swing.JLabel lblTab2NuevaVentaUsuario;
+    private javax.swing.JLabel lblTab2NuevaVentaVendedor;
     private javax.swing.JSpinner spinnerMisVendedoresAgregarCantidad;
     private javax.swing.JSpinner spinnerMisVentasAgregarCantidad;
     private javax.swing.JTable tableClientes;
