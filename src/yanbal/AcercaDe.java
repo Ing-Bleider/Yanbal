@@ -75,7 +75,7 @@ public class AcercaDe extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Goudy Old Style", 0, 20)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Titulo: ");
+        jLabel3.setText("Titulo Profesional: ");
 
         jLabel4.setFont(new java.awt.Font("Goudy Old Style", 0, 22)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
